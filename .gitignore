@@ -1,0 +1,8 @@
+# Ignore secrets and generated content
+config.py
+__pycache__/
+*.pyc
+*.log
+
+# Output files
+output/

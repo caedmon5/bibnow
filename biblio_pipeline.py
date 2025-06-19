@@ -39,8 +39,17 @@ def zotero_upload(entry):
             "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(',')]
         }]
     }
-    r = requests.post(f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items", headers=headers, data=json.dumps(metadata))
-    return r.status_code, r.json()
+
+    r = requests.post(
+        f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
+        headers=headers,
+        data=json.dumps(metadata)
+    )
+
+    try:
+        return r.status_code, r.json()
+    except requests.exceptions.JSONDecodeError:
+        return r.status_code, {"error": "No JSON returned", "body": r.text}
 
 def build_markdown(entry, zotero_key):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}"
