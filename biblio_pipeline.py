@@ -114,7 +114,7 @@ def main(text, commit=False):
             log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
         else:
             print(f"❌ Zotero upload failed: {status}")
-            print(resp)
+            print(json.dumps(resp, indent=2))
 
 if __name__ == "__main__":
     with open("viking_sample.txt", encoding='utf-8') as f:
