@@ -1,6 +1,21 @@
 import requests, json, os, re, time
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 
+def generate_citekey(author, date_str, title):
+    # Extract last name from author field
+    lastname = re.sub(r'[^A-Za-z]', '', author.split()[-1])
+
+    # Get year (YYYY) from date
+    year_match = re.search(r'\d{4}', date_str)
+    year = year_match.group(0) if year_match else "XXXX"
+
+    # First three words of title
+    title_words = re.findall(r'\b\w+\b', title)
+    slug = ''.join(word.capitalize() for word in title_words[:3])
+
+    return f"{lastname}{year}{slug}"
+
+
 # Dynamic base path
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 import platform
@@ -106,7 +121,11 @@ def main(text, commit=False):
         print("⚠️ Detected @markdown block — ignored. Markdown is now built from Zotero.")
 
     bib = parse_bibtex(bibtex_raw)
-    citekey = bib.get("ID", "unknown")
+    citekey = generate_citekey(
+        author=bib.get("author", "Unknown"),
+        date_str=bib.get("date", ""),
+        title=bib.get("title", "")
+    )
 
     print(f"✅ Parsed citekey: {citekey}")
     if not commit:
