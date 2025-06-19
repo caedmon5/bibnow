@@ -96,9 +96,14 @@ def log_run(data, citekey):
 
 def main(text, commit=False):
     bibtex_raw = extract_blocks(text, "@bibtex", "@end")
+
     if not bibtex_raw:
         print("❌ Could not find @bibtex block.")
         return
+
+    # Optional: warn if markdown block is still present (legacy input)
+    if "@markdown" in text:
+        print("⚠️ Detected @markdown block — ignored. Markdown is now built from Zotero.")
 
     bib = parse_bibtex(bibtex_raw)
     citekey = bib.get("ID", "unknown")
