@@ -114,7 +114,7 @@ def main(text, commit=False):
             key = zotero_item['key']
             print(f"✅ Zotero upload successful (Key: {key})")
             md = build_markdown(bib, key)
-            filename = f"LN {citekey}.md"
+            filename = f"LN {' '.join(re.findall('[A-Z][a-z]*|[0-9]+', citekey))}.md"
             save_file(md, filename, OBSIDIAN_PATH)
             print(f"✅ Markdown saved: {filename}")
             log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
