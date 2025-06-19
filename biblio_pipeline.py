@@ -15,6 +15,21 @@ def generate_citekey(author, date_str, title):
 
     return f"{lastname}{year}{slug}"
 
+def generate_filename(author, date_str, title):
+    # Split author into capitalized parts
+    name_parts = [w.capitalize() for w in author.replace('-', ' ').split()]
+    lastname_parts = name_parts[-2:] if len(name_parts) >= 2 else name_parts[-1:]
+
+    # Extract year
+    year_match = re.search(r'\d{4}', date_str)
+    year = year_match.group(0) if year_match else "XXXX"
+
+    # Title-cased first 3 words
+    title_words = re.findall(r'\b\w+\b', title)
+    title_part = ' '.join(w.capitalize() for w in title_words[:3])
+
+    return f"LN {' '.join(lastname_parts)} {year} {title_part}.md"
+
 
 # Dynamic base path
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -138,7 +153,11 @@ def main(text, commit=False):
             key = zotero_item['key']
             print(f"✅ Zotero upload successful (Key: {key})")
             md = build_markdown(bib, key)
-            filename = f"LN {' '.join(re.findall('[A-Z][a-z]*|[0-9]+', citekey))}.md"
+            filename = generate_filename(
+                author=bib.get("author", "Unknown"),
+                date_str=bib.get("date", ""),
+                title=bib.get("title", "")
+            )
             save_file(md, filename, OBSIDIAN_PATH)
             print(f"✅ Markdown saved: {filename}")
             log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
