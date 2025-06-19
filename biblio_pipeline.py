@@ -3,7 +3,15 @@ from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 
 # Dynamic base path
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
-OBSIDIAN_PATH = os.path.join(BASE_PATH, "output", "LN Literature Notes")
+import platform
+
+if "ANDROID_STORAGE" in os.environ or platform.system() == "Linux" and "com.termux" in os.environ.get("HOME", ""):
+    # Android (e.g. Termux or Pydroid)
+    OBSIDIAN_PATH = "/sdcard/Documents/Obsidian/LN Literature Notes"
+else:
+    # Default to Linux desktop
+    OBSIDIAN_PATH = "/home/dan/wealtheow/LN Literature Notes"
+
 LOG_PATH = os.path.join(BASE_PATH, "output", "biblio-log")
 
 # Ensure output directories exist
