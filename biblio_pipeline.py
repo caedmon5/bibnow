@@ -101,7 +101,7 @@ def main(text, commit=False):
         print(json.dumps(bib, indent=2))
     else:
         status, resp = zotero_upload(bib)
-        if status == 201:
+        if status in [201, 201]:
             zotero_item = resp['successful']['0']
             key = zotero_item['key']
             print(f"✅ Zotero upload successful (Key: {key})")
