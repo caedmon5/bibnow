@@ -27,17 +27,16 @@ def parse_bibtex(bibtex):
 
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
-    metadata = {
-        "items": [{
-            "itemType": "journalArticle",
-            "title": entry.get("title", ""),
-            "creators": [{"creatorType": "author", "name": entry.get("author", "Unknown")}],
-            "publicationTitle": entry.get("journal", ""),
-            "date": entry.get("date", ""),
-            "url": entry.get("url", ""),
-            "abstractNote": entry.get("abstract", ""),
-            "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(',')]
-        }]
+metadata = [{
+    "itemType": "journalArticle",
+    "title": entry.get("title", ""),
+    "creators": [{"creatorType": "author", "name": entry.get("author", "Unknown")}],
+    "publicationTitle": entry.get("journal", ""),
+    "date": entry.get("date", ""),
+    "url": entry.get("url", ""),
+    "abstractNote": entry.get("abstract", ""),
+    "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(',')]
+}]
     }
 
     r = requests.post(
