@@ -166,7 +166,17 @@ def main(text, commit=False):
             print(json.dumps(resp, indent=2))
 
 if __name__ == "__main__":
-    import pyperclip
+    import platform
 
-    input_text = pyperclip.paste()
+    if platform.system() == "Linux":
+        import pyperclip
+        input_text = pyperclip.paste()
+        print("📋 Clipboard input (Linux) loaded.")
+    else:
+        with open("input.txt", encoding="utf-8") as f:
+            input_text = f.read()
+        print("📄 Loaded input from file (Android/Termux).")
+
     main(input_text, commit=True)
+
+
