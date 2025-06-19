@@ -123,6 +123,7 @@ def main(text, commit=False):
             print(json.dumps(resp, indent=2))
 
 if __name__ == "__main__":
-    with open("viking_sample.txt", encoding='utf-8') as f:
-        input_text = f.read()
+    import pyperclip
+
+    input_text = pyperclip.paste()
     main(input_text, commit=True)
