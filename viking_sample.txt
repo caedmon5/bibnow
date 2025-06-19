@@ -1,0 +1,32 @@
+@bibtex
+@article{Guardian2025VikingBurial,
+  author = {{Agence France-Presse}},
+  title = {Viking Age Burial Site Full of Ancient Objects Found in Denmark, Say Experts},
+  journal = {The Guardian},
+  date = {2025-06-17},
+  url = {https://www.theguardian.com/world/2025/jun/17/viking-age-burial-site-full-of-ancient-objects-found-in-denmark-say-experts?CMP=Share_AndroidApp_Other},
+  note = {Online news article},
+  keywords = {Denmark, Viking Age, archaeology, Harald Bluetooth, burial site, Lisbjerg, Moesgaard Museum, ancient objects, noble family, excavations}
+}
+@end
+
+@markdown
+---
+citekey: "Guardian2025VikingBurial"
+type: "article"
+---
+# Chicago Author-Year  Bibliography
+Agence France-Presse. 2025. "Viking Age Burial Site Full of Ancient Objects Found in Denmark, Say Experts." *The Guardian*, June 17, 2025. https://www.theguardian.com/world/2025/jun/17/viking-age-burial-site-full-of-ancient-objects-found-in-denmark-say-experts?CMP=Share_AndroidApp_Other.
+
+# Abstract  
+A 10th-century Viking Age burial site has been discovered near Lisbjerg, Denmark, containing around 30 graves linked to a noble family possibly connected to King Harald Bluetooth. The graves include pearls, coins, ceramics, gold-threaded boxes, and other ancient artifacts. The Moesgaard Museum in Aarhus is leading the analysis following the completion of excavations.
+
+# Keywords
+[[Denmark]], [[Viking Age]], [[archaeology]], [[Harald Bluetooth]], [[burial site]], [[Lisbjerg]], [[Moesgaard Museum]], [[ancient objects]], [[noble family]], [[excavations]]
+
+# Notes  
+Online news article
+
+# Related Files and URLs.
+https://www.theguardian.com/world/2025/jun/17/viking-age-burial-site-full-of-ancient-objects-found-in-denmark-say-experts?CMP=Share_AndroidApp_Other
+@end
