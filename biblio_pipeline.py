@@ -165,17 +165,31 @@ def main(text, commit=False):
             print(f"❌ Zotero upload failed: {status}")
             print(json.dumps(resp, indent=2))
 
+
 if __name__ == "__main__":
     import platform
 
-    if platform.system() == "Linux":
+    if platform.system() == "Linux" and not os.environ.get("PREFIX"):
         import pyperclip
         input_text = pyperclip.paste()
         print("📋 Clipboard input (Linux) loaded.")
+        with open("input.txt", "w", encoding="utf-8") as f:
+            f.write(input_text)
+    elif os.environ.get("PREFIX"):  # Android Termux
+        import subprocess
+        try:
+            clipboard = subprocess.check_output(["termux-clipboard-get"]).decode("utf-8")
+            with open("input.txt", "w", encoding="utf-8") as f:
+                f.write(clipboard)
+            print("📋 Clipboard input (Android/Termux) saved to input.txt.")
+            input_text = clipboard
+        except Exception as e:
+            print(f"❌ Failed to read clipboard: {e}")
+            exit(1)
     else:
         with open("input.txt", encoding="utf-8") as f:
             input_text = f.read()
-        print("📄 Loaded input from file (Android/Termux).")
+        print("📄 Loaded input from file.")
 
     main(input_text, commit=True)
 
