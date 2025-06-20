@@ -1,11 +1,13 @@
+@bibtex
 @article{Edwards2025TikTokSephoraKids,
   author = {Samantha Edwards},
-  title = {TikTok's 'Sephora kids' are embracing expensive skin care - but these routines carry a risk, study finds},
+  title = {TikTok’s 'Sephora kids' are embracing expensive skin care – but these routines carry a risk, study finds},
   journal = {The Globe and Mail},
   date = {2025-06-18},
   year = {2025},
   url = {https://www.theglobeandmail.com/life/health-and-fitness/article-tweens-teens-tiktok-skin-care-sephora-kids/},
-  abstract = {This article investigates the TikTok-driven trend of 'Sephora kids', where tweens and teens adopt elaborate and expensive skincare routines. Drawing from a study published in Pediatrics, it documents the widespread use of anti-aging and exfoliating products, often with multiple active ingredients and allergens. Researchers highlight dermatological risks, such as skin irritation and allergic contact dermatitis, as well as concerns over youth consumerism and distorted health ideals.},
+  abstract = {This article investigates the TikTok-driven trend of “Sephora kids,” where tweens and teens adopt elaborate and expensive skincare routines. Drawing from a study published in *Pediatrics*, it documents the widespread use of anti-aging and exfoliating products, often with multiple active ingredients and allergens. Researchers highlight dermatological risks, such as skin irritation and allergic contact dermatitis, as well as concerns over youth consumerism and distorted health ideals.},
   keywords = {TikTok, Sephora kids, skincare, tweens, dermatology, Pediatrics study, social media, youth culture, consumer behavior, allergic reactions, algorithmic influence, social media trends, political discourse},
   note = {User is interested in this article for how social media algorithms promote potentially harmful trends, and plans to connect it to broader discussions about algorithmic influence on political discourse as explored in the Ezra Klein podcast.}
 }
+@end

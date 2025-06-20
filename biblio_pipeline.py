@@ -73,6 +73,7 @@ def zotero_upload(entry):
         "date": entry.get("date", ""),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
+        "extra": entry.get("note", ""),
         "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(',')]
 }]
 
