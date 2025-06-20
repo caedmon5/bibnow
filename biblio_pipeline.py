@@ -108,7 +108,7 @@ autoupdate: true
 {', '.join(f"[[{k.strip()}]]" for k in entry.get("keywords", "").split(','))}
 
 # Notes  
-TBD
+{entry.get('note', 'TBD')}
 
 # Related Files and URLs.  
 {zotero_url}
