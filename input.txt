@@ -1,13 +1,11 @@
-@bibtex
-@article{Edwards2025TikTokSephoraKids,
-  author = {Samantha Edwards},
-  title = {TikTok’s ‘Sephora kids’ are embracing expensive skin care – but these routines carry a risk, study finds},
-  journal = {The Globe and Mail},
-  date = {2025-06-18},
-  year = {2025},
-  url = {https://www.theglobeandmail.com/life/health-and-fitness/article-tweens-teens-tiktok-skin-care-sephora-kids/},
-  abstract = {This article investigates the TikTok-driven trend of “Sephora kids,” where tweens and teens adopt elaborate and expensive skincare routines. Drawing from a study published in Pediatrics, it documents the widespread use of anti-aging and exfoliating products, often with multiple active ingredients and allergens. Researchers highlight dermatological risks, such as skin irritation and allergic contact dermatitis, as well as concerns over youth consumerism and distorted health ideals.},
-  keywords = {TikTok, Sephora kids, skincare, tweens, dermatology, Pediatrics study, social media, youth culture, consumer behavior, allergic reactions, algorithmic influence, social media trends, political discourse},
-  note = {User is interested in this article for how social media algorithms promote potentially harmful trends, and plans to connect it to broader discussions about algorithmic influence on political discourse as explored in the Ezra Klein podcast.}
+@article{Gopnik2025PerfectlyImperfect,
+  author    = {Adam Gopnik},
+  title     = {Mastering It: The Art of Being Perfectly Imperfect},
+  journal   = {The Globe and Mail},
+  year      = {2025},
+  date      = {2025-06-21},
+  url       = {https://www.theglobeandmail.com/life/article-the-art-of-perfectly-imperfect-adam-gopnik-mastering-it/},
+  abstract  = {In this introductory piece to the Globe and Mail's “Mastering It” series, Adam Gopnik explores the paradoxical value of imperfection in the pursuit of mastery. Drawing from examples in music, sports, magic, and personal experience, he argues that expressive flaws and human variability are not only signs of authenticity but essential to aesthetic and emotional resonance. The essay discusses the 'Too Perfect Trick' theory in magic as a key metaphor for the dangers of over-perfection in performance and politics.},
+  keywords  = {too perfect theory, mastery, imperfection, magic theory, humanism, Adam Gopnik, expressive error, aesthetics, sports strategy, performance},
+  note      = {Includes a discussion of the Too Perfect Trick theory in relation to broader cultural and philosophical ideas about mastery and imperfection}
 }
-@end

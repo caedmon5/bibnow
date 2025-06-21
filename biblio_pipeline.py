@@ -126,10 +126,14 @@ def log_run(data, citekey):
     save_file(json.dumps(data, indent=2), log_filename, LOG_PATH)
 
 def main(text, commit=False):
-    bibtex_raw = extract_blocks(text, "@bibtex", "@end")
+    if "@bibtex" in text and "@end" in text:
+        bibtex_raw = extract_blocks(text, "@bibtex", "@end")
+    else:
+        print("🔎 No @bibtex block markers found — assuming entire input is raw BibTeX.")
+        bibtex_raw = text.strip()
 
-    if not bibtex_raw:
-        print("❌ Could not find @bibtex block.")
+    if not bibtex_raw.startswith("@"):
+        print("❌ Input does not appear to be valid BibTeX.")
         return
 
     # Optional: warn if markdown block is still present (legacy input)
