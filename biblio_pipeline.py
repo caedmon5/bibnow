@@ -218,13 +218,14 @@ if __name__ == "__main__":
     if platform.system() == "Linux" and not os.environ.get("PREFIX"):
         import pyperclip
         input_text = pyperclip.paste()
-        print("📋 Clipboard input (Linux) loaded.")
+        print("📋 Clipboard input (Linux) detected and loaded.")
         with open("input.txt", "w", encoding="utf-8") as f:
             f.write(input_text)
     elif os.environ.get("PREFIX"):  # Android Termux
         import subprocess
         try:
             clipboard = subprocess.check_output(["termux-clipboard-get"]).decode("utf-8")
+            print("📋 Android clipboard detected via termux-clipboard-get.")
             with open("input.txt", "w", encoding="utf-8") as f:
                 f.write(clipboard)
             print("📋 Clipboard input (Android/Termux) saved to input.txt.")
