@@ -27,7 +27,11 @@ def generate_citekey(entry):
     year = extract_year(entry)
 
     # Extract last name from author field
-    lastname = re.sub(r'[^A-Za-z]', '', author.split()[-1])
+    first_author = author.split(" and ")[0]
+    if "," in first_author:
+        lastname = re.sub(r'[^A-Za-z]', '', first_author.split(",")[0])
+    else:
+        lastname = re.sub(r'[^A-Za-z]', '', first_author.split()[-1])
 
     # First three words of title
     title_words = re.findall(r'\b\w+\b', title)
