@@ -12,7 +12,7 @@ def extract_year(entry):
         return match.group(1)
     return "XXXX"
 
-def generate_citekey(author, date_str, title):
+def generate_citekey(entry):
     author = entry.get("author", "Unknown")
     title = entry.get("title", "")
     year = extract_year(entry)
@@ -26,7 +26,7 @@ def generate_citekey(author, date_str, title):
 
     return f"{lastname}{year}{slug}"
 
-def generate_filename(author, date_str, title):
+def generate_filename(entry):
     author = entry.get("author", "Unknown")
     title = entry.get("title", "")
     year = extract_year(entry)
