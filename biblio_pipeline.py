@@ -175,11 +175,7 @@ def main(text, commit=False):
                 md = build_markdown(bib, key)
                 year = extract_year(bib)
 
-                citekey = generate_citekey(
-                    author=bib.get("author", "Unknown"),
-                    date_str=year,
-                    title=bib.get("title", "")
-                )
+                citekey = generate_citekey(bib)
 
                 filename = generate_filename(bib)
                 save_file(md, filename, OBSIDIAN_PATH)

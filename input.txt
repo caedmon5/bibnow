@@ -9,3 +9,51 @@
   keywords  = {too perfect theory, mastery, imperfection, Adam Gopnik, expressive performance, magic theory, aesthetics, performance studies, humanism, sports analytics},
   note      = {Includes a cultural commentary on the Too Perfect Trick theory and its philosophical resonance across disciplines}
 }
+
+@book{Vernon1957BookMagic,
+  author    = {Lewis Ganson and Dai Vernon},
+  title     = {The Dai Vernon Book of Magic},
+  year      = {1957},
+  publisher = {L\&L Publishing},
+  note      = {Seminal exposition of Vernon's magic theories, including the foundation of the 'Too Perfect Theory'. See also: Gopnik (2025), "Mastering It".},
+  abstract  = {This foundational book documents the routines and theories of Dai Vernon, one of the most influential magicians of the 20th century. While primarily practical, it includes reflections on performance theory, including early articulations of what would become known as the Too Perfect Theory: the idea that an overly clean or flawless trick can expose its method by eliminating plausible alternatives.},
+  keywords  = {magic theory, Dai Vernon, too perfect theory, sleight of hand, performance strategy, misdirection, magician ethics}
+}
+
+@online{Jerx2017TooPerfect,
+  author    = {Andy},
+  title     = {The Too Perfect Theory (And What Comes Next)},
+  year      = {2017},
+  url       = {https://www.thejerx.com/blog/2017/6/12/the-too-perfect-theory-and-what-comes-next},
+  note      = {Contemporary blog essay on performance framing and ambiguity in magic. Related commentary found in Gopnik (2025), "Mastering It".},
+  abstract  = {In this blog post, magician and theorist Andy of The Jerx offers a reflective critique and expansion of the Too Perfect Theory. He suggests that the theory should evolve beyond simply introducing flaws to increase ambiguity, proposing instead more interactive and emotionally grounded forms of performance. The piece is influential in modern online magic circles.},
+  keywords  = {too perfect theory, performance framing, audience psychology, magician practice, contemporary magic}
+}
+
+@article{Smith2020SocialEpistemologyMagic,
+  author  = {Michael Smith},
+  title   = {The Social Epistemology of Magic},
+  journal = {Social Epistemology},
+  volume  = {34},
+  number  = {4},
+  pages   = {349--361},
+  year    = {2020},
+  doi     = {10.1080/02691728.2020.1749780},
+  note    = {Applies epistemological frameworks to magician-audience dynamics. Parallels with Gopnik (2025), "Mastering It", especially on ambiguity and belief.},
+  abstract = {Smith explores how magicians manage audience expectations, knowledge, and belief through deliberate misdirection and rhetorical framing. He discusses the Too Perfect Theory as a key example of how creating multiple plausible explanations preserves mystery, integrating epistemological frameworks from philosophy.},
+  keywords = {social epistemology, too perfect theory, philosophy of magic, belief manipulation, misdirection, audience cognition}
+}
+
+@article{Nelson2009SlightMind,
+  author  = {Maggie Nelson},
+  title   = {A Slight of Mind: Magic, Consciousness, and the Culture of Performance},
+  journal = {Performance Research},
+  volume  = {14},
+  number  = {4},
+  pages   = {99--108},
+  year    = {2009},
+  doi     = {10.1080/13528160903519108},
+  note    = {Discusses illusion, imperfection, and the Too Perfect Theory. See also Gopnik (2025), who expands this link to mastery and vulnerability.},
+  abstract = {Nelson investigates how magic interacts with theories of consciousness and performance. Using examples from illusionist and performance traditions, she highlights how even small discrepancies in a magic trick’s presentation can shift the cognitive load and influence belief. The essay touches on the Too Perfect Theory as a mode of cognitive deferral.},
+  keywords = {consciousness, performance theory, too perfect theory, deception, cognitive science, illusion, theatricality}
+}
