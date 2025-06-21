@@ -1,4 +1,4 @@
-import requests, json, os, re, time, bibtextparser
+import requests, json, os, re, time, bibtexparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 from bibtexparser.bparser import BibTexParser
 
