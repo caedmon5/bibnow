@@ -140,7 +140,43 @@ def main(text, commit=False):
     if "@markdown" in text:
         print("⚠️ Detected @markdown block — ignored. Markdown is now built from Zotero.")
 
-    bib = parse_bibtex(bibtex_raw)
+# Find all BibTeX blocks in the input (supporting multiple)
+entries = re.findall(r'@\w+\{[^@]+\}', bibtex_raw, re.DOTALL)
+
+if not entries:
+    print("❌ No BibTeX entries found.")
+    return
+
+for bibtext in entries:
+    bib = parse_bibtex(bibtext)
+    citekey = generate_citekey(
+        author=bib.get("author", "Unknown"),
+        date_str=bib.get("date", ""),
+        title=bib.get("title", "")
+    )
+    print(f"\n✅ Parsed citekey: {citekey}")
+    if not commit:
+        print("🟡 Dry-run mode. No Zotero upload or file write.")
+        print(json.dumps(bib, indent=2))
+    else:
+        status, resp = zotero_upload(bib)
+        if status in [200, 201]:
+            zotero_item = resp['successful']['0']
+            key = zotero_item['key']
+            print(f"✅ Zotero upload successful (Key: {key})")
+            md = build_markdown(bib, key)
+            filename = generate_filename(
+                author=bib.get("author", "Unknown"),
+                date_str=bib.get("date", ""),
+                title=bib.get("title", "")
+            )
+            save_file(md, filename, OBSIDIAN_PATH)
+            print(f"✅ Markdown saved: {filename}")
+            log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
+        else:
+            print(f"❌ Zotero upload failed: {status}")
+            print(json.dumps(resp, indent=2))
+
     citekey = generate_citekey(
         author=bib.get("author", "Unknown"),
         date_str=bib.get("date", ""),

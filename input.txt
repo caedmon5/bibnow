@@ -5,7 +5,7 @@
   year      = {2025},
   date      = {2025-06-21},
   url       = {https://www.theglobeandmail.com/life/article-the-art-of-perfectly-imperfect-adam-gopnik-mastering-it/},
-  abstract  = {In this introductory piece to the Globe and Mail's “Mastering It” series, Adam Gopnik explores the paradoxical value of imperfection in the pursuit of mastery. Drawing from examples in music, sports, magic, and personal experience, he argues that expressive flaws and human variability are not only signs of authenticity but essential to aesthetic and emotional resonance. The essay discusses the 'Too Perfect Trick' theory in magic as a key metaphor for the dangers of over-perfection in performance and politics.},
-  keywords  = {too perfect theory, mastery, imperfection, magic theory, humanism, Adam Gopnik, expressive error, aesthetics, sports strategy, performance},
-  note      = {Includes a discussion of the Too Perfect Trick theory in relation to broader cultural and philosophical ideas about mastery and imperfection}
+  abstract  = {In this introductory essay for the Globe and Mail's “Mastering It” series, Adam Gopnik explores the paradox of perfection in mastery. He draws on examples from music, sport, magic, and the arts to argue that expressive imperfection is a core component of compelling performance. He discusses the 'Too Perfect Trick Theory' from magic as a central metaphor for why perfect execution often weakens, rather than strengthens, artistic or experiential impact.},
+  keywords  = {too perfect theory, mastery, imperfection, Adam Gopnik, expressive performance, magic theory, aesthetics, performance studies, humanism, sports analytics},
+  note      = {Includes a cultural commentary on the Too Perfect Trick theory and its philosophical resonance across disciplines}
 }
