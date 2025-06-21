@@ -1,13 +1,20 @@
 import requests, json, os, re, time
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 
+def extract_year(entry):
+    date_str = entry.get("date", "")
+    match = re.search(r'\b(\d{4})\b', date_str)
+    if match:
+        return match.group(1)
+    year_str = entry.get("year", "")
+    match = re.search(r'\b(\d{4})\b', year_str)
+    if match:
+        return match.group(1)
+    return "XXXX"
+
 def generate_citekey(author, date_str, title):
     # Extract last name from author field
     lastname = re.sub(r'[^A-Za-z]', '', author.split()[-1])
-
-    # Get year (YYYY) from date
-    year_match = re.search(r'\d{4}', date_str)
-    year = year_match.group(0) if year_match else "XXXX"
 
     # First three words of title
     title_words = re.findall(r'\b\w+\b', title)
@@ -19,10 +26,6 @@ def generate_filename(author, date_str, title):
     # Split author into capitalized parts
     name_parts = [w.capitalize() for w in author.replace('-', ' ').split()]
     lastname_parts = name_parts[-2:] if len(name_parts) >= 2 else name_parts[-1:]
-
-    # Extract year
-    year_match = re.search(r'\d{4}', date_str)
-    year = year_match.group(0) if year_match else "XXXX"
 
     # Title-cased first 3 words
     title_words = re.findall(r'\b\w+\b', title)
@@ -149,9 +152,11 @@ def main(text, commit=False):
 
     for bibtext in entries:
         bib = parse_bibtex(bibtext)
+        year = extract_year(bib)
+
         citekey = generate_citekey(
             author=bib.get("author", "Unknown"),
-            date_str=bib.get("date", ""),
+            date_str=year,
             title=bib.get("title", "")
         )
         print(f"\n✅ Parsed citekey: {citekey}")
@@ -165,6 +170,14 @@ def main(text, commit=False):
                 key = zotero_item['key']
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, key)
+                year = extract_year(bib)
+
+                citekey = generate_citekey(
+                    author=bib.get("author", "Unknown"),
+                    date_str=year,
+                    title=bib.get("title", "")
+                )
+
                 filename = generate_filename(
                     author=bib.get("author", "Unknown"),
                     date_str=bib.get("date", ""),
