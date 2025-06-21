@@ -1,143 +1,136 @@
-# 📚 biblio_mobile_pipeline_v1
+# biblio_mobile_pipeline_v1
 
-This repository contains a mobile-friendly, clipboard-based bibliography pipeline that allows you to:
+This repository contains a lightweight, cross-platform bibliography processing pipeline designed for researchers using **Zotero**, **Obsidian**, and **mobile devices** (especially Android).
 
-- Copy BibTeX data into your clipboard
-- Run `bibnow` to:
-  - Upload to **Zotero** via their API
-  - Create a Markdown literature note in your **Obsidian** vault
-  - Log all activity for tracking
-
-It’s designed for use on both **Linux** (e.g., a laptop) and **Android** (via **Termux**), with platform-specific support for clipboard handling and file paths.
+It enables rapid creation of well-structured markdown literature notes and automatic uploads to Zotero from BibTeX-formatted entries, using a single clipboard copy-paste or input file.
 
 ---
 
-## 🔧 Features
+## 🚀 Features
 
-- 🧠 **Smart citekey generation**: From author name, date, and title
-- 🗃️ **Zotero sync**: Uploads via user API key and writes metadata, keywords, and abstract
-- 📝 **Obsidian note creation**: Proper YAML frontmatter and markdown body
-- 🗂️ **Logs**: Each entry is logged to a timestamped JSON file
-- 📋 **Clipboard-aware**: On Linux, uses `pyperclip`; on Android, reads/writes to `input.txt`
-
----
-
-## 📱 Android Setup (Termux)
-
-1. Clone the repo to:
-
-    ```bash
-    /sdcard/Documents/git/biblio_mobile_pipeline_v1
-    ```
-
-2. Ensure required packages are installed:
-
-    ```bash
-    pkg install python git
-    pip install requests
-    ```
-
-3. Create `config.py` in the root directory:
-
-    ```python
-    ZOTERO_API_KEY = "your_api_key"
-    ZOTERO_USER_ID = "your_numeric_id"
-    ZOTERO_USERNAME = "your_zotero_username"
-    ```
-
-4. To run:
-
-    - Copy a BibTeX block to clipboard (with `@bibtex ... @end` markers)
-    - In Termux, run:
-
-    ```bash
-    cd /sdcard/Documents/git/biblio_mobile_pipeline_v1
-    python biblio_pipeline.py
-    ```
+- ✅ Automatic extraction and parsing of BibTeX from clipboard (Linux) or `input.txt` (Android)
+- ✅ Uploads metadata to your personal Zotero library via API
+- ✅ Generates fully structured Obsidian `.md` literature notes:
+  - YAML frontmatter (with `autoupdate: true`)
+  - Chicago Author–Date citation block
+  - Abstract
+  - Keywords (as `[[wikilinks]]`)
+  - Note (from `note` field in BibTeX)
+  - Related Zotero links
+- ✅ Dynamic platform detection (Linux vs Android)
+- ✅ Logs Zotero API response and metadata to timestamped JSON files
+- 📄 File naming follows:  
+  `LN Lastname [et al] YYYY First Second Third Word.md`
 
 ---
 
-## 💻 Linux Setup
+## 📂 Directory Structure
 
-1. Clone the repo to any subdirectory under:
-
-    ```bash
-    ~/git/
-    ```
-
-2. Install requirements:
-
-    ```bash
-    pip install requests pyperclip
-    ```
-
-3. Create `config.py` (see Android example)
-
-4. On Linux, the clipboard will be read directly using `pyperclip`.
-
----
-
-## 📄 File Locations
-
-| Platform | Obsidian Notes Path                                   | Input Source             |
-|----------|--------------------------------------------------------|--------------------------|
-| Linux    | `/home/dan/wealtheow/LN Literature Notes`             | Clipboard (via pyperclip)|
-| Android  | `/sdcard/Documents/Obsidian/LN Literature Notes`      | `input.txt`              |
-
----
-
-## 🗂️ File Formats
-
-Markdown entries are created using the following structure:
-
-```markdown
----
-citekey: "Lastname2025ShortTitle"
-type: "article"
-zotero_key: "ABC123"
-zotero_url: "https://www.zotero.org/..."
-zotero_library_id: 123456
-autoupdate: true
----
-# Chicago Author-Year  Bibliography
-Lastname, Firstname. 2025. "Title of the Article." *Journal Name*. URL.
-
-# Abstract  
-...
-
-# Keywords  
-[[keyword one]], [[keyword two]], ...
-
-# Notes  
-...
-
-# Related Files and URLs  
-https://www.zotero.org/...
+```
+biblio_mobile_pipeline_v1/
+├── biblio_pipeline.py         # Main processing script
+├── config.py                  # Personal Zotero credentials (NOT SHARED)
+├── input.txt                  # Used on Android (Termux/Pydroid3) to load BibTeX
+├── output/
+│   └── biblio-log/            # JSON logs of Zotero uploads
+└── README.md
 ```
 
 ---
 
-## 🧪 Testing
+## 🧠 Requirements
 
-You can run in dry-run mode by replacing `commit=True` with `commit=False` at the bottom of `biblio_pipeline.py`.
+Install with pip (Linux) or Pydroid repository (Android):
 
----
+```bash
+pip install requests
+```
 
-## 🔐 Privacy
+If running on Linux with clipboard support:
 
-No private credentials are stored in this repository. Your Zotero API key, user ID, and username must be stored in a local `config.py` file that is `.gitignored`.
-
----
-
-## 📦 Future Improvements
-
-- Termux widget to launch `bibnow`
-- Automatic Obsidian backlinking
-- Daily note integration
-- DOI metadata enrichment
+```bash
+pip install pyperclip
+sudo apt install xclip  # or xsel
+```
 
 ---
 
-**Author**: Daniel Paul O'Donnell  
-**License**: MIT
+## 💻 Linux Desktop Usage
 
+1. Copy BibTeX entry (surrounded by `@bibtex` and `@end`)
+2. Run the script:
+   ```bash
+   python3 biblio_pipeline.py
+   ```
+
+> 📋 Input is pulled automatically from the clipboard.
+
+---
+
+## 📱 Android Usage (Termux or Pydroid)
+
+1. Paste BibTeX (with `@bibtex` and `@end`) into `input.txt`
+2. Run:
+   ```bash
+   python3 biblio_pipeline.py
+   ```
+
+> 📄 Input is read from `input.txt` if clipboard access is not available.
+
+---
+
+## ✍️ Format for BibTeX Input
+
+Surround your BibTeX entry like so:
+
+```
+@bibtex
+@article{Lastname2025ShortTitle,
+  author = {Jane Lastname and Sam Coauthor},
+  title = {Example Title for Reference},
+  journal = {Some Journal},
+  date = {2025-06-21},
+  year = {2025},
+  url = {https://example.com},
+  abstract = {This study explores...},
+  keywords = {example, research, mobile tools},
+  note = {User is interested in this because...}
+}
+@end
+```
+
+---
+
+## 📥 Output
+
+- Markdown file saved to:
+  - `/home/dan/wealtheow/LN Literature Notes` on Linux
+  - `/sdcard/Documents/Obsidian/LN Literature Notes` on Android
+- Zotero item created via API
+- JSON log written to `output/biblio-log/`
+
+---
+
+## 🔐 Notes
+
+- You must create a `config.py` file with your Zotero credentials:
+  ```python
+  ZOTERO_API_KEY = "your-api-key"
+  ZOTERO_USER_ID = "your-numeric-id"
+  ZOTERO_USERNAME = "your-username"
+  ```
+- Keep this file out of version control.
+
+---
+
+## 🧭 Roadmap
+
+- [ ] Sync existing Obsidian notes with Zotero updates (`autoupdate: true`)
+- [ ] Daily note linking
+- [ ] Context menu or button shortcut on Android
+
+---
+
+## 🗂️ License
+
+MIT (except user-specific config files).
