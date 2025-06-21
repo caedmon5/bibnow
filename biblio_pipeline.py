@@ -2,6 +2,23 @@ import requests, json, os, re, time, bibtexparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 from bibtexparser.bparser import BibTexParser
 
+# Mapping from BibTeX types to Zotero item types
+BIBTEX_TO_ZOTERO_TYPE = {
+    "article": "journalArticle",
+    "book": "book",
+    "inbook": "bookSection",
+    "incollection": "bookSection",
+    "inproceedings": "conferencePaper",
+    "conference": "conferencePaper",
+    "techreport": "report",
+    "phdthesis": "thesis",
+    "mastersthesis": "thesis",
+    "misc": "document",
+    "unpublished": "manuscript",
+    "online": "webpage",
+}
+
+
 def load_bibtex_entries(bibtex_str):
     parser = BibTexParser(common_strings=True)
     parser.ignore_nonstandard_types = False
@@ -86,7 +103,9 @@ def parse_bibtex(bibtex):
         if '=' in line:
             k, v = line.split('=', 1)
             entry[k.strip()] = v.strip().strip('{}",')
-    entry["ID"] = re.search(r'@\w+\{([^,]+),', bibtex).group(1)
+            entry_type_match = re.search(r'@(\w+)\{([^,]+),', bibtex)
+            entry["ENTRYTYPE"] = entry_type_match.group(1).lower() if entry_type_match else "misc"
+            entry["ID"] = entry_type_match.group(2) if entry_type_match else "unknown"
     return entry
 
 def bibtex_to_zotero_type(bibtex_type):
@@ -111,16 +130,28 @@ def bibtex_to_zotero_type(bibtex_type):
 
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
+    item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
+    creators = [{"creatorType": "author", "name": entry.get("author", "")}]
+
     metadata = [{
-        "itemType": bibtex_to_zotero_type(entry.get("ENTRYTYPE", "misc")),
+        "itemType": item_type,
         "title": entry.get("title", ""),
-        "creators": [{"creatorType": "author", "name": entry.get("author", "Unknown")}],
-        "publicationTitle": entry.get("journal", ""),
+        "creators": creators,
         "date": entry.get("date", ""),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
-        "extra": entry.get("note", ""),
-        "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(',')]
+        "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
+        "publicationTitle": entry.get("journal", ""),
+        "volume": entry.get("volume", ""),
+        "issue": entry.get("number", entry.get("issue", "")),
+        "pages": entry.get("pages", ""),
+        "publisher": entry.get("publisher", ""),
+        "DOI": entry.get("doi", entry.get("DOI", "")),
+        "reportType": entry.get("type", "") if item_type == "report" else "",
+        "thesisType": "PhD Thesis" if entry.get("ENTRYTYPE") == "phdthesis" else (
+            "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
+        ),
+        "institution": entry.get("school", "") if "thesis" in entry.get("ENTRYTYPE", "") or item_type == "report" else "",
 }]
 
     r = requests.post(
