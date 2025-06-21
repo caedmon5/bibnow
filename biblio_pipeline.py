@@ -208,6 +208,11 @@ def main(text, commit=False):
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--commit", action="store_true", help="Actually upload to Zotero and write files")
+    args = parser.parse_args()
+
     import platform
 
     if platform.system() == "Linux" and not os.environ.get("PREFIX"):
@@ -232,6 +237,7 @@ if __name__ == "__main__":
             input_text = f.read()
         print("📄 Loaded input from file.")
 
-    main(input_text, commit=True)
+    print(f"🚦 Running in {'COMMIT' if args.commit else 'DRY-RUN'} mode.")
+    main(input_text, commit=args.commit)
 
 
