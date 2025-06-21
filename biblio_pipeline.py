@@ -13,6 +13,10 @@ def extract_year(entry):
     return "XXXX"
 
 def generate_citekey(author, date_str, title):
+    author = entry.get("author", "Unknown")
+    title = entry.get("title", "")
+    year = extract_year(entry)
+
     # Extract last name from author field
     lastname = re.sub(r'[^A-Za-z]', '', author.split()[-1])
 
@@ -23,6 +27,11 @@ def generate_citekey(author, date_str, title):
     return f"{lastname}{year}{slug}"
 
 def generate_filename(author, date_str, title):
+    author = entry.get("author", "Unknown")
+    title = entry.get("title", "")
+    year = extract_year(entry)
+
+
     # Split author into capitalized parts
     name_parts = [w.capitalize() for w in author.replace('-', ' ').split()]
     lastname_parts = name_parts[-2:] if len(name_parts) >= 2 else name_parts[-1:]
@@ -152,13 +161,7 @@ def main(text, commit=False):
 
     for bibtext in entries:
         bib = parse_bibtex(bibtext)
-        year = extract_year(bib)
-
-        citekey = generate_citekey(
-            author=bib.get("author", "Unknown"),
-            date_str=year,
-            title=bib.get("title", "")
-        )
+        citekey = generate_citekey(bib)
         print(f"\n✅ Parsed citekey: {citekey}")
         if not commit:
             print("🟡 Dry-run mode. No Zotero upload or file write.")
@@ -178,46 +181,13 @@ def main(text, commit=False):
                     title=bib.get("title", "")
                 )
 
-                filename = generate_filename(
-                    author=bib.get("author", "Unknown"),
-                    date_str=bib.get("date", ""),
-                    title=bib.get("title", "")
-                )
+                filename = generate_filename(bib)
                 save_file(md, filename, OBSIDIAN_PATH)
                 print(f"✅ Markdown saved: {filename}")
                 log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
             else:
                 print(f"❌ Zotero upload failed: {status}")
                 print(json.dumps(resp, indent=2))
-
-    citekey = generate_citekey(
-        author=bib.get("author", "Unknown"),
-        date_str=bib.get("date", ""),
-        title=bib.get("title", "")
-    )
-
-    print(f"✅ Parsed citekey: {citekey}")
-    if not commit:
-        print("🟡 Dry-run mode. No Zotero upload or file write.")
-        print(json.dumps(bib, indent=2))
-    else:
-        status, resp = zotero_upload(bib)
-        if status in [200, 201]:
-            zotero_item = resp['successful']['0']
-            key = zotero_item['key']
-            print(f"✅ Zotero upload successful (Key: {key})")
-            md = build_markdown(bib, key)
-            filename = generate_filename(
-                author=bib.get("author", "Unknown"),
-                date_str=bib.get("date", ""),
-                title=bib.get("title", "")
-            )
-            save_file(md, filename, OBSIDIAN_PATH)
-            print(f"✅ Markdown saved: {filename}")
-            log_run({"bibtex": bib, "zotero_response": zotero_item}, citekey)
-        else:
-            print(f"❌ Zotero upload failed: {status}")
-            print(json.dumps(resp, indent=2))
 
 
 if __name__ == "__main__":
