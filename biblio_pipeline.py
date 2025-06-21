@@ -2,22 +2,35 @@ import requests, json, os, re, time, bibtexparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
 from bibtexparser.bparser import BibTexParser
 
-# Mapping from BibTeX types to Zotero item types
+# Expanded BibTeX to Zotero type map
 BIBTEX_TO_ZOTERO_TYPE = {
     "article": "journalArticle",
     "book": "book",
     "inbook": "bookSection",
     "incollection": "bookSection",
     "inproceedings": "conferencePaper",
-    "conference": "conferencePaper",
-    "techreport": "report",
     "phdthesis": "thesis",
     "mastersthesis": "thesis",
-    "misc": "document",
+    "techreport": "report",
+    "report": "report",
+    "manual": "document",
+    "misc": "webpage",  # Catch-all fallback
     "unpublished": "manuscript",
     "online": "webpage",
+    "webpage": "webpage",
+    "dataset": "dataset",
+    "thesis": "thesis",
+    "proceedings": "conferencePaper",
+    "booklet": "book",
+    "lecture": "presentation",
+    "presentation": "presentation",
+    "film": "film",
+    "broadcast": "tvBroadcast",
+    "hearing": "hearing",
+    "case": "case",
+    "legal": "case",
+    "document": "document",  # Explicit fallback
 }
-
 
 def load_bibtex_entries(bibtex_str):
     parser = BibTexParser(common_strings=True)
