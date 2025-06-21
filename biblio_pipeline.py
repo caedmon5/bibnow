@@ -178,6 +178,11 @@ def main(text, commit=False):
         if not commit:
             print("🟡 Dry-run mode. No Zotero upload or file write.")
             print(json.dumps(bib, indent=2))
+            filename = generate_filename(bib)
+            print(f"\n📄 Would write file: {filename}")
+            print("📦 Markdown preview:\n")
+            print(md)
+
         else:
             status, resp = zotero_upload(bib)
             if status in [200, 201]:
