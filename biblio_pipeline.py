@@ -1,5 +1,14 @@
-import requests, json, os, re, time
+import requests, json, os, re, time, bibtextparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
+from bibtexparser.bparser import BibTexParser
+
+def load_bibtex_entries(bibtex_str):
+    parser = BibTexParser(common_strings=True)
+    parser.ignore_nonstandard_types = False
+    parser.homogenize_fields = False
+    parser.interpolate_strings = True
+    db = bibtexparser.loads(bibtex_str, parser=parser)
+    return db.entries  # list of dicts
 
 def extract_year(entry):
     date_str = entry.get("date", "")
@@ -153,14 +162,13 @@ def main(text, commit=False):
         print("⚠️ Detected @markdown block — ignored. Markdown is now built from Zotero.")
 
     # Find all BibTeX blocks in the input (supporting multiple)
-    entries = re.findall(r'@\w+\{[^@]+\}', bibtex_raw, re.DOTALL)
+    entries = load_bibtex_entries(bibtex_raw)
 
     if not entries:
         print("❌ No BibTeX entries found.")
         return
 
-    for bibtext in entries:
-        bib = parse_bibtex(bibtext)
+    for bib in entries:
         citekey = generate_citekey(bib)
         print(f"\n✅ Parsed citekey: {citekey}")
         if not commit:
