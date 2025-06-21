@@ -80,6 +80,7 @@ def extract_blocks(text, start_marker, end_marker):
 
 def parse_bibtex(bibtex):
     entry = {}
+    entry["ENTRYTYPE"] = re.search(r'@(\w+)\{', bibtex).group(1).lower()
     lines = bibtex.splitlines()
     for line in lines:
         if '=' in line:
@@ -88,10 +89,30 @@ def parse_bibtex(bibtex):
     entry["ID"] = re.search(r'@\w+\{([^,]+),', bibtex).group(1)
     return entry
 
+def bibtex_to_zotero_type(bibtex_type):
+    mapping = {
+        "article": "journalArticle",
+        "book": "book",
+        "inbook": "bookSection",
+        "incollection": "bookSection",
+        "inproceedings": "conferencePaper",
+        "proceedings": "conferencePaper",
+        "techreport": "report",
+        "phdthesis": "thesis",
+        "mastersthesis": "thesis",
+        "manual": "report",
+        "unpublished": "manuscript",
+        "misc": "document",
+        "online": "webpage",
+        "webpage": "webpage"
+    }
+    return mapping.get(bibtex_type.lower(), "document")
+
+
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
     metadata = [{
-        "itemType": "journalArticle",
+        "itemType": bibtex_to_zotero_type(entry.get("ENTRYTYPE", "misc")),
         "title": entry.get("title", ""),
         "creators": [{"creatorType": "author", "name": entry.get("author", "Unknown")}],
         "publicationTitle": entry.get("journal", ""),
