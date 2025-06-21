@@ -113,12 +113,12 @@ def zotero_upload(entry):
     except requests.exceptions.JSONDecodeError:
         return r.status_code, {"error": "No JSON returned", "body": r.text}
 
-def build_markdown(entry, zotero_key):
-    zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}"
+def build_markdown(entry, citekey=None, zotero_key=None):
+    zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     md = f"""---
-citekey: "{entry.get('ID')}"
+citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
 type: "article"
-zotero_key: "{zotero_key}"
+zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
 autoupdate: true
@@ -181,6 +181,7 @@ def main(text, commit=False):
             filename = generate_filename(bib)
             print(f"\n📄 Would write file: {filename}")
             print("📦 Markdown preview:\n")
+            md = build_markdown(bib, citekey=citekey)
             print(md)
 
         else:
@@ -189,7 +190,7 @@ def main(text, commit=False):
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
                 print(f"✅ Zotero upload successful (Key: {key})")
-                md = build_markdown(bib, key)
+                md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
 
                 citekey = generate_citekey(bib)
