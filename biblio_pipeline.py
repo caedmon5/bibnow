@@ -123,26 +123,6 @@ def parse_bibtex(bibtex):
             entry["ID"] = entry_type_match.group(2) if entry_type_match else "unknown"
     return entry
 
-def bibtex_to_zotero_type(bibtex_type):
-    mapping = {
-        "article": "journalArticle",
-        "book": "book",
-        "inbook": "bookSection",
-        "incollection": "bookSection",
-        "inproceedings": "conferencePaper",
-        "proceedings": "conferencePaper",
-        "techreport": "report",
-        "phdthesis": "thesis",
-        "mastersthesis": "thesis",
-        "manual": "report",
-        "unpublished": "manuscript",
-        "misc": "document",
-        "online": "webpage",
-        "webpage": "webpage"
-    }
-    return mapping.get(bibtex_type.lower(), "document")
-
-
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
     item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
