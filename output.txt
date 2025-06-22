@@ -1,0 +1,130 @@
+📋 Clipboard input (Linux) detected and loaded.
+🚦 Running in DRY-RUN mode.
+
+✅ Parsed citekey: Unknown1973RoeVWade
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Important for studies on reproductive rights and U.S. constitutional law.",
+  "keywords": "Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent",
+  "abstract": "The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.",
+  "reporter": "410 U.S. 113",
+  "court": "Supreme Court of the United States",
+  "date": "1973-01-22",
+  "year": "1973",
+  "title": "Roe v. Wade",
+  "ENTRYTYPE": "case",
+  "ID": "Roe1973Wade"
+}
+
+📄 Would write file: LN Unknown 1973 Roe V Wade.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown1973RoeVWade"
+type: "case"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+. 1973-01-22. "Roe v. Wade." . 
+
+# Abstract  
+The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.
+
+# Keywords
+[[Supreme Court]], [[Roe v. Wade]], [[abortion]], [[legal history]], [[judicial precedent]]
+
+# Notes  
+Important for studies on reproductive rights and U.S. constitutional law.
+
+# Related Files and URLs.  
+
+
+
+✅ Parsed citekey: Unknown2020HouseOfCommons
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Useful for policy analysis and governmental oversight research.",
+  "keywords": "Canada, COVID-19, parliamentary hearings, public health, accountability",
+  "abstract": "Testimonies and evidence presented to the Canadian parliamentary health committee on the government\u2019s response to the COVID-19 pandemic.",
+  "committee": "Standing Committee on Health",
+  "institution": "Parliament of Canada",
+  "url": "https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671",
+  "date": "2020-05-01",
+  "year": "2020",
+  "title": "House of Commons Standing Committee on Health: COVID-19 Pandemic Response",
+  "ENTRYTYPE": "hearing",
+  "ID": "Canada2020PandemicResponse"
+}
+
+📄 Would write file: LN Unknown 2020 House Of Commons.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown2020HouseOfCommons"
+type: "hearing"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+. 2020-05-01. "House of Commons Standing Committee on Health: COVID-19 Pandemic Response." Parliament of Canada. https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671
+
+# Abstract  
+Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.
+
+# Keywords
+[[Canada]], [[COVID-19]], [[parliamentary hearings]], [[public health]], [[accountability]]
+
+# Notes  
+Useful for policy analysis and governmental oversight research.
+
+# Related Files and URLs.  
+
+
+
+✅ Parsed citekey: Unknown2022DigitalCharterImplementation
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Relevant for discussions about Canadian digital governance and AI regulation.",
+  "keywords": "Canada, privacy law, digital charter, legislation, C-27",
+  "abstract": "This bill proposes major changes to Canada\u2019s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.",
+  "legislativebody": "House of Commons, Canada",
+  "session": "44th Parliament, 1st Session",
+  "billnumber": "C-27",
+  "date": "2022-06-15",
+  "year": "2022",
+  "title": "Digital Charter Implementation Act, 2022",
+  "ENTRYTYPE": "bill",
+  "ID": "Canada2022C27"
+}
+
+📄 Would write file: LN Unknown 2022 Digital Charter Implementation.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown2022DigitalCharterImplementation"
+type: "bill"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+. 2022-06-15. "Digital Charter Implementation Act, 2022." . 
+
+# Abstract  
+This bill proposes major changes to Canada’s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.
+
+# Keywords
+[[Canada]], [[privacy law]], [[digital charter]], [[legislation]], [[C-27]]
+
+# Notes  
+Relevant for discussions about Canadian digital governance and AI regulation.
+
+# Related Files and URLs.  
+
+

@@ -195,7 +195,9 @@ zotero_library_id: {ZOTERO_USER_ID}
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-{entry.get('author', '')}. {entry.get('date', '')}. "{entry.get('title', '')}." {entry.get('howpublished', entry.get('publisher', entry.get('institution', '')))}. {entry.get('url', '')}
+f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
 
 # Abstract  
 {entry.get('abstract', 'TBD')}

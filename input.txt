@@ -1,34 +1,36 @@
-@film{Kurosawa1950Rashomon,
-  title = {Rashomon},
-  director = {Akira Kurosawa},
-  producer = {Minoru Jingo},
-  year = {1950},
-  date = {1950},
-  url = {https://www.imdb.com/title/tt0042876/},
-  genre = {Drama, Crime},
-  abstract = {A groundbreaking Japanese film that explores the subjectivity of truth through multiple perspectives on a single incident.},
-  keywords = {film, Akira Kurosawa, Rashomon, Japanese cinema, truth, subjectivity},
-  note = {Cited for its philosophical exploration of conflicting testimony and perception.}
-}
-
+@bibtex
 @case{Roe1973Wade,
-  title = {Roe v. Wade},
-  court = {Supreme Court of the United States},
-  reporter = {410 U.S. 113},
-  date = {1973-01-22},
-  year = {1973},
-  abstract = {The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.},
-  keywords = {Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent},
-  note = {Important for studies on reproductive rights and U.S. constitutional law.}
+  title     = {Roe v. Wade},
+  year      = {1973},
+  date      = {1973-01-22},
+  court     = {Supreme Court of the United States},
+  reporter  = {410 U.S. 113},
+  abstract  = {The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.},
+  keywords  = {Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent},
+  note      = {Important for studies on reproductive rights and U.S. constitutional law.}
 }
 
 @hearing{Canada2020PandemicResponse,
-  title = {House of Commons Standing Committee on Health: COVID-19 Pandemic Response},
-  institution = {Parliament of Canada},
-  url = {https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671},
-  date = {2020-05-01},
-  year = {2020},
-  abstract = {Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.},
-  keywords = {Canada, COVID-19, parliamentary hearings, public health, accountability},
-  note = {Useful for policy analysis and governmental oversight research.}
+  title        = {House of Commons Standing Committee on Health: COVID-19 Pandemic Response},
+  year         = {2020},
+  date         = {2020-05-01},
+  url          = {https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671},
+  institution  = {Parliament of Canada},
+  committee    = {Standing Committee on Health},
+  abstract     = {Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.},
+  keywords     = {Canada, COVID-19, parliamentary hearings, public health, accountability},
+  note         = {Useful for policy analysis and governmental oversight research.}
 }
+
+@bill{Canada2022C27,
+  title            = {Digital Charter Implementation Act, 2022},
+  year             = {2022},
+  date             = {2022-06-15},
+  billnumber       = {C-27},
+  session          = {44th Parliament, 1st Session},
+  legislativebody  = {House of Commons, Canada},
+  abstract         = {This bill proposes major changes to Canada’s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.},
+  keywords         = {Canada, privacy law, digital charter, legislation, C-27},
+  note             = {Relevant for discussions about Canadian digital governance and AI regulation.}
+}
+@end
