@@ -1,21 +1,32 @@
-@case{Brown1954BoardEducation,
-  title     = {Brown v. Board of Education},
-  court     = {Supreme Court of the United States},
-  date      = {1954-05-17},
-  year      = {1954},
-  reporter  = {347 U.S. 483},
-  abstract  = {Landmark U.S. Supreme Court decision that declared racial segregation in public schools unconstitutional.},
-  keywords  = {Supreme Court, Brown v. Board, civil rights, education law, desegregation, judicial precedent},
-  note      = {Cited for its foundational role in U.S. civil rights jurisprudence.}
+@case{Canada2015SupremeDecision,
+  title     = {Reference re Supreme Court Act, ss. 5 and 6},
+  court     = {Supreme Court of Canada},
+  year      = {2015},
+  date      = {2015-04-25},
+  reporter  = {2015 SCC 21, [2015] 1 S.C.R. 706},
+  abstract  = {This ruling addressed whether certain judicial appointments to the Supreme Court of Canada were valid under ss. 5 and 6 of the Supreme Court Act.},
+  keywords  = {Canadian law, Supreme Court, judicial appointment, constitutional law},
+  note      = {Used to illustrate judicial authorship and legal responsibility in Canadian citation.}
 }
 
-@legislation{Canada1982CharterRights,
-  title     = {Canadian Charter of Rights and Freedoms},
+@film{Herzog2010CaveOfForgottenDreams,
+  title     = {Cave of Forgotten Dreams},
+  director  = {Werner Herzog},
+  producer  = {Creative Differences},
+  year      = {2010},
+  url       = {https://www.imdb.com/title/tt1664894/},
+  abstract  = {This documentary explores the Chauvet Cave in France, home to the oldest known human-painted images. Herzog examines questions of time, art, and humanity.},
+  keywords  = {Werner Herzog, prehistoric art, documentary film, Chauvet Cave, time, cave painting},
+  note      = {Illustrates fallback to director when no traditional author is present.}
+}
+
+@hearing{Canada2021DigitalCharterHearings,
+  title        = {House of Commons Standing Committee on Access to Information, Privacy and Ethics: Digital Charter Implementation Act},
   legislativebody = {Parliament of Canada},
-  date      = {1982-04-17},
-  year      = {1982},
-  session   = {Part I of the Constitution Act, 1982},
-  abstract  = {The Charter enshrines fundamental freedoms and rights of individuals in Canadian law and serves as a central reference for constitutional cases.},
-  keywords  = {Canadian Charter, constitutional law, civil liberties, Parliament, Canada, human rights, legislative documents},
-  note      = {Frequently cited in Canadian constitutional scholarship and legal decisions.}
+  year         = {2021},
+  date         = {2021-03-10},
+  url          = {https://www.ourcommons.ca/Committees/en/ETHI/StudyActivity?studyActivityId=11245678},
+  abstract     = {A hearing discussing the implications of Canada's Digital Charter Implementation Act, Bill C-11, on privacy, ethics, and digital rights.},
+  keywords     = {Digital Charter, Canadian Parliament, data privacy, Bill C-11, digital rights},
+  note         = {Used to test parsing of parliamentary hearings and legislative authorship.}
 }
