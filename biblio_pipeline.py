@@ -77,7 +77,9 @@ def generate_filename(entry):
 
     # Split author into capitalized parts
     name_parts = [w.capitalize() for w in author.replace('-', ' ').split()]
-    lastname_parts = name_parts[-2:] if len(name_parts) >= 2 else name_parts[-1:]
+    lastname_parts = [name_parts[-1]] if len(name_parts) >= 1 else ['Unknown']
+    if " and " in author:
+        lastname_parts.append("et al")
 
     # Title-cased first 3 words
     title_words = re.findall(r'\b\w+\b', title)
@@ -182,14 +184,14 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
-type: "article"
+type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-{entry.get('author', '')}. {entry.get('date', '')}. "{entry.get('title', '')}." *{entry.get('journal', '')}*. {entry.get('url', '')}
+{entry.get('author', '')}. {entry.get('date', '')}. "{entry.get('title', '')}." {entry.get('howpublished', entry.get('publisher', entry.get('institution', '')))}. {entry.get('url', '')}
 
 # Abstract  
 {entry.get('abstract', 'TBD')}

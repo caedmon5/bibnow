@@ -1,59 +1,34 @@
-@article{Gopnik2025PerfectlyImperfect,
-  author    = {Adam Gopnik},
-  title     = {Mastering It: The Art of Being Perfectly Imperfect},
-  journal   = {The Globe and Mail},
-  year      = {2025},
-  date      = {2025-06-21},
-  url       = {https://www.theglobeandmail.com/life/article-the-art-of-perfectly-imperfect-adam-gopnik-mastering-it/},
-  abstract  = {In this introductory essay for the Globe and Mail's “Mastering It” series, Adam Gopnik explores the paradox of perfection in mastery. He draws on examples from music, sport, magic, and the arts to argue that expressive imperfection is a core component of compelling performance. He discusses the 'Too Perfect Trick Theory' from magic as a central metaphor for why perfect execution often weakens, rather than strengthens, artistic or experiential impact.},
-  keywords  = {too perfect theory, mastery, imperfection, Adam Gopnik, expressive performance, magic theory, aesthetics, performance studies, humanism, sports analytics},
-  note      = {Includes a cultural commentary on the Too Perfect Trick theory and its philosophical resonance across disciplines}
+@film{Kurosawa1950Rashomon,
+  title = {Rashomon},
+  director = {Akira Kurosawa},
+  producer = {Minoru Jingo},
+  year = {1950},
+  date = {1950},
+  url = {https://www.imdb.com/title/tt0042876/},
+  genre = {Drama, Crime},
+  abstract = {A groundbreaking Japanese film that explores the subjectivity of truth through multiple perspectives on a single incident.},
+  keywords = {film, Akira Kurosawa, Rashomon, Japanese cinema, truth, subjectivity},
+  note = {Cited for its philosophical exploration of conflicting testimony and perception.}
 }
 
-@book{Vernon1957BookMagic,
-  author    = {Lewis Ganson and Dai Vernon},
-  title     = {The Dai Vernon Book of Magic},
-  year      = {1957},
-  publisher = {L\&L Publishing},
-  note      = {Seminal exposition of Vernon's magic theories, including the foundation of the 'Too Perfect Theory'. See also: Gopnik (2025), "Mastering It".},
-  abstract  = {This foundational book documents the routines and theories of Dai Vernon, one of the most influential magicians of the 20th century. While primarily practical, it includes reflections on performance theory, including early articulations of what would become known as the Too Perfect Theory: the idea that an overly clean or flawless trick can expose its method by eliminating plausible alternatives.},
-  keywords  = {magic theory, Dai Vernon, too perfect theory, sleight of hand, performance strategy, misdirection, magician ethics}
+@case{Roe1973Wade,
+  title = {Roe v. Wade},
+  court = {Supreme Court of the United States},
+  reporter = {410 U.S. 113},
+  date = {1973-01-22},
+  year = {1973},
+  abstract = {The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.},
+  keywords = {Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent},
+  note = {Important for studies on reproductive rights and U.S. constitutional law.}
 }
 
-@online{Jerx2017TooPerfect,
-  author    = {Andy},
-  title     = {The Too Perfect Theory (And What Comes Next)},
-  year      = {2017},
-  url       = {https://www.thejerx.com/blog/2017/6/12/the-too-perfect-theory-and-what-comes-next},
-  note      = {Contemporary blog essay on performance framing and ambiguity in magic. Related commentary found in Gopnik (2025), "Mastering It".},
-  abstract  = {In this blog post, magician and theorist Andy of The Jerx offers a reflective critique and expansion of the Too Perfect Theory. He suggests that the theory should evolve beyond simply introducing flaws to increase ambiguity, proposing instead more interactive and emotionally grounded forms of performance. The piece is influential in modern online magic circles.},
-  keywords  = {too perfect theory, performance framing, audience psychology, magician practice, contemporary magic}
-}
-
-@article{Smith2020SocialEpistemologyMagic,
-  author  = {Michael Smith},
-  title   = {The Social Epistemology of Magic},
-  journal = {Social Epistemology},
-  volume  = {34},
-  number  = {4},
-  pages   = {349--361},
-  year    = {2020},
-  doi     = {10.1080/02691728.2020.1749780},
-  note    = {Applies epistemological frameworks to magician-audience dynamics. Parallels with Gopnik (2025), "Mastering It", especially on ambiguity and belief.},
-  abstract = {Smith explores how magicians manage audience expectations, knowledge, and belief through deliberate misdirection and rhetorical framing. He discusses the Too Perfect Theory as a key example of how creating multiple plausible explanations preserves mystery, integrating epistemological frameworks from philosophy.},
-  keywords = {social epistemology, too perfect theory, philosophy of magic, belief manipulation, misdirection, audience cognition}
-}
-
-@article{Nelson2009SlightMind,
-  author  = {Maggie Nelson},
-  title   = {A Slight of Mind: Magic, Consciousness, and the Culture of Performance},
-  journal = {Performance Research},
-  volume  = {14},
-  number  = {4},
-  pages   = {99--108},
-  year    = {2009},
-  doi     = {10.1080/13528160903519108},
-  note    = {Discusses illusion, imperfection, and the Too Perfect Theory. See also Gopnik (2025), who expands this link to mastery and vulnerability.},
-  abstract = {Nelson investigates how magic interacts with theories of consciousness and performance. Using examples from illusionist and performance traditions, she highlights how even small discrepancies in a magic trick’s presentation can shift the cognitive load and influence belief. The essay touches on the Too Perfect Theory as a mode of cognitive deferral.},
-  keywords = {consciousness, performance theory, too perfect theory, deception, cognitive science, illusion, theatricality}
+@hearing{Canada2020PandemicResponse,
+  title = {House of Commons Standing Committee on Health: COVID-19 Pandemic Response},
+  institution = {Parliament of Canada},
+  url = {https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671},
+  date = {2020-05-01},
+  year = {2020},
+  abstract = {Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.},
+  keywords = {Canada, COVID-19, parliamentary hearings, public health, accountability},
+  note = {Useful for policy analysis and governmental oversight research.}
 }
