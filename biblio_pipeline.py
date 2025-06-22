@@ -145,6 +145,7 @@ def zotero_upload(entry):
         "title": entry.get("title", ""),
         "creators": creators,
         "date": entry.get("date", ""),
+        "year": extract_year(entry),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
         "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],

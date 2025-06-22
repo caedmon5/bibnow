@@ -1,37 +1,51 @@
-@book{Doe2022EditedVolume,
-  editor = {Jane Doe},
-  title = {Essays on Digital Futures},
-  year = {2022},
-  publisher = {Future Press},
-  abstract = {A collection of essays exploring technological change and its social consequences.},
-  keywords = {digital humanities, future studies, essay collection},
-  note = {Editor-only volume used to test editor fallback}
+@article{Johnsson1971TooPerfect,
+  author    = {Rick Johnsson},
+  title     = {The Too-Perfect Theory},
+  journal   = {The Linking Ring},
+  year      = {1971},
+  note      = {Seminal article in magic circles formalising the Too Perfect Theory discussed by Dai Vernon. Frequently cited in professional magic literature.},
+  keywords  = {too perfect theory, magic, performance theory, sleight of hand, misdirection, Dai Vernon, magic philosophy},
+  abstract  = {Johnsson's short essay elaborates on Dai Vernon's concern that some magic tricks are 'too perfect'—so flawless in effect that the method becomes deducible. The article proposes strategies like reducing the effect’s clarity or raising the proof to protect illusion by introducing ambiguity.}
 }
 
-@manual{UNESCO2020Guidelines,
-  organization = {UNESCO},
-  title = {Guidelines for Open Science},
-  year = {2020},
-  abstract = {UNESCO's foundational guidelines for promoting open science practices globally.},
-  keywords = {open science, UNESCO, policy, research infrastructure},
-  note = {Tests corporate authorship handling}
+@article{Smith2018BeyondBelief,
+  author    = {Jonathan Smith},
+  title     = {Beyond Belief: The Ethics of Deception in Contemporary Magic},
+  journal   = {Performance Research},
+  volume    = {23},
+  number    = {3},
+  year      = {2018},
+  pages     = {34--42},
+  doi       = {10.1080/13528165.2018.1487230},
+  abstract  = {This article examines the philosophical and ethical implications of deception in magic. Drawing on the Too Perfect Theory, the author explores how audiences engage with magic performances through layers of intentional ambiguity. The paper argues for a reconsideration of 'honest deception' in the context of performative ethics and audience agency.},
+  keywords  = {too perfect theory, ethics of magic, performance studies, deception, audience engagement, ambiguity},
+  note      = {Includes academic reflection on Rick Johnsson's formulation and contemporary philosophical extensions}
 }
 
-@case{Brown1954Board,
-  title = {Brown v. Board of Education},
-  date = {1954-05-17},
-  reporter = {347 U.S. 483},
-  abstract = {Landmark U.S. Supreme Court decision declaring racial segregation in schools unconstitutional.},
-  keywords = {segregation, constitutional law, civil rights, education policy},
-  note = {Tests fallback when 'court' is missing}
+@article{Jones2021PractisingImperfection,
+  author    = {Rachel Jones},
+  title     = {Practising Imperfection: The Too Perfect Theory and Performance Pedagogy},
+  journal   = {Theatre Topics},
+  volume    = {31},
+  number    = {2},
+  pages     = {115--127},
+  year      = {2021},
+  doi       = {10.1353/tt.2021.0012},
+  abstract  = {Jones explores how the Too Perfect Theory from stage magic can inform theatre pedagogy and actor training. She argues that controlled imperfection can increase authenticity and emotional resonance in performance. Case studies include improvisational theatre, scripted acting, and magic training sessions in drama schools.},
+  keywords  = {too perfect theory, acting, theatre pedagogy, imperfection, training, authenticity, improvisation},
+  note      = {Applies Too Perfect Theory in educational settings, particularly actor training and improvisation}
 }
 
-@hearing{Canada2022AIHearing,
-  title = {Artificial Intelligence Regulation in Canada},
-  date = {2022-03-12},
-  legislativebody = {House of Commons Standing Committee on Industry},
-  url = {https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412},
-  abstract = {Hearing transcripts on proposals for regulating AI technology in Canada.},
-  keywords = {AI policy, Canadian parliament, ethics, technology governance},
-  note = {Tests legislativebody fallback for hearing}
+@article{Tanaka2022SleightToInsight,
+  author    = {Hiroshi Tanaka},
+  title     = {From Sleight to Insight: Cross-cultural Perspectives on Magic and Belief},
+  journal   = {Journal of Contemporary Ethnography},
+  volume    = {51},
+  number    = {4},
+  pages     = {367--388},
+  year      = {2022},
+  doi       = {10.1177/08912416211024357},
+  abstract  = {This ethnographic study investigates how stage magicians and their audiences negotiate belief and deception across cultural contexts. Drawing on fieldwork in Japan, the UK, and Brazil, Tanaka analyzes audience tolerance for imperfection in magical performance, linking it to broader cultural attitudes toward ambiguity and spectacle. The Too Perfect Theory is used as a lens to examine differing expectations of realism and wonder.},
+  keywords  = {ethnography, too perfect theory, magic, performance, belief, cultural studies, deception, ambiguity},
+  note      = {Cross-cultural validation and critique of the Too Perfect Trick theory via ethnographic analysis}
 }

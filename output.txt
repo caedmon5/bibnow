@@ -2,7 +2,7 @@
 🚦 Running in DRY-RUN mode.
 🔎 No @bibtex block markers found — assuming entire input is raw BibTeX.
 
-✅ Parsed citekey: Unknown2022EssaysOnDigital
+✅ Parsed citekey: Doe2022EssaysOnDigital
 🟡 Dry-run mode. No Zotero upload or file write.
 {
   "note": "Editor-only volume used to test editor fallback",
@@ -16,11 +16,11 @@
   "ID": "Doe2022EditedVolume"
 }
 
-📄 Would write file: LN Unknown 2022 Essays On Digital.md
+📄 Would write file: LN Doe 2022 Essays On Digital.md
 📦 Markdown preview:
 
 ---
-citekey: "Unknown2022EssaysOnDigital"
+citekey: "Doe2022EssaysOnDigital"
 type: "book"
 zotero_key: ""
 zotero_url: ""
@@ -28,9 +28,7 @@ zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-f". . "Essays on Digital Futures." **. "
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
-    else f"UNKNOWN. . "Essays on Digital Futures."  "
+UNKNOWN. . "Essays on Digital Futures."  
 
 # Abstract  
 A collection of essays exploring technological change and its social consequences.
@@ -45,7 +43,7 @@ Editor-only volume used to test editor fallback
 
 
 
-✅ Parsed citekey: Unknown2020GuidelinesForOpen
+✅ Parsed citekey: Unesco2020GuidelinesForOpen
 🟡 Dry-run mode. No Zotero upload or file write.
 {
   "note": "Tests corporate authorship handling",
@@ -58,11 +56,11 @@ Editor-only volume used to test editor fallback
   "ID": "UNESCO2020Guidelines"
 }
 
-📄 Would write file: LN Unknown 2020 Guidelines For Open.md
+📄 Would write file: LN Unesco 2020 Guidelines For Open.md
 📦 Markdown preview:
 
 ---
-citekey: "Unknown2020GuidelinesForOpen"
+citekey: "Unesco2020GuidelinesForOpen"
 type: "manual"
 zotero_key: ""
 zotero_url: ""
@@ -70,9 +68,7 @@ zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-f". . "Guidelines for Open Science." **. "
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
-    else f"UNKNOWN. . "Guidelines for Open Science."  "
+UNKNOWN. . "Guidelines for Open Science."  
 
 # Abstract  
 UNESCO's foundational guidelines for promoting open science practices globally.
@@ -112,9 +108,7 @@ zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-f". 1954-05-17. "Brown v. Board of Education." **. "
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
-    else f"UNKNOWN. 1954-05-17. "Brown v. Board of Education." 347 U.S. 483 "
+UNKNOWN. 1954-05-17. "Brown v. Board of Education." 347 U.S. 483 
 
 # Abstract  
 Landmark U.S. Supreme Court decision declaring racial segregation in schools unconstitutional.
@@ -155,9 +149,7 @@ zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-f". 2022-03-12. "Artificial Intelligence Regulation in Canada." **. https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412"
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
-    else f"House of Commons Standing Committee on Industry. 2022-03-12. "Artificial Intelligence Regulation in Canada."  https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412"
+House of Commons Standing Committee on Industry. 2022-03-12. "Artificial Intelligence Regulation in Canada."  https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412
 
 # Abstract  
 Hearing transcripts on proposals for regulating AI technology in Canada.
