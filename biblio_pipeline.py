@@ -28,6 +28,7 @@ BIBTEX_TO_ZOTERO_TYPE = {
     "broadcast": "tvBroadcast",
     "hearing": "hearing",
     "case": "case",
+    "bill": "bill",
     "legal": "case",
     "document": "document",  # Explicit fallback
 }
@@ -148,6 +149,23 @@ def zotero_upload(entry):
         ),
         "institution": entry.get("school", "") if "thesis" in entry.get("ENTRYTYPE", "") or item_type == "report" else "",
 }]
+
+    # Additional fields for custom types
+    item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
+    metadata[0]["itemType"] = item_type
+
+    if item_type == "case":
+        metadata[0]["reporter"] = entry.get("reporter", "")
+        metadata[0]["court"] = entry.get("court", "")
+    elif item_type == "hearing":
+        metadata[0]["institution"] = entry.get("institution", "")
+        metadata[0]["committee"] = entry.get("committee", "")
+    elif item_type == "bill":
+        metadata[0]["billNumber"] = entry.get("billnumber", "")
+        metadata[0]["session"] = entry.get("session", "")
+        metadata[0]["legislativeBody"] = entry.get("legislativebody", "")
+
+
 
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
