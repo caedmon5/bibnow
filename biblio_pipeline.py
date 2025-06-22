@@ -148,6 +148,7 @@ def zotero_upload(entry):
         # "year": extract_year(entry),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
+        "extra": entry.get("note", "None supplied."),
         "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
         "publicationTitle": entry.get("journal", ""),
         "volume": entry.get("volume", ""),
