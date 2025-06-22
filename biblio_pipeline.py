@@ -60,9 +60,11 @@ def generate_citekey(entry):
     # Extract last name from author field
     first_author = author.split(" and ")[0]
     if "," in first_author:
-        lastname = re.sub(r'[^A-Za-z]', '', first_author.split(",")[0])
+        lastname = first_author.split(",")[0]
     else:
-        lastname = re.sub(r'[^A-Za-z]', '', first_author.split()[-1])
+        lastname = first_author.split()[-1]
+
+    lastname = re.sub(r'[^\w\s]', '', lastname).capitalize()
 
     # First three words of title
     title_words = re.findall(r'\b\w+\b', title)
@@ -75,18 +77,20 @@ def generate_filename(entry):
     title = entry.get("title", "")
     year = extract_year(entry)
 
+    first_author = author.split(" and ")[0]
+    if "," in first_author:
+        lastname = first_author.split(",")[0].strip()
+    else:
+        lastname = first_author.split()[-1].strip()
 
-    # Split author into capitalized parts
-    name_parts = [w.capitalize() for w in author.replace('-', ' ').split()]
-    lastname_parts = [name_parts[-1]] if len(name_parts) >= 1 else ['Unknown']
+    lastname = re.sub(r'[^\w\s]', '', lastname).capitalize()
+
     if " and " in author:
-        lastname_parts.append("et al")
+        lastname += " et al"
 
-    # Title-cased first 3 words
     title_words = re.findall(r'\b\w+\b', title)
     title_part = ' '.join(w.capitalize() for w in title_words[:3])
-
-    return f"LN {' '.join(lastname_parts)} {year} {title_part}.md"
+    return f"LN {lastname} {year} {title_part}.md"
 
 
 # Dynamic base path
