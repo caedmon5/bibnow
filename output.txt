@@ -1,4 +1,173 @@
 📋 Clipboard input (Linux) detected and loaded.
 🚦 Running in DRY-RUN mode.
 🔎 No @bibtex block markers found — assuming entire input is raw BibTeX.
-❌ Input does not appear to be valid BibTeX.
+
+✅ Parsed citekey: Unknown2022EssaysOnDigital
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Editor-only volume used to test editor fallback",
+  "keywords": "digital humanities, future studies, essay collection",
+  "abstract": "A collection of essays exploring technological change and its social consequences.",
+  "publisher": "Future Press",
+  "year": "2022",
+  "title": "Essays on Digital Futures",
+  "editor": "Jane Doe",
+  "ENTRYTYPE": "book",
+  "ID": "Doe2022EditedVolume"
+}
+
+📄 Would write file: LN Unknown 2022 Essays On Digital.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown2022EssaysOnDigital"
+type: "book"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+f". . "Essays on Digital Futures." **. "
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"UNKNOWN. . "Essays on Digital Futures."  "
+
+# Abstract  
+A collection of essays exploring technological change and its social consequences.
+
+# Keywords
+[[digital humanities]], [[future studies]], [[essay collection]]
+
+# Notes  
+Editor-only volume used to test editor fallback
+
+# Related Files and URLs.  
+
+
+
+✅ Parsed citekey: Unknown2020GuidelinesForOpen
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Tests corporate authorship handling",
+  "keywords": "open science, UNESCO, policy, research infrastructure",
+  "abstract": "UNESCO's foundational guidelines for promoting open science practices globally.",
+  "year": "2020",
+  "title": "Guidelines for Open Science",
+  "organization": "UNESCO",
+  "ENTRYTYPE": "manual",
+  "ID": "UNESCO2020Guidelines"
+}
+
+📄 Would write file: LN Unknown 2020 Guidelines For Open.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown2020GuidelinesForOpen"
+type: "manual"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+f". . "Guidelines for Open Science." **. "
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"UNKNOWN. . "Guidelines for Open Science."  "
+
+# Abstract  
+UNESCO's foundational guidelines for promoting open science practices globally.
+
+# Keywords
+[[open science]], [[UNESCO]], [[policy]], [[research infrastructure]]
+
+# Notes  
+Tests corporate authorship handling
+
+# Related Files and URLs.  
+
+
+
+✅ Parsed citekey: Unknown1954BrownVBoard
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Tests fallback when 'court' is missing",
+  "keywords": "segregation, constitutional law, civil rights, education policy",
+  "abstract": "Landmark U.S. Supreme Court decision declaring racial segregation in schools unconstitutional.",
+  "reporter": "347 U.S. 483",
+  "date": "1954-05-17",
+  "title": "Brown v. Board of Education",
+  "ENTRYTYPE": "case",
+  "ID": "Brown1954Board"
+}
+
+📄 Would write file: LN Unknown 1954 Brown V Board.md
+📦 Markdown preview:
+
+---
+citekey: "Unknown1954BrownVBoard"
+type: "case"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+f". 1954-05-17. "Brown v. Board of Education." **. "
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"UNKNOWN. 1954-05-17. "Brown v. Board of Education." 347 U.S. 483 "
+
+# Abstract  
+Landmark U.S. Supreme Court decision declaring racial segregation in schools unconstitutional.
+
+# Keywords
+[[segregation]], [[constitutional law]], [[civil rights]], [[education policy]]
+
+# Notes  
+Tests fallback when 'court' is missing
+
+# Related Files and URLs.  
+
+
+
+✅ Parsed citekey: Industry2022ArtificialIntelligenceRegulation
+🟡 Dry-run mode. No Zotero upload or file write.
+{
+  "note": "Tests legislativebody fallback for hearing",
+  "keywords": "AI policy, Canadian parliament, ethics, technology governance",
+  "abstract": "Hearing transcripts on proposals for regulating AI technology in Canada.",
+  "url": "https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412",
+  "legislativebody": "House of Commons Standing Committee on Industry",
+  "date": "2022-03-12",
+  "title": "Artificial Intelligence Regulation in Canada",
+  "ENTRYTYPE": "hearing",
+  "ID": "Canada2022AIHearing"
+}
+
+📄 Would write file: LN Industry 2022 Artificial Intelligence Regulation.md
+📦 Markdown preview:
+
+---
+citekey: "Industry2022ArtificialIntelligenceRegulation"
+type: "hearing"
+zotero_key: ""
+zotero_url: ""
+zotero_library_id: 632779
+autoupdate: true
+---
+# Chicago Author-Year  Bibliography
+f". 2022-03-12. "Artificial Intelligence Regulation in Canada." **. https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412"
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"House of Commons Standing Committee on Industry. 2022-03-12. "Artificial Intelligence Regulation in Canada."  https://www.ourcommons.ca/Committees/en/INDU/StudyActivity?studyActivityId=11532412"
+
+# Abstract  
+Hearing transcripts on proposals for regulating AI technology in Canada.
+
+# Keywords
+[[AI policy]], [[Canadian parliament]], [[ethics]], [[technology governance]]
+
+# Notes  
+Tests legislativebody fallback for hearing
+
+# Related Files and URLs.  
+
+

@@ -53,12 +53,11 @@ def extract_year(entry):
     return "XXXX"
 
 def get_responsible_party(entry):
-    for field in ["author", "court", "institution", "legislativebody", "director", "producer"]:
+    for field in ["author", "editor", "court", "institution", "organization", "legislativebody", "director", "producer"]:
         value = entry.get(field)
         if value:
             return value
     return "Unknown"
-
 
 def generate_citekey(entry):
     author = get_responsible_party(entry)
@@ -198,6 +197,11 @@ def zotero_upload(entry):
 
 def build_markdown(entry, citekey=None, zotero_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
+        biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
+    else:
+        biblio_line = f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
+
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
 type: "{entry.get('ENTRYTYPE', 'article')}"
@@ -207,9 +211,7 @@ zotero_library_id: {ZOTERO_USER_ID}
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
-    else f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
+{biblio_line}
 
 # Abstract  
 {entry.get('abstract', 'TBD')}
