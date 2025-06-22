@@ -148,13 +148,12 @@ def zotero_upload(entry):
             "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
         ),
         "institution": entry.get("school", "") if "thesis" in entry.get("ENTRYTYPE", "") or item_type == "report" else "",
-        ),
         "court": entry.get("court", "") if item_type == "case" else "",
         "reporter": entry.get("reporter", "") if item_type == "case" else "",
         "committee": entry.get("committee", "") if item_type == "hearing" else "",
         "billNumber": entry.get("billnumber", "") if item_type == "bill" else "",
         "session": entry.get("session", "") if item_type == "bill" else "",
-        "legislativeBody": entry.get("legislativebody", "") if item_type == "bill" else "",
+        "legislativeBody": entry.get("legislativebody", "") if item_type == "bill" else ""
 }]
 
     # Additional fields for custom types
