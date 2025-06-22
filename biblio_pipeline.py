@@ -148,7 +148,7 @@ def zotero_upload(entry):
         # "year": extract_year(entry),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
-        "extra": entry.get("note", "None supplied."),
+        "extra": entry.get("note", ""),
         "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
         "publicationTitle": entry.get("journal", ""),
         "volume": entry.get("volume", ""),
@@ -212,20 +212,32 @@ zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
 autoupdate: true
 ---
-# Chicago Author-Year  Bibliography
+# Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
+
+## Chicago Author-Year Bibliography
 {biblio_line}
 
-# Abstract  
-{entry.get('abstract', 'TBD')}
+## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
+{entry.get('abstract', 'None supplied')}
 
-# Keywords
+## Keywords <span title="This field stores supplied keywords and should not be edited here. User-supplied keywords should go in a separate section below the edit line.">ⓘ</span>
 {', '.join(f"[[{k.strip()}]]" for k in entry.get("keywords", "").split(','))}
+## Bibliographic Note <span title="This field stores Zotero's 'extra' field and is intended for supplied bibliographic metadata. Do not edit unless syncing manually. User notes go below.">ⓘ</span>
+{entry.get('note', 'None supllied.')}
 
-# Notes  
-{entry.get('note', 'TBD')}
-
-# Related Files and URLs.  
+## Related Files and URLs. <span title="This field stores supplied URLs and files and should not be edited here. User-supplied URLS or files should go in a separate section below the edit line.">ⓘ</span>
 {zotero_url}
+
+---
+
+<!-- Do not edit above this line: all changes should be made in Zotero -->
+
+# User-genersted Content <span title="This section is for Obsidian-focussed notes. it is preserved during updates. The headers and sections are freeform and can be adapted or added as needed.">ⓘ</span>
+
+## User Notes <span title="This field is for user-supplied content that belongs closely to the record as a whole but does not need to be added to the canonical record in Zotero. Notes on specific topics or content within the content(e.g. quotstions, observations and thoughts)  should be created as separate unique notes and linked here.">ⓘ</span>
+
+
+
 """
     return md
 
