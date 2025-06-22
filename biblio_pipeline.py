@@ -205,8 +205,6 @@ def build_markdown(entry, citekey=None, zotero_key=None):
         biblio_line = f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
 
     md = f"""---
-aliases:
-  - "{lastname} {year} {title_part}"
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
 type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
