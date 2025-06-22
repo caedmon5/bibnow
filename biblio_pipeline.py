@@ -144,7 +144,7 @@ def zotero_upload(entry):
         "itemType": item_type,
         "title": entry.get("title", ""),
         "creators": creators,
-        "date": entry.get("date", ""),
+        "date": entry.get("date", entry.get("year", "")),
         # "year": extract_year(entry),
         "url": entry.get("url", ""),
         "abstractNote": entry.get("abstract", ""),
