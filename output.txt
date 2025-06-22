@@ -1,26 +1,27 @@
 📋 Clipboard input (Linux) detected and loaded.
 🚦 Running in DRY-RUN mode.
+🔎 No @bibtex block markers found — assuming entire input is raw BibTeX.
 
-✅ Parsed citekey: Unknown1973RoeVWade
+✅ Parsed citekey: Unknown1954BrownVBoard
 🟡 Dry-run mode. No Zotero upload or file write.
 {
-  "note": "Important for studies on reproductive rights and U.S. constitutional law.",
-  "keywords": "Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent",
-  "abstract": "The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.",
-  "reporter": "410 U.S. 113",
+  "note": "Cited for its foundational role in U.S. civil rights jurisprudence.",
+  "keywords": "Supreme Court, Brown v. Board, civil rights, education law, desegregation, judicial precedent",
+  "abstract": "Landmark U.S. Supreme Court decision that declared racial segregation in public schools unconstitutional.",
+  "reporter": "347 U.S. 483",
+  "year": "1954",
+  "date": "1954-05-17",
   "court": "Supreme Court of the United States",
-  "date": "1973-01-22",
-  "year": "1973",
-  "title": "Roe v. Wade",
+  "title": "Brown v. Board of Education",
   "ENTRYTYPE": "case",
-  "ID": "Roe1973Wade"
+  "ID": "Brown1954BoardEducation"
 }
 
-📄 Would write file: LN Unknown 1973 Roe V Wade.md
+📄 Would write file: LN Unknown 1954 Brown V Board.md
 📦 Markdown preview:
 
 ---
-citekey: "Unknown1973RoeVWade"
+citekey: "Unknown1954BrownVBoard"
 type: "case"
 zotero_key: ""
 zotero_url: ""
@@ -28,102 +29,62 @@ zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-. 1973-01-22. "Roe v. Wade." . 
+f". 1954-05-17. "Brown v. Board of Education." **. "
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"Supreme Court of the United States. 1954-05-17. "Brown v. Board of Education." 347 U.S. 483 "
 
 # Abstract  
-The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.
+Landmark U.S. Supreme Court decision that declared racial segregation in public schools unconstitutional.
 
 # Keywords
-[[Supreme Court]], [[Roe v. Wade]], [[abortion]], [[legal history]], [[judicial precedent]]
+[[Supreme Court]], [[Brown v. Board]], [[civil rights]], [[education law]], [[desegregation]], [[judicial precedent]]
 
 # Notes  
-Important for studies on reproductive rights and U.S. constitutional law.
+Cited for its foundational role in U.S. civil rights jurisprudence.
 
 # Related Files and URLs.  
 
 
 
-✅ Parsed citekey: Unknown2020HouseOfCommons
+✅ Parsed citekey: Unknown1982CanadianCharterOf
 🟡 Dry-run mode. No Zotero upload or file write.
 {
-  "note": "Useful for policy analysis and governmental oversight research.",
-  "keywords": "Canada, COVID-19, parliamentary hearings, public health, accountability",
-  "abstract": "Testimonies and evidence presented to the Canadian parliamentary health committee on the government\u2019s response to the COVID-19 pandemic.",
-  "committee": "Standing Committee on Health",
-  "institution": "Parliament of Canada",
-  "url": "https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671",
-  "date": "2020-05-01",
-  "year": "2020",
-  "title": "House of Commons Standing Committee on Health: COVID-19 Pandemic Response",
-  "ENTRYTYPE": "hearing",
-  "ID": "Canada2020PandemicResponse"
+  "note": "Frequently cited in Canadian constitutional scholarship and legal decisions.",
+  "keywords": "Canadian Charter, constitutional law, civil liberties, Parliament, Canada, human rights, legislative documents",
+  "abstract": "The Charter enshrines fundamental freedoms and rights of individuals in Canadian law and serves as a central reference for constitutional cases.",
+  "session": "Part I of the Constitution Act, 1982",
+  "year": "1982",
+  "date": "1982-04-17",
+  "legislativebody": "Parliament of Canada",
+  "title": "Canadian Charter of Rights and Freedoms",
+  "ENTRYTYPE": "legislation",
+  "ID": "Canada1982CharterRights"
 }
 
-📄 Would write file: LN Unknown 2020 House Of Commons.md
+📄 Would write file: LN Unknown 1982 Canadian Charter Of.md
 📦 Markdown preview:
 
 ---
-citekey: "Unknown2020HouseOfCommons"
-type: "hearing"
+citekey: "Unknown1982CanadianCharterOf"
+type: "legislation"
 zotero_key: ""
 zotero_url: ""
 zotero_library_id: 632779
 autoupdate: true
 ---
 # Chicago Author-Year  Bibliography
-. 2020-05-01. "House of Commons Standing Committee on Health: COVID-19 Pandemic Response." Parliament of Canada. https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671
+f". 1982-04-17. "Canadian Charter of Rights and Freedoms." **. "
+    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]
+    else f"Parliament of Canada. 1982-04-17. "Canadian Charter of Rights and Freedoms." Part I of the Constitution Act, 1982 "
 
 # Abstract  
-Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.
+The Charter enshrines fundamental freedoms and rights of individuals in Canadian law and serves as a central reference for constitutional cases.
 
 # Keywords
-[[Canada]], [[COVID-19]], [[parliamentary hearings]], [[public health]], [[accountability]]
+[[Canadian Charter]], [[constitutional law]], [[civil liberties]], [[Parliament]], [[Canada]], [[human rights]], [[legislative documents]]
 
 # Notes  
-Useful for policy analysis and governmental oversight research.
-
-# Related Files and URLs.  
-
-
-
-✅ Parsed citekey: Unknown2022DigitalCharterImplementation
-🟡 Dry-run mode. No Zotero upload or file write.
-{
-  "note": "Relevant for discussions about Canadian digital governance and AI regulation.",
-  "keywords": "Canada, privacy law, digital charter, legislation, C-27",
-  "abstract": "This bill proposes major changes to Canada\u2019s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.",
-  "legislativebody": "House of Commons, Canada",
-  "session": "44th Parliament, 1st Session",
-  "billnumber": "C-27",
-  "date": "2022-06-15",
-  "year": "2022",
-  "title": "Digital Charter Implementation Act, 2022",
-  "ENTRYTYPE": "bill",
-  "ID": "Canada2022C27"
-}
-
-📄 Would write file: LN Unknown 2022 Digital Charter Implementation.md
-📦 Markdown preview:
-
----
-citekey: "Unknown2022DigitalCharterImplementation"
-type: "bill"
-zotero_key: ""
-zotero_url: ""
-zotero_library_id: 632779
-autoupdate: true
----
-# Chicago Author-Year  Bibliography
-. 2022-06-15. "Digital Charter Implementation Act, 2022." . 
-
-# Abstract  
-This bill proposes major changes to Canada’s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.
-
-# Keywords
-[[Canada]], [[privacy law]], [[digital charter]], [[legislation]], [[C-27]]
-
-# Notes  
-Relevant for discussions about Canadian digital governance and AI regulation.
+Frequently cited in Canadian constitutional scholarship and legal decisions.
 
 # Related Files and URLs.  
 

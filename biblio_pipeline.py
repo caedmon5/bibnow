@@ -52,8 +52,16 @@ def extract_year(entry):
         return match.group(1)
     return "XXXX"
 
+def get_responsible_party(entry):
+    for field in ["author", "court", "institution", "legislativebody", "director", "producer"]:
+        value = entry.get(field)
+        if value:
+            return value
+    return "Unknown"
+
+
 def generate_citekey(entry):
-    author = entry.get("author", "Unknown")
+    author = get_responsible_party(entry)
     title = entry.get("title", "")
     year = extract_year(entry)
 
@@ -73,7 +81,7 @@ def generate_citekey(entry):
     return f"{lastname}{year}{slug}"
 
 def generate_filename(entry):
-    author = entry.get("author", "Unknown")
+    author = get_responsible_party(entry)
     title = entry.get("title", "")
     year = extract_year(entry)
 

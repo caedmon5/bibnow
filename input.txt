@@ -1,36 +1,21 @@
-@bibtex
-@case{Roe1973Wade,
-  title     = {Roe v. Wade},
-  year      = {1973},
-  date      = {1973-01-22},
+@case{Brown1954BoardEducation,
+  title     = {Brown v. Board of Education},
   court     = {Supreme Court of the United States},
-  reporter  = {410 U.S. 113},
-  abstract  = {The landmark Supreme Court case that established a woman's legal right to an abortion under the U.S. Constitution.},
-  keywords  = {Supreme Court, Roe v. Wade, abortion, legal history, judicial precedent},
-  note      = {Important for studies on reproductive rights and U.S. constitutional law.}
+  date      = {1954-05-17},
+  year      = {1954},
+  reporter  = {347 U.S. 483},
+  abstract  = {Landmark U.S. Supreme Court decision that declared racial segregation in public schools unconstitutional.},
+  keywords  = {Supreme Court, Brown v. Board, civil rights, education law, desegregation, judicial precedent},
+  note      = {Cited for its foundational role in U.S. civil rights jurisprudence.}
 }
 
-@hearing{Canada2020PandemicResponse,
-  title        = {House of Commons Standing Committee on Health: COVID-19 Pandemic Response},
-  year         = {2020},
-  date         = {2020-05-01},
-  url          = {https://www.ourcommons.ca/Committees/en/HESA/StudyActivity?studyActivityId=10968671},
-  institution  = {Parliament of Canada},
-  committee    = {Standing Committee on Health},
-  abstract     = {Testimonies and evidence presented to the Canadian parliamentary health committee on the government’s response to the COVID-19 pandemic.},
-  keywords     = {Canada, COVID-19, parliamentary hearings, public health, accountability},
-  note         = {Useful for policy analysis and governmental oversight research.}
+@legislation{Canada1982CharterRights,
+  title     = {Canadian Charter of Rights and Freedoms},
+  legislativebody = {Parliament of Canada},
+  date      = {1982-04-17},
+  year      = {1982},
+  session   = {Part I of the Constitution Act, 1982},
+  abstract  = {The Charter enshrines fundamental freedoms and rights of individuals in Canadian law and serves as a central reference for constitutional cases.},
+  keywords  = {Canadian Charter, constitutional law, civil liberties, Parliament, Canada, human rights, legislative documents},
+  note      = {Frequently cited in Canadian constitutional scholarship and legal decisions.}
 }
-
-@bill{Canada2022C27,
-  title            = {Digital Charter Implementation Act, 2022},
-  year             = {2022},
-  date             = {2022-06-15},
-  billnumber       = {C-27},
-  session          = {44th Parliament, 1st Session},
-  legislativebody  = {House of Commons, Canada},
-  abstract         = {This bill proposes major changes to Canada’s privacy and data protection framework, including the creation of a tribunal and the enhancement of personal data rights.},
-  keywords         = {Canada, privacy law, digital charter, legislation, C-27},
-  note             = {Relevant for discussions about Canadian digital governance and AI regulation.}
-}
-@end
