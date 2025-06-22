@@ -274,7 +274,7 @@ def main(text, commit=False):
 
         else:
             status, resp = zotero_upload(bib)
-            if status in [200, 201]:
+            if status in [200, 201] and 'successful' in resp and '0' in resp['successful']:
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
                 print(f"✅ Zotero upload successful (Key: {key})")
