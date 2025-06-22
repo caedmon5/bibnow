@@ -1,10 +1,12 @@
-@article{Walker2025YouDontBrag,
-  author = {Stephen Walker},
-  title = {‘You Don’t Brag About Wiping Out 60–70,000 People’: The Men Who Dropped the Atomic Bombs on Hiroshima and Nagasaki},
-  journal = {The Guardian},
-  date = {2025-06-22},
-  url = {https://www.theguardian.com/world/2025/jun/22/atomic-bomb-hiroshima-nagasaki-author-stephen-walker},
-  note = {Generated abstract | Keywords supplemented by AI},
-  abstract = {Published to coincide with the 80th anniversary of the atomic bombings of Hiroshima and Nagasaki, Stephen Walker's long-form article revisits the events of August 1945 through the lens of firsthand testimony from the now-deceased American flight crews who carried out the missions. Drawing from previously unpublished interviews conducted two decades earlier, Walker reconstructs the detailed preparation, emotional responses, and retrospective reflections of pilots, bombardiers, and scientists involved in both missions. The article situates these accounts in contemporary nuclear discourse, underscoring their historical and ethical significance as nuclear proliferation threats intensify globally. It provides a nuanced, human-centred portrayal of the crews, contrasting operational pride with glimpses of moral ambivalence, and reflects on how memory, war, and technological power intersect in a world still living in the shadow of Hiroshima.},
-  keywords = {atomic bombing, Hiroshima, Nagasaki, nuclear history, oral history, World War II, military testimony, Los Alamos, US Air Force, nuclear ethics, Stephen Walker, Cold War legacy, hibakusha, memory studies}
+@article{Swallow2003LactasePersistence,
+  author       = {Dallas M. Swallow},
+  title        = {Genetics of Lactase Persistence and Lactose Intolerance},
+  journal      = {Annual Review of Genetics},
+  volume       = {37},
+  pages        = {197--219},
+  year         = {2003},
+  doi          = {10.1146/annurev.genet.37.110801.143820},
+  abstract     = {This review explores the molecular genetics of lactase persistence in humans and contrasts it with the ancestral condition of lactase non-persistence. It emphasizes that in most mammals, including the majority of humans, lactase expression declines following weaning, aligning with species-specific developmental timelines. The article examines regulatory mutations associated with continued lactase expression and traces their evolutionary trajectories in dairying populations.},
+  keywords     = {lactase, lactase persistence, lactose intolerance, gene regulation, species-specific weaning, evolutionary adaptation, mammalian physiology, nutritional genetics},
+  note         = {Generated abstract | Keywords supplemented by AI}
 }
