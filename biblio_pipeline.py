@@ -209,8 +209,8 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:3])
     year = extract_year(entry)
-    alias_line = f'aliases: ["{lastname} {year} {slug}"]\n
-    callnumber_line = f'callnumber: "{entry.get("callnumber", ")}"\n'
+    alias_line = f'aliases: ["{lastname} {year} {slug}"]'
+    callnumber_line = f'callnumber: "{entry.get("callnumber", ")}"'
     if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
         biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
     else:
