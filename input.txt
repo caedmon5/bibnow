@@ -1,12 +1,27 @@
-@article{Swallow2003LactasePersistence,
-  author       = {Dallas M. Swallow},
-  title        = {Genetics of Lactase Persistence and Lactose Intolerance},
-  journal      = {Annual Review of Genetics},
-  volume       = {37},
-  pages        = {197--219},
-  year         = {2003},
-  doi          = {10.1146/annurev.genet.37.110801.143820},
-  abstract     = {This review explores the molecular genetics of lactase persistence in humans and contrasts it with the ancestral condition of lactase non-persistence. It emphasizes that in most mammals, including the majority of humans, lactase expression declines following weaning, aligning with species-specific developmental timelines. The article examines regulatory mutations associated with continued lactase expression and traces their evolutionary trajectories in dairying populations.},
-  keywords     = {lactase, lactase persistence, lactose intolerance, gene regulation, species-specific weaning, evolutionary adaptation, mammalian physiology, nutritional genetics},
-  note         = {Generated abstract | Keywords supplemented by AI}
+@book{wordsworth1815poemsvol1,
+  author      = {Wordsworth, William},
+  title       = {Poems [vol. 1]: Including Lyrical Ballads, and the miscellaneous pieces of the author; with additional poems, a new preface, and a supplementary essay},
+  volume      = {1},
+  year        = {1815},
+  publisher   = {Longman, Hurst, Rees, Orme, and Brown},
+  address     = {London},
+  url         = {https://en.wikisource.org/wiki/Poems_(Wordsworth,_1815)/Volume_1},
+  callnumber  = {PR5869 .A1 1815},
+  abstract    = {Volume 1 of Wordsworth’s 1815 two-volume *Poems* collects his earlier and better-known lyric and narrative poetry, including many from the *Lyrical Ballads*. It opens with a new preface and reorganizes the poems under themed groupings, such as “Poems Referring to the Period of Childhood.” This volume plays a key role in shaping Wordsworth’s poetic canon.},
+  keywords    = {Wordsworth, Romanticism, British poetry, 19th century literature, Lyrical Ballads, childhood, lyric poetry, poetic canon, poetry volumes, unessay chapter},
+  note        = {Generated abstract | Keywords supplemented by AI | Reason for interest: For use in my unessay chapter}
+}
+
+@book{wordsworth1815poemsvol2,
+  author      = {Wordsworth, William},
+  title       = {Poems [vol. 2]: Including Lyrical Ballads, and the miscellaneous pieces of the author; with additional poems, a new preface, and a supplementary essay},
+  volume      = {2},
+  year        = {1815},
+  publisher   = {Longman, Hurst, Rees, Orme, and Brown},
+  address     = {London},
+  url         = {https://en.wikisource.org/wiki/Poems_(Wordsworth,_1815)/Volume_2},
+  callnumber  = {PR5869 .A1 1815},
+  abstract    = {The second volume of Wordsworth’s 1815 edition of his *Poems* contains many of his longer or more philosophically ambitious pieces, including the "Poems of the Imagination" section, alongside additional sonnets and occasional poems. This volume contributes to his self-curation of a poetic identity and features extensive revisions and reordering.},
+  keywords    = {Wordsworth, Romanticism, British poetry, 19th century literature, Lyrical Ballads, Preface to Lyrical Ballads, philosophical poetry, self-curation, poetry volumes, unessay chapter},
+  note        = {Generated abstract | Keywords supplemented by AI | Reason for interest: For use in my unessay chapter}
 }

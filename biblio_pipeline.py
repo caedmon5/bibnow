@@ -96,7 +96,7 @@ def generate_filename(entry):
         lastname += " et al"
 
     title_words = re.findall(r'\b\w+\b', title)
-    title_part = ' '.join(w.capitalize() for w in title_words[:3])
+    title_part = ' '.join(re.sub(r"[^\w\s]", "", w).capitalize() for w in title_words[:3])
     return f"LN {lastname} {year} {title_part}.md"
 
 
@@ -199,6 +199,18 @@ def zotero_upload(entry):
 
 def build_markdown(entry, citekey=None, zotero_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
+    first_author = get_responsible_party(entry).split(" and ")[0]
+    if "," in first_author:
+        lastname = first_author.split(",")[0].strip()
+    else:
+        lastname = first_author.split()[-1].strip()
+    lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
+
+    title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
+    slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:3])
+    year = extract_year(entry)
+    alias_line = f'aliases: ["{lastname} {year} {slug}"]\n
+    callnumber_line = f'callnumber: "{entry.get("callnumber", ")}"\n'
     if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
         biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
     else:
@@ -206,11 +218,12 @@ def build_markdown(entry, citekey=None, zotero_key=None):
 
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
+{alias_line}
 type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
-autoupdate: true
+{callnumber_line}autoupdate: true
 ---
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
@@ -232,7 +245,7 @@ autoupdate: true
 
 <!-- Do not edit above this line: all changes should be made in Zotero -->
 
-# User-genersted Content <span title="This section is for Obsidian-focussed notes. it is preserved during updates. The headers and sections are freeform and can be adapted or added as needed.">ⓘ</span>
+# User-generated Content <span title="This section is for Obsidian-focussed notes. it is preserved during updates. The headers and sections are freeform and can be adapted or added as needed.">ⓘ</span>
 
 ## User Notes <span title="This field is for user-supplied content that belongs closely to the record as a whole but does not need to be added to the canonical record in Zotero. Notes on specific topics or content within the content(e.g. quotstions, observations and thoughts)  should be created as separate unique notes and linked here.">ⓘ</span>
 
