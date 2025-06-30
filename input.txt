@@ -9,3 +9,16 @@
   keywords     = {Early English Text Society, textual editing, Middle English, nineteenth century, philology, scholarly publishing, England, thesis, editorial history},
   note         = {Generated abstract | Keywords supplemented by AI}
 }
+
+@article{Singleton2005OrganizationalHistory,
+  author       = {Singleton, Antony},
+  title        = {The Early English Text Society in the Nineteenth Century: An Organizational History},
+  journal      = {Review of English Studies},
+  volume       = {56},
+  number       = {223},
+  pages        = {90--118},
+  year         = {2005},
+  abstract     = {This article builds on Singleton’s doctoral research to trace the organizational and administrative evolution of the Early English Text Society (EETS) in the nineteenth century. It provides a detailed analysis of the Society’s leadership, funding, publication strategies, and relationship to the broader world of English literary scholarship. Particular attention is paid to the tension between amateur and professional roles in the editing of medieval texts.},
+  keywords     = {Early English Text Society, editorial practices, Middle English, scholarly societies, textual scholarship, academic publishing, nineteenth century, institutional history},
+  note         = {Generated abstract | Keywords supplemented by AI}
+}

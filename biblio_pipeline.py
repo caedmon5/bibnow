@@ -164,7 +164,7 @@ def zotero_upload(entry):
             "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
         ),
         "institution": entry.get("institution", "") if item_type == "report" else "",
-        "school": entry.get("school", "") if item_type == "thesis" else "",
+        "university": entry.get("school", "") if item_type == "thesis" else "",
         "court": entry.get("court", "") if item_type == "case" else "",
         "reporter": entry.get("reporter", "") if item_type == "case" else "",
         "committee": entry.get("committee", "") if item_type == "hearing" else "",
