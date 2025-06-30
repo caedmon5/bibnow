@@ -133,6 +133,9 @@ def parse_bibtex(bibtex):
             entry_type_match = re.search(r'@(\w+)\{([^,]+),', bibtex)
             entry["ENTRYTYPE"] = entry_type_match.group(1).lower() if entry_type_match else "misc"
             entry["ID"] = entry_type_match.group(2) if entry_type_match else "unknown"
+# Normalize institution to school for Zotero compatibility
+    if entry["ENTRYTYPE"] in ["phdthesis", "mastersthesis"]:
+        entry["school"] = entry.get("school", "") or entry.get("institution", "")
     return entry
 
 def zotero_upload(entry):
@@ -160,7 +163,8 @@ def zotero_upload(entry):
         "thesisType": "PhD Thesis" if entry.get("ENTRYTYPE") == "phdthesis" else (
             "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
         ),
-        "institution": entry.get("school", "") if "thesis" in entry.get("ENTRYTYPE", "") or item_type == "report" else "",
+        "institution": entry.get("institution", "") if item_type == "report" else "",
+        "school": entry.get("school", "") if item_type == "thesis" else "",
         "court": entry.get("court", "") if item_type == "case" else "",
         "reporter": entry.get("reporter", "") if item_type == "case" else "",
         "committee": entry.get("committee", "") if item_type == "hearing" else "",
