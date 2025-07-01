@@ -127,18 +127,16 @@ if __name__ == "__main__":
     print(render_bibliography(test_entry, "modern-language-association"))
 
 
-# Monkeypatch citeproc.model.quote to avoid NoneType quote errors
+# Monkeypatch citeproc.model.Layout.quote to avoid NoneType errors
 import citeproc.model
 
-original_quote_function = citeproc.model.quote
+original_quote_method = citeproc.model.Layout.quote
 
-def safe_quote(string, open_quote=None, close_quote=None):
-    if string is None:
-        string = ""
+def safe_quote(self, string, open_quote=None, close_quote=None):
     if open_quote is None:
         open_quote = "“"
     if close_quote is None:
         close_quote = "”"
     return open_quote + string + close_quote
 
-citeproc.model.quote = safe_quote
+citeproc.model.Layout.quote = safe_quote
