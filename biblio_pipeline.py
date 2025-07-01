@@ -112,6 +112,7 @@ def generate_citekey(entry):
     info = parse_responsible_party(entry)
     lastname = info["first_lastname"]
     title = entry.get("title", "")
+    year = extract_year(entry)
 
     # First four words of title
     title_words = re.findall(r'\b\w+\b', title)
