@@ -1,12 +1,39 @@
-@article{Kumar2025CollaborativeCitationTesting,
-  author = {Kumar, Anjali and Chen, Wei and Dubois, Claire and Thompson, Elijah},
-  title = {Collaborative Testing of Citation Pipelines in Multi-Author Contexts},
-  journal = {Journal of Scholarly Workflows},
-  year = {2025},
-  volume = {11},
-  number = {2},
-  pages = {77--98},
-  abstract = {This article investigates citation generation behaviours when handling multi-author entries across Markdown and BibTeX systems.},
-  keywords = {test, multiple authors, formatting, citation},
+@article{Adams2021SoloAuthorship,
+  author = {Adams, Rachel},
+  title = {The Single Author in Modern Citation Contexts},
+  journal = {Solo Studies Quarterly},
+  year = {2021},
+  abstract = {Explores implications of single authorship for digital bibliography pipelines.},
+  keywords = {test, responsible party, one author},
+  note = {TEST ENTRY}
+}
+
+@book{BrownGreen2022TwoAuthors,
+  author = {Brown, Thomas and Green, Lisa},
+  title = {Dual Authorship and Metadata Consistency},
+  publisher = {MetaPress},
+  year = {2022},
+  abstract = {Case study on handling two authors in reference management systems.},
+  keywords = {test, responsible party, two authors},
+  note = {TEST ENTRY}
+}
+
+@techreport{ChenEtAl2023ThreeEditors,
+  editor = {Chen, Ming and O'Shea, Grace and Patel, Raj},
+  title = {Three Editors and a BibTeX File},
+  institution = {Metadata Institute},
+  year = {2023},
+  abstract = {This report analyzes multi-editor roles in bibliographic pipelines.},
+  keywords = {test, responsible party, three editors},
+  note = {TEST ENTRY}
+}
+
+@inproceedings{UNESCO2024InstitutionAsAuthor,
+  institution = {UNESCO and World Bank and OECD and IMF},
+  title = {Coordinated Institutional Authorship in Global Research},
+  booktitle = {Proceedings of the Global Policy Research Summit},
+  year = {2024},
+  abstract = {This paper explores edge cases where institutional names function as compound authors.},
+  keywords = {test, responsible party, four institutions},
   note = {TEST ENTRY}
 }
