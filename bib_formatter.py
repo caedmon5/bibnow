@@ -28,11 +28,15 @@ def patch_csl_quotes(style):
 
         term_names = {t.get("name") for t in locale.terms if isinstance(t, dict)}
         if "open-quote" not in term_names:
-            term_el = etree.Element("term", name="open-quote", form="long")
+            term_el = etree.Element("term")
+            term_el.set("name", "open-quote")
+            term_el.set("form", "long")
             term_el.text = "“"
             locale.terms.append(term_el)
         if "close-quote" not in term_names:
-            term_el = etree.Element("term", name="close-quote", form="long")
+            term_el = etree.Element("term")
+            term_el.set("name", "close-quote")
+            term_el.set("form", "long")
             term_el.text = "”"
             locale.terms.append(term_el)
 
