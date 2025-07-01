@@ -88,19 +88,29 @@ def get_responsible_party(entry):
             return value
     return "Unknown"
 
-def generate_citekey(entry):
-    author = get_responsible_party(entry)
-    title = entry.get("title", "")
-    year = extract_year(entry)
+def parse_responsible_party(entry):
+    party = get_responsible_party(entry)
+    party_list = [p.strip() for p in party.split(" and ")]
+    first = party_list[0]
 
-    # Extract last name from author field
-    first_author = author.split(" and ")[0]
-    if "," in first_author:
-        lastname = first_author.split(",")[0]
+    if "," in first:
+        lastname = first.split(",")[0].strip()
     else:
-        lastname = first_author.split()[-1]
+        lastname = first.split()[-1].strip()
 
-    lastname = re.sub(r'[^\w\s]', '', lastname).capitalize()
+    clean_lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
+
+    return {
+        "raw": party,
+        "party_list": party_list,
+        "first_lastname": clean_lastname,
+        "multiple": len(party_list) > 1
+    }
+
+
+def generate_citekey(entry):
+    info = parse_responsible_party(entry)
+    lastname = info["first_lastname"]
 
     # First four words of title
     title_words = re.findall(r'\b\w+\b', title)
@@ -109,19 +119,9 @@ def generate_citekey(entry):
     return f"{lastname}{year}{slug}"
 
 def generate_filename(entry):
-    author = get_responsible_party(entry)
-    title = entry.get("title", "")
-    year = extract_year(entry)
-
-    first_author = author.split(" and ")[0]
-    if "," in first_author:
-        lastname = first_author.split(",")[0].strip()
-    else:
-        lastname = first_author.split()[-1].strip()
-
-    lastname = re.sub(r'[^\w\s]', '', lastname).capitalize()
-
-    if " and " in author:
+    info = parse_responsible_party(entry)
+    lastname = info["first_lastname"]
+    if info["multiple"]:
         lastname += " et al"
 
     title_words = re.findall(r'\b\w+\b', title)
@@ -255,13 +255,8 @@ def zotero_upload(entry):
 
 def build_markdown(entry, citekey=None, zotero_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
-    first_author = get_responsible_party(entry).split(" and ")[0]
-    if "," in first_author:
-        lastname = first_author.split(",")[0].strip()
-    else:
-        lastname = first_author.split()[-1].strip()
-    lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
-
+    info = parse_responsible_party(entry)
+    lastname = info["first_lastname"]
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     year = extract_year(entry)
