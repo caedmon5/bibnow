@@ -1,8 +1,8 @@
-@article{Miller2024AIQuoteDilemma,
+@article{Miller2024TheSmartDilemmaHow,
   author    = {Miller, Jane and Brooks, Samuel},
-  title     = {“The ‘Smart’ Dilemma”: How Quotation Marks Confuse AI Bibliographies},
-  journal   = {Journal of Computational Rhetoric},
-  volume    = {42},
+  title     = {"The ‘Smart’ Dilemma": How Quotation Marks Confuse AI Bibliographies},
+  journal   = {Journal of Machine Ethics},
+  volume    = {12},
   number    = {2},
   year      = {2024},
   url       = {https://example.com/smart-dilemma}

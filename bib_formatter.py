@@ -5,18 +5,6 @@ from citeproc.source.json import CiteProcJSON
 from author_utils import parse_responsible_parties
 from lxml import etree
 
-# Monkeypatch citeproc.model.quote to avoid NoneType errors
-import citeproc.model
-
-def safe_quote(string, open_quote=None, close_quote=None):
-    if open_quote is None:
-        open_quote = "“"
-    if close_quote is None:
-        close_quote = "”"
-    return open_quote + string + close_quote
-
-citeproc.model.quote = safe_quote
-
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
 STYLE_DIR = os.path.join(os.path.dirname(__file__), "csl")
@@ -137,3 +125,20 @@ if __name__ == "__main__":
 
     print("\nMLA:")
     print(render_bibliography(test_entry, "modern-language-association"))
+
+
+# Monkeypatch citeproc.model.quote to avoid NoneType quote errors
+import citeproc.model
+
+original_quote_function = citeproc.model.quote
+
+def safe_quote(string, open_quote=None, close_quote=None):
+    if string is None:
+        string = ""
+    if open_quote is None:
+        open_quote = "“"
+    if close_quote is None:
+        close_quote = "”"
+    return open_quote + string + close_quote
+
+citeproc.model.quote = safe_quote

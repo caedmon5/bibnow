@@ -1,0 +1,32 @@
+📋 Clipboard input (Linux) detected and loaded.
+📋 Clipboard input (Linux) detected and loaded.
+🚦 Running in COMMIT mode.
+🔎 No @bibtex block markers found — assuming entire input is raw BibTeX.
+
+✅ Parsed citekey: Miller2024TheSmartDilemmaHow
+✅ Zotero upload successful (Key: 2TMQ2SSF)
+{
+  "id": "Miller2024TheSmartDilemmaHow",
+  "type": "article",
+  "title": "\"The \u2018Smart\u2019 Dilemma\": How Quotation Marks Confuse AI Bibliographies",
+  "author": [
+    {
+      "family": "Miller",
+      "given": "Jane"
+    },
+    {
+      "family": "Brooks",
+      "given": "Samuel"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2024
+      ]
+    ]
+  },
+  "container-title": "",
+  "publisher": "",
+  "DOI": ""
+}
