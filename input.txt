@@ -1,12 +1,10 @@
-@article{Test2024QuotingIssue,
+@article{Doe2024SmartTechnologiesInDumb,
   author = {Doe, Jane and Smith, John},
-  title = {“Smart” Technologies in “Dumb” Systems: Quotation Handling in Automated Bibliographies},
-  journal = {Journal of Bibliographic Engineering},
-  volume = {42},
-  number = {1},
+  title = {Smart Technologies in Dumb Environments: A Study of AI Adoption in Public Institutions},
+  journal = {Journal of Public Infrastructure},
   year = {2024},
-  pages = {1--20},
-  url = {https://example.org/smart-dumb},
-  abstract = {A test article with nested quotation marks in the title, designed to trigger quote-handling logic in CSL rendering engines.},
-  keywords = {citation, formatting, CSL, quotation marks, automation}
+  volume = {19},
+  number = {2},
+  pages = {101--120},
+  url = {https://example.org/smart-tech-2024}
 }

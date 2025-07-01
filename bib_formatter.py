@@ -14,6 +14,8 @@ def patch_csl_quotes(style):
     preventing citeproc rendering errors.
     """
     root = style.root
+    if root.terms is None:
+            root.terms = {}
     root.terms.setdefault("open-quote", {"long": "“", "short": "‘"}) # check if openquote is set; if not use provided values
     root.terms.setdefault("close-quote", {"long": "”", "short": "’"}) # ditto, except for close quote.
 
