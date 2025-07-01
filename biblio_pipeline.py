@@ -260,11 +260,11 @@ def zotero_upload(entry):
 def build_markdown(entry, citekey=None, zotero_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
-    lastname = info["first_lastname"]
+    lastname_readable = f"{info['first_lastname']} et al" if info["multiple"] else info["first_lastname"]
+    year = extract_year(entry)
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
-    year = extract_year(entry)
-    aliases = f'"{lastname} {year} {slug}","{lastname} {year}", "{citekey}"'
+    aliases = f'"{lastname_readable} {year} {slug}","{lastname_readable} {year}", "{citekey}"'
     callnumber = f"{entry.get('callnumber', '')}"
     if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
         biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
