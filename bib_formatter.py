@@ -26,7 +26,10 @@ def patch_csl_quotes(style):
         if not hasattr(locale, "terms") or locale.terms is None:
             locale.terms = []
 
-        term_names = {t.get("name") for t in locale.terms if isinstance(t, dict)}
+        term_names = {
+            t.get("name") if isinstance(t, dict) else t.attrib.get("name")
+            for t in locale.terms
+}
         if "open-quote" not in term_names:
             term_el = etree.Element("term")
             term_el.set("name", "open-quote")
