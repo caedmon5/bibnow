@@ -20,22 +20,6 @@ def patch_csl_quotes(style):
     root.terms.setdefault("close-quote", {"long": "”", "short": "’"}) # ditto, except for close quote.
 
 
-    REQUIRED_TERMS = {
-        "open-quote": "“",
-        "close-quote": "”",
-        "open-inner-quote": "‘",
-        "close-inner-quote": "’"
-    }
-
-    for locale in style.root.locales:
-        existing_terms = {term.get("name") for term in locale.terms}
-        for name, value in REQUIRED_TERMS.items():
-            if name not in existing_terms:
-                from citeproc import Term
-                new_term = Term(name=name)
-                new_term.text = value
-                locale.terms.append(new_term)
-
 
 def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     """
