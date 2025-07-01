@@ -27,6 +27,35 @@ def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     entries = list(bibliography.bibliography())
     return str(entries[0]) if entries else "⟨No bibliography entry generated⟩"
 
+def bib_to_csl(entry, citekey=None):
+    """
+    Converts a BibTeX-like entry into CSL-JSON format for citeproc.
+    Adds fallbacks for required fields.
+    """
+    # Fallbacks for mandatory CSL fields
+    if not entry.get("title"):
+        entry["title"] = "Untitled"
+    if not entry.get("container-title"):
+        entry["container-title"] = ""
+    if not entry.get("publisher"):
+        entry["publisher"] = ""
+    if not entry.get("issued") and entry.get("year"):
+        try:
+            entry["issued"] = {"date-parts": [[int(entry["year"])]]}
+        except ValueError:
+            entry["issued"] = {"date-parts": [[1900]]}
+
+    return {
+        "id": citekey or entry.get("ID", "missing-id"),
+        "type": entry.get("ENTRYTYPE", "article-journal"),
+        "title": entry["title"],
+        "author": entry.get("author", []),
+        "issued": entry.get("issued", {"date-parts": [[1900]]}),
+        "container-title": entry.get("container-title", ""),
+        "publisher": entry.get("publisher", ""),
+        "DOI": entry.get("doi", ""),
+    }
+
 
 # Command-line test
 if __name__ == "__main__":
