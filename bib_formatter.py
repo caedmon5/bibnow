@@ -5,6 +5,16 @@ from citeproc.source.json import CiteProcJSON
 from author_utils import parse_responsible_parties
 from lxml import etree
 
+import citeproc.model
+
+def debug_quote(self, string):
+    open_quote = self.get_term("open-quote")
+    close_quote = self.get_term("close-quote")
+    print(f"DEBUG: open_quote={repr(open_quote)}, string={repr(string)}, close_quote={repr(close_quote)}")
+    return (open_quote or '') + (string or '') + (close_quote or '')
+
+citeproc.model.Quote.quote = debug_quote
+
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
 STYLE_DIR = os.path.join(os.path.dirname(__file__), "csl")
