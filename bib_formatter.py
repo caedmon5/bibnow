@@ -13,6 +13,11 @@ def patch_csl_quotes(style):
     Ensures that standard quote terms are present in CSL styles,
     preventing citeproc rendering errors.
     """
+    root = style.root
+    root.terms.setdefault("open-quote", {"long": "“", "short": "‘"}) # check if openquote is set; if not use provided values
+    root.terms.setdefault("close-quote", {"long": "”", "short": "’"}) # ditto, except for close quote.
+
+
     REQUIRED_TERMS = {
         "open-quote": "“",
         "close-quote": "”",
