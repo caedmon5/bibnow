@@ -5,15 +5,17 @@ from citeproc.source.json import CiteProcJSON
 from author_utils import parse_responsible_parties
 from lxml import etree
 
+# Monkeypatch citeproc.model.quote to avoid NoneType errors
 import citeproc.model
 
-def debug_quote(self, string):
-    open_quote = self.get_term("open-quote")
-    close_quote = self.get_term("close-quote")
-    print(f"DEBUG: open_quote={repr(open_quote)}, string={repr(string)}, close_quote={repr(close_quote)}")
-    return (open_quote or '') + (string or '') + (close_quote or '')
+def safe_quote(string, open_quote=None, close_quote=None):
+    if open_quote is None:
+        open_quote = "“"
+    if close_quote is None:
+        close_quote = "”"
+    return open_quote + string + close_quote
 
-citeproc.model.Quote.quote = debug_quote
+citeproc.model.quote = safe_quote
 
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
