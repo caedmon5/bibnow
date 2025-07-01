@@ -1,6 +1,8 @@
 import requests, json, os, re, time, bibtexparser
-from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAULT_PATH
+from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAULT_PATH, BIBLIO_STYLE
 from bibtexparser.bparser import BibTexParser
+from bib_formatter import render_bibliography
+
 
 def detect_platform():
     """
@@ -266,10 +268,63 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     aliases = f'"{lastname_readable} {year} {slug}","{lastname_readable} {year}", "{citekey}"'
     callnumber = f"{entry.get('callnumber', '')}"
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
-        biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
-    else:
-        biblio_line = f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
+    # BibTeX to CSL type mapping (preserving granularity)
+    BIBTEX_TO_CSL_TYPE = {
+        "article": "article-journal",
+        "book": "book",
+        "inbook": "chapter",
+        "incollection": "chapter",
+        "inproceedings": "paper-conference",
+        "proceedings": "book",
+        "phdthesis": "thesis",
+        "mastersthesis": "thesis",
+        "techreport": "report",
+        "report": "report",
+        "manual": "book",
+        "misc": "document",
+        "unpublished": "manuscript",
+        "dataset": "dataset",
+        "presentation": "speech",
+        "lecture": "speech",
+        "film": "motion_picture",
+        "broadcast": "broadcast",
+        "case": "legal_case",
+        "bill": "legislation",
+        "hearing": "hearing"
+    }
+
+    bibtype = entry.get("ENTRYTYPE", "misc")
+    csl = {
+        "id": citekey,
+        "type": BIBTEX_TO_CSL_TYPE.get(bibtype, "document"),
+        "title": entry.get("title", ""),
+        "issued": {"date-parts": [[int(extract_year(entry))]]} if extract_year(entry).isdigit() else {},
+        "URL": entry.get("url", "")
+    }
+
+    if "author" in entry:
+        csl["author"] = [{"family": a.split(",")[0].strip(), "given": a.split(",")[1].strip()} if "," in a else {"literal": a.strip()} for a in entry["author"].split(" and ")]
+    elif "editor" in entry:
+        csl["editor"] = [{"family": e.split(",")[0].strip(), "given": e.split(",")[1].strip()} if "," in e else {"literal": e.strip()} for e in entry["editor"].split(" and ")]
+    elif "institution" in entry:
+        csl["author"] = [{"literal": entry["institution"]}]
+    elif "organization" in entry:
+        csl["author"] = [{"literal": entry["organization"]}]
+    elif "court" in entry:
+        csl["author"] = [{"literal": entry["court"]}]
+
+    if "journal" in entry:
+        csl["container-title"] = entry["journal"]
+    if "publisher" in entry:
+        csl["publisher"] = entry["publisher"]
+    if "volume" in entry:
+        csl["volume"] = entry["volume"]
+    if "number" in entry:
+        csl["issue"] = entry["number"]
+    if "pages" in entry:
+        csl["page"] = entry["pages"]
+
+    biblio_line = render_bibliography(csl, style_name=BIBLIO_STYLE)
 
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
