@@ -14,12 +14,22 @@ def patch_csl_quotes(style):
     preventing citeproc rendering errors.
     """
     root = style.root
+# patch root terms
     if root.terms is None:
             root.terms = {}
     root.terms.setdefault("open-quote", {"long": "“", "short": "‘"}) # check if openquote is set; if not use provided values
     root.terms.setdefault("close-quote", {"long": "”", "short": "’"}) # ditto, except for close quote.
 
+# Patch locale terms (used during rendering)
+    for locale in root.locales:
+        if not hasattr(locale, "terms") or locale.terms is None:
+            locale.terms = []
 
+        term_names = {t.get("name") for t in locale.terms if isinstance(t, dict)}
+        if "open-quote" not in term_names:
+            locale.terms.append({"name": "open-quote", "form": "long", "text": "“"})
+        if "close-quote" not in term_names:
+            locale.terms.append({"name": "close-quote", "form": "long", "text": "”"})
 
 def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     """
