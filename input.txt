@@ -1,24 +1,12 @@
-@phdthesis{Singleton2001EarlyEnglish,
-  author       = {Singleton, Antony},
-  title        = {The Early English Text Society in the Nineteenth Century: A Chapter in the History of the Editing of Middle English Texts},
-  school       = {University of Oxford},
-  year         = {2001},
-  type         = {D.Phil. thesis},
-  callnumber   = {Z2014.E5 S56 2001 (ebook)},
-  abstract     = {This doctoral dissertation examines the founding, development, and editorial practices of the Early English Text Society (EETS) during the nineteenth century. It explores the institutional, scholarly, and textual traditions that shaped the Society’s work in producing editions of Middle English literature, emphasizing its role in the professionalization of philological editing and textual scholarship in Britain.},
-  keywords     = {Early English Text Society, textual editing, Middle English, nineteenth century, philology, scholarly publishing, England, thesis, editorial history},
-  note         = {Generated abstract | Keywords supplemented by AI}
-}
-
-@article{Singleton2005OrganizationalHistory,
-  author       = {Singleton, Antony},
-  title        = {The Early English Text Society in the Nineteenth Century: An Organizational History},
-  journal      = {Review of English Studies},
-  volume       = {56},
-  number       = {223},
-  pages        = {90--118},
-  year         = {2005},
-  abstract     = {This article builds on Singleton’s doctoral research to trace the organizational and administrative evolution of the Early English Text Society (EETS) in the nineteenth century. It provides a detailed analysis of the Society’s leadership, funding, publication strategies, and relationship to the broader world of English literary scholarship. Particular attention is paid to the tension between amateur and professional roles in the editing of medieval texts.},
-  keywords     = {Early English Text Society, editorial practices, Middle English, scholarly societies, textual scholarship, academic publishing, nineteenth century, institutional history},
-  note         = {Generated abstract | Keywords supplemented by AI}
+@article{Kumar2025CollaborativeCitationTesting,
+  author = {Kumar, Anjali and Chen, Wei and Dubois, Claire and Thompson, Elijah},
+  title = {Collaborative Testing of Citation Pipelines in Multi-Author Contexts},
+  journal = {Journal of Scholarly Workflows},
+  year = {2025},
+  volume = {11},
+  number = {2},
+  pages = {77--98},
+  abstract = {This article investigates citation generation behaviours when handling multi-author entries across Markdown and BibTeX systems.},
+  keywords = {test, multiple authors, formatting, citation},
+  note = {TEST ENTRY}
 }

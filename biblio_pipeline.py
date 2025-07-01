@@ -131,6 +131,10 @@ def generate_filename(entry):
 
 # Dynamic base path
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+if not OBSIDIAN_VAULT_PATH:
+    raise ValueError("❌ OBSIDIAN_VAULT_PATH is not set in config.py — please set it to your local Obsidian vault path.")
+
+OBSIDIAN_PATH = os.path.abspath(OBSIDIAN_VAULT_PATH)
 
 platform_type = detect_platform()
 
@@ -261,7 +265,7 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     year = extract_year(entry)
-    aliases = f'["{lastname} {year} {slug}","{lastname} {year}", "{citekey}"]'
+    aliases = f'"{lastname} {year} {slug}","{lastname} {year}", "{citekey}"'
     callnumber = f"{entry.get('callnumber', '')}"
     if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
         biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
