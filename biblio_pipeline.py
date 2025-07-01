@@ -1,7 +1,7 @@
 import requests, json, os, re, time, bibtexparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAULT_PATH, BIBLIO_STYLE
 from bibtexparser.bparser import BibTexParser
-from bib_formatter import render_bibliography
+from bib_formatter import render_bibliography, bib_to_csl
 
 
 def detect_platform():
@@ -294,36 +294,7 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     }
 
     bibtype = entry.get("ENTRYTYPE", "misc")
-    csl = {
-        "id": citekey,
-        "type": BIBTEX_TO_CSL_TYPE.get(bibtype, "document"),
-        "title": entry.get("title") or "Untitled",
-        "issued": {"date-parts": [[int(extract_year(entry))]]} if extract_year(entry).isdigit() else {},
-        "URL": entry.get("url", "")
-    }
-
-    if "author" in entry:
-        csl["author"] = [{"family": a.split(",")[0].strip(), "given": a.split(",")[1].strip()} if "," in a else {"literal": a.strip()} for a in entry["author"].split(" and ")]
-    elif "editor" in entry:
-        csl["editor"] = [{"family": e.split(",")[0].strip(), "given": e.split(",")[1].strip()} if "," in e else {"literal": e.strip()} for e in entry["editor"].split(" and ")]
-    elif "institution" in entry:
-        csl["author"] = [{"literal": entry["institution"]}]
-    elif "organization" in entry:
-        csl["author"] = [{"literal": entry["organization"]}]
-    elif "court" in entry:
-        csl["author"] = [{"literal": entry["court"]}]
-
-    if "journal" in entry:
-        csl["container-title"] = entry["journal"]
-    if "publisher" in entry:
-        csl["publisher"] = entry["publisher"]
-    if "volume" in entry:
-        csl["volume"] = entry["volume"]
-    if "number" in entry:
-        csl["issue"] = entry["number"]
-    if "pages" in entry:
-        csl["page"] = entry["pages"]
-
+    csl = bib_to_csl(entry, citekey=citekey)
     biblio_line = render_bibliography(csl, style_name=BIBLIO_STYLE)
 
     md = f"""---
