@@ -268,30 +268,6 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     aliases = f'"{lastname_readable} {year} {slug}","{lastname_readable} {year}", "{citekey}"'
     callnumber = f"{entry.get('callnumber', '')}"
-    # BibTeX to CSL type mapping (preserving granularity)
-    BIBTEX_TO_CSL_TYPE = {
-        "article": "article-journal",
-        "book": "book",
-        "inbook": "chapter",
-        "incollection": "chapter",
-        "inproceedings": "paper-conference",
-        "proceedings": "book",
-        "phdthesis": "thesis",
-        "mastersthesis": "thesis",
-        "techreport": "report",
-        "report": "report",
-        "manual": "book",
-        "misc": "document",
-        "unpublished": "manuscript",
-        "dataset": "dataset",
-        "presentation": "speech",
-        "lecture": "speech",
-        "film": "motion_picture",
-        "broadcast": "broadcast",
-        "case": "legal_case",
-        "bill": "legislation",
-        "hearing": "hearing"
-    }
 
     bibtype = entry.get("ENTRYTYPE", "misc")
     csl = bib_to_csl(entry, citekey=citekey)
