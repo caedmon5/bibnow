@@ -1,6 +1,35 @@
 import requests, json, os, re, time, bibtexparser
-from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME
+from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAULT_PATH
 from bibtexparser.bparser import BibTexParser
+
+def detect_platform():
+    """
+    Returns one of: 'windows', 'macos', 'ios', 'ipad', 'android-termux', 'android', 'linux', 'unknown'
+    """
+    import platform, os
+
+    sysname = platform.system()
+    machine = platform.machine()
+    env_home = os.environ.get("HOME", "")
+
+    if sysname == "Windows":
+        return "windows"
+    elif sysname == "Darwin":
+        plat = platform.platform()
+        if "iPhone" in plat:
+            return "ios"
+        if "iPad" in plat:
+            return "ipad"
+        return "macos"
+    elif sysname == "Linux":
+        if "com.termux" in env_home:
+            return "android-termux"
+        if "ANDROID_STORAGE" in os.environ:
+            return "android"
+        return "linux"
+    else:
+        return "unknown"
+
 
 # Expanded BibTeX to Zotero type map
 BIBTEX_TO_ZOTERO_TYPE = {
@@ -73,9 +102,9 @@ def generate_citekey(entry):
 
     lastname = re.sub(r'[^\w\s]', '', lastname).capitalize()
 
-    # First three words of title
+    # First four words of title
     title_words = re.findall(r'\b\w+\b', title)
-    slug = ''.join(word.capitalize() for word in title_words[:3])
+    slug = ''.join(word.capitalize() for word in title_words[:4])
 
     return f"{lastname}{year}{slug}"
 
@@ -96,20 +125,39 @@ def generate_filename(entry):
         lastname += " et al"
 
     title_words = re.findall(r'\b\w+\b', title)
-    title_part = ' '.join(re.sub(r"[^\w\s]", "", w).capitalize() for w in title_words[:3])
+    title_part = ' '.join(re.sub(r"[^\w\s]", "", w).capitalize() for w in title_words[:4])
     return f"LN {lastname} {year} {title_part}.md"
 
 
 # Dynamic base path
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
-import platform
 
-if "ANDROID_STORAGE" in os.environ or platform.system() == "Linux" and "com.termux" in os.environ.get("HOME", ""):
-    # Android (e.g. Termux or Pydroid)
-    OBSIDIAN_PATH = "/sdcard/Documents/Obsidian/LN Literature Notes"
+platform_type = detect_platform()
+
+if platform_type == "linux":
+    import pyperclip
+    input_text = pyperclip.paste()
+    print("📋 Clipboard input (Linux) detected and loaded.")
+    with open("input.txt", "w", encoding="utf-8") as f:
+        f.write(input_text)
+
+elif platform_type == "android-termux":
+    import subprocess
+    try:
+        clipboard = subprocess.check_output(["termux-clipboard-get"]).decode("utf-8")
+        print("📋 Android clipboard detected via termux-clipboard-get.")
+        with open("input.txt", "w", encoding="utf-8") as f:
+            f.write(clipboard)
+        print("📋 Clipboard input (Android/Termux) saved to input.txt.")
+        input_text = clipboard
+    except Exception as e:
+        print(f"❌ Failed to read clipboard: {e}")
+        exit(1)
+
 else:
-    # Default to Linux desktop
-    OBSIDIAN_PATH = "/home/dan/wealtheow/LN Literature Notes"
+    with open("input.txt", encoding="utf-8") as f:
+        input_text = f.read()
+    print("📄 Loaded input from file.")
 
 LOG_PATH = os.path.join(BASE_PATH, "output", "biblio-log")
 
@@ -211,7 +259,7 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
 
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
-    slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:5])
+    slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     year = extract_year(entry)
     aliases = f'["{lastname} {year} {slug}","{lastname} {year}", "{citekey}"]'
     callnumber = f"{entry.get('callnumber', '')}"
