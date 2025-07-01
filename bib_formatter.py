@@ -1,5 +1,5 @@
 import os
-from citeproc import CitationStylesStyle, CitationStylesBibliography
+from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem
 from citeproc.source.json import CiteProcJSON
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
@@ -22,9 +22,8 @@ def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     if not bib_id:
         raise ValueError("Missing 'id' in CSL JSON")
 
-    citation = {'citationItems': [{'id': bib_id}], 'properties': {'noteIndex': 0}}
+    citation = Citation([CitationItem(entry_csl_json.get("id"))])
     bibliography.register(citation)
-
     entries = list(bibliography.bibliography())
     return str(entries[0]) if entries else "⟨No bibliography entry generated⟩"
 

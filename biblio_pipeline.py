@@ -297,7 +297,7 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     csl = {
         "id": citekey,
         "type": BIBTEX_TO_CSL_TYPE.get(bibtype, "document"),
-        "title": entry.get("title", ""),
+        "title": entry.get("title") or "Untitled",
         "issued": {"date-parts": [[int(extract_year(entry))]]} if extract_year(entry).isdigit() else {},
         "URL": entry.get("url", "")
     }
