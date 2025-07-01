@@ -1,10 +1,12 @@
 @article{Chen2024AffectiveComputingInEducation,
-  title = {Affective Computing in Education: Potentials and Pitfalls},
-  author = {Chen, Mei and Lopez, Ana and Singh, Rakesh},
-  journal = {Journal of Educational AI},
+  title = {Affective Computing in Education: Prospects and Pitfalls},
+  author = {Chen, Alice and López, Marta and Tanaka, Hiroshi and O'Malley, Seán},
+  journal = {Journal of Learning Analytics},
   year = {2024},
-  volume = {12},
-  number = {3},
-  pages = {145--163},
-  url = {https://example.com/affective-computing}
+  volume = {11},
+  number = {2},
+  pages = {45--67},
+  url = {https://doi.org/10.1234/jla.2024.045},
+  abstract = {This article explores how affective computing is transforming classroom practices, learner engagement, and teacher-student dynamics. It reviews current research, highlights key concerns about privacy and agency, and outlines paths for ethically-informed adoption.},
+  keywords = {affective computing, education technology, student engagement, AI ethics}
 }

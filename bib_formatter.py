@@ -1,4 +1,5 @@
 import os
+import json
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem
 from citeproc.source.json import CiteProcJSON
 from author_utils import parse_responsible_parties
@@ -6,6 +7,27 @@ from author_utils import parse_responsible_parties
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
 STYLE_DIR = os.path.join(os.path.dirname(__file__), "csl")
+
+def patch_csl_quotes(style):
+    """
+    Ensures that standard quote terms are present in CSL styles,
+    preventing citeproc rendering errors.
+    """
+    REQUIRED_TERMS = {
+        "open-quote": "“",
+        "close-quote": "”",
+        "open-inner-quote": "‘",
+        "close-inner-quote": "’"
+    }
+
+    for locale in style.root.locales:
+        existing_terms = {term.get("name") for term in locale.terms}
+        for name, value in REQUIRED_TERMS.items():
+            if name not in existing_terms:
+                from citeproc import Term
+                new_term = Term(name=name)
+                new_term.text = value
+                locale.terms.append(new_term)
 
 
 def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
@@ -17,6 +39,8 @@ def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     """
     style_path = os.path.join(STYLE_DIR, f"{style_name}.csl")
     style = CitationStylesStyle(style_path, validate=False)
+    patch_csl_quotes(style)  # ← Add this line to ensure quote terms are present
+    print(json.dumps(entry_csl_json, indent=2))
     bib_source = CiteProcJSON([entry_csl_json])
     bibliography = CitationStylesBibliography(style, bib_source, formatter="text")
 
