@@ -3,6 +3,7 @@ import json
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem
 from citeproc.source.json import CiteProcJSON
 from author_utils import parse_responsible_parties
+from lxml import etree
 
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
@@ -27,9 +28,13 @@ def patch_csl_quotes(style):
 
         term_names = {t.get("name") for t in locale.terms if isinstance(t, dict)}
         if "open-quote" not in term_names:
-            locale.terms.append({"name": "open-quote", "form": "long", "text": "“"})
+            term_el = etree.Element("term", name="open-quote", form="long")
+            term_el.text = "“"
+            locale.terms.append(term_el)
         if "close-quote" not in term_names:
-            locale.terms.append({"name": "close-quote", "form": "long", "text": "”"})
+            term_el = etree.Element("term", name="close-quote", form="long")
+            term_el.text = "”"
+            locale.terms.append(term_el)
 
 def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     """
