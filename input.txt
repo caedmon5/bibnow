@@ -1,13 +1,3 @@
-@book{Zamora2022PostHumanCities,
-  author = {Zamora, Pablo},
-  title = {Post-Human Cities: Infrastructure and Belonging},
-  year = {2022},
-  publisher = {Urban Edge Press},
-  abstract = {Explores the rise of networked infrastructures in reshaping urban identity.},
-  keywords = {test, citeproc, formatting, urban studies},
-  note = {TEST ENTRY}
-}
-
 @article{HughesEtAl2023MultimodalLiteracies,
   author = {Hughes, Tara and Becker, Janine and Li, Song and O'Neill, Max},
   title = {Multimodal Literacies in the Post-Text Era},
@@ -18,37 +8,5 @@
   pages = {134--156},
   abstract = {Analyzes emerging forms of digital scholarship and their implications for literacy theory.},
   keywords = {test, citeproc, formatting, multimodal, literacy},
-  note = {TEST ENTRY}
-}
-
-@incollection{Nguyen2021EncodedPasts,
-  author = {Nguyen, Lily},
-  title = {Encoded Pasts: Metadata as Memory},
-  booktitle = {Archives in Code},
-  publisher = {Speculative Methods},
-  year = {2021},
-  abstract = {A chapter reflecting on how metadata acts as both a record and a reinscription.},
-  keywords = {test, citeproc, formatting, metadata, archives},
-  note = {TEST ENTRY}
-}
-
-@techreport{Kumar2020AIStandards,
-  author = {Kumar, Rajiv},
-  title = {Towards International AI Standards},
-  institution = {Global AI Governance Forum},
-  year = {2020},
-  abstract = {Outlines emerging standards for responsible AI development and deployment.},
-  keywords = {test, citeproc, formatting, AI, standards},
-  note = {TEST ENTRY}
-}
-
-@case{SupremeCourt2023CopyrightRuling,
-  court = {Supreme Court of Canada},
-  title = {Society of Authors v. University of Metro},
-  year = {2023},
-  reporter = {SCC},
-  session = {2023},
-  abstract = {A copyright ruling on digital reserves in university libraries.},
-  keywords = {test, citeproc, formatting, law, copyright},
   note = {TEST ENTRY}
 }

@@ -1,3 +1,4 @@
+import os
 from citeproc import CitationStylesStyle, CitationStylesBibliography
 from citeproc.source.json import CiteProcJSON
 
@@ -12,11 +13,20 @@ def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     :param style_name: A CSL style string (default: chicago-author-date).
     :return: A formatted bibliography string.
     """
-    style = CitationStylesStyle(style_name, validate=False)
+    style_path = os.path.join(STYLE_DIR, f"{style_name}.csl")
+    style = CitationStylesStyle(style_path, validate=False)
     bib_source = CiteProcJSON([entry_csl_json])
     bibliography = CitationStylesBibliography(style, bib_source, formatter="text")
 
-    return str(bibliography.bibliography()[0])
+    bib_id = entry_csl_json.get("id")
+    if not bib_id:
+        raise ValueError("Missing 'id' in CSL JSON")
+
+    citation = {'citationItems': [{'id': bib_id}], 'properties': {'noteIndex': 0}}
+    bibliography.register(citation)
+
+    entries = list(bibliography.bibliography())
+    return str(entries[0]) if entries else "⟨No bibliography entry generated⟩"
 
 
 # Command-line test
