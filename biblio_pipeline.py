@@ -211,10 +211,10 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
 
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
-    slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:3])
+    slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:5])
     year = extract_year(entry)
-    alias_line = f'aliases: ["{lastname} {year} {slug}"]'
-    callnumber_line = f'callnumber: "{entry.get("callnumber", "")}"'
+    aliases = f'["{lastname} {year} {slug}","{lastname} {year}", "{citekey}"]'
+    callnumber = f"{entry.get('callnumber', '')}"
     if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
         biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
     else:
@@ -222,12 +222,13 @@ def build_markdown(entry, citekey=None, zotero_key=None):
 
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
-{alias_line}
+aliases: [{aliases}]
 type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
-{callnumber_line}autoupdate: true
+callnumber: "{callnumber}"
+autoupdate: true
 ---
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
