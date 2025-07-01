@@ -1,6 +1,8 @@
 import os
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem
 from citeproc.source.json import CiteProcJSON
+from author_utils import parse_responsible_parties
+
 
 # 🔽 Path to the folder where your CSL files live (relative to this script)
 STYLE_DIR = os.path.join(os.path.dirname(__file__), "csl")
@@ -49,7 +51,7 @@ def bib_to_csl(entry, citekey=None):
         "id": citekey or entry.get("ID", "missing-id"),
         "type": entry.get("ENTRYTYPE", "article-journal"),
         "title": entry["title"],
-        "author": entry.get("author", []),
+        "author": parse_responsible_parties(entry)
         "issued": entry.get("issued", {"date-parts": [[1900]]}),
         "container-title": entry.get("container-title", ""),
         "publisher": entry.get("publisher", ""),

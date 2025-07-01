@@ -1,12 +1,10 @@
-@article{ChenEtAl2024AffectiveComputingInEducation,
-  author = {Chen, Mei and Alvarez, Lucía and Patel, Anil and O'Malley, Fiona},
-  title = {Affective Computing in Education: Empathy-Aware AI Tutors},
-  journal = {Journal of Educational Technology},
-  volume = {39},
-  number = {1},
+@article{Chen2024AffectiveComputingInEducation,
+  title = {Affective Computing in Education: Potentials and Pitfalls},
+  author = {Chen, Mei and Lopez, Ana and Singh, Rakesh},
+  journal = {Journal of Educational AI},
   year = {2024},
-  pages = {12--34},
-  abstract = {This article explores the role of affective computing in adaptive learning environments, focusing on how AI systems can respond to student emotional states.},
-  keywords = {test, affective computing, AI in education, empathy-aware systems, citeproc},
-  note = {TEST ENTRY}
+  volume = {12},
+  number = {3},
+  pages = {145--163},
+  url = {https://example.com/affective-computing}
 }
