@@ -1,9 +1,9 @@
-@article{Garcia2023AlgorithmicBiasAndJustice,
-  author    = {Garcia, Maria and Lee, Anthony},
-  title     = {Algorithmic Bias and the Pursuit of Justice in Automated Systems},
-  journal   = {Journal of Ethics and Information Technology},
-  volume    = {25},
-  number    = {3},
-  year      = {2023},
-  url       = {https://example.com/algorithmic-bias-justice}
+@article{Miller2024AIQuoteDilemma,
+  author    = {Miller, Jane and Brooks, Samuel},
+  title     = {“The ‘Smart’ Dilemma”: How Quotation Marks Confuse AI Bibliographies},
+  journal   = {Journal of Computational Rhetoric},
+  volume    = {42},
+  number    = {2},
+  year      = {2024},
+  url       = {https://example.com/smart-dilemma}
 }

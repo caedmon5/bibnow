@@ -54,6 +54,10 @@ def patch_csl_quotes(style):
             term_el.set("form", "long")
             term_el.text = "”"
             locale.terms.append(term_el)
+        style.root.open_quote = style.root.open_quote or "“"
+        style.root.close_quote = style.root.close_quote or "”"
+
+
 
 def render_bibliography(entry_csl_json, style_name="chicago-author-date"):
     """
