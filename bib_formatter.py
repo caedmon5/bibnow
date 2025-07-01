@@ -51,7 +51,7 @@ def bib_to_csl(entry, citekey=None):
         "id": citekey or entry.get("ID", "missing-id"),
         "type": entry.get("ENTRYTYPE", "article-journal"),
         "title": entry["title"],
-        "author": parse_responsible_parties(entry)
+        "author": parse_responsible_parties(entry),
         "issued": entry.get("issued", {"date-parts": [[1900]]}),
         "container-title": entry.get("container-title", ""),
         "publisher": entry.get("publisher", ""),
