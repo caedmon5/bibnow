@@ -125,6 +125,8 @@ def generate_filename(entry):
     lastname = info["first_lastname"]
     if info["multiple"]:
         lastname += " et al"
+    title = entry.get("title", "")
+    year = extract_year(entry)
 
     title_words = re.findall(r'\b\w+\b', title)
     title_part = ' '.join(re.sub(r"[^\w\s]", "", w).capitalize() for w in title_words[:4])
