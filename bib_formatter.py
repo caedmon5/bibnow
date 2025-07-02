@@ -146,8 +146,9 @@ def render_bibliography(csl, style_name=None):
     style_path = style_name or DEFAULT_STYLE
     style = CitationStylesStyle(style_path, validate=False)
     source = CiteProcJSON([csl])
-    bibliography = CitationStylesBibliography(style, source, formatter.plain)
+    bibliography = CitationStylesBibliography(style, source)
     citation = Citation([CitationItem(csl["id"])])
     bibliography.register(citation)
-    return [str(entry) for entry in bibliography.bibliography()]
+    entries = bibliography.bibliography()
+    return str(entries[0]) if entries else ""
 # === END: bib_formatter.py ===
