@@ -1,6 +1,5 @@
-
 import os
-from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem
+from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem, formatter
 from citeproc.source.json import CiteProcJSON
 import json
 
@@ -9,7 +8,7 @@ def render_bibliography(csl, style_name=None):
     from citeproc.source.json import CiteProcJSON
     style = CitationStylesStyle(style_name, validate=False)
     bib_source = CiteProcJSON([csl])
-    bibliography = CitationStylesBibliography(style, bib_source, formatter="text")
+    bibliography = CitationStylesBibliography(style, bib_source, formatter=formatter.plain)
     citation = Citation([CitationItem(csl["id"])])
     bibliography.register(citation)
     return [str(entry) for entry in bibliography.bibliography()]

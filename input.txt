@@ -1,6 +1,7 @@
-@article{Garcia2023AlgorithmicBiasAndThe,
-  title={Algorithmic Bias and the Limits of Fairness},
-  author={Garcia, M.},
-  journal={AI & Society},
-  year={2023}
+@book{Test2025Quotes,
+  author = {Smith, Jane},
+  title = {"Thinking with 'Inner' Voices"},
+  year = {2025},
+  publisher = {Fictional Press},
+  location = {Nowhere}
 }
