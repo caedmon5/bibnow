@@ -5,6 +5,8 @@ import json
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem, formatter
 from citeproc.source.json import CiteProcJSON
 import inflect
+import xml.etree.ElementTree as ET
+from tempfile import NamedTemporaryFile
 p = inflect.engine()
 
 # === CONFIG ===
@@ -144,7 +146,6 @@ def bib_to_csl(entry, citekey=None):
 # === FUNCTION: Render bibliography from CSL JSON using a CSL file ===
 def render_bibliography(csl, style_name=None):
     style_path = style_name or DEFAULT_STYLE
-    style = CitationStylesStyle(style_path, validate=False)
     force_us_punctuation_styles = [
         "chicago-author-date",  # add more as needed
     ]
@@ -152,9 +153,20 @@ def render_bibliography(csl, style_name=None):
     # Extract basename of CSL file to determine style
     style_basename = os.path.basename(style_path).replace(".csl", "")
 
-    # Force US punctuation style if applicable
-    if style_basename in ["chicago-author-date"]:
-        style._style.options["punctuation-in-quote"] = "true"
+    # Patch CSL file if needed
+    patched_style_path = style_path
+    if style_basename in force_us_punctuation_styles:
+        tree = ET.parse(style_path)
+        root = tree.getroot()
+        if not any(e.tag.endswith("style-options") for e in root):
+            style_options = ET.Element("style-options")
+            style_options.attrib["punctuation-in-quote"] = "true"
+            root.insert(1, style_options)
+            tmp = NamedTemporaryFile(delete=False, suffix=".csl", mode="w", encoding="utf-8")
+            tree.write(tmp.name, encoding="unicode")
+            patched_style_path = tmp.name
+
+    style = CitationStylesStyle(patched_style_path, validate=False
     source = CiteProcJSON([csl])
     bibliography = CitationStylesBibliography(style, source)
     citation = Citation([CitationItem(csl["id"])])
