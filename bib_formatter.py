@@ -151,7 +151,7 @@ def render_bibliography(csl, style_name=None):
     ]
 
     # Extract basename of CSL file to determine style
-    style_basename = os.path.basename(original_style_path).replace(".csl", "")
+    style_basename = os.path.splitext(os.path.basename(original_style_path))[0]
 
     # Patch CSL file if needed
     patched_style_path = original_style_path
