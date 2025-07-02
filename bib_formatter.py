@@ -102,6 +102,12 @@ def bib_to_csl(entry, citekey=None):
     if "issued" not in csl and "date" in entry:
         csl["issued"] = {"raw": entry["date"]}
 
+    # === Remove unsupported fields for citeproc Reference ===
+    # These are kept in entry for Markdown generation, but CSL engine will warn on them
+    unsupported_fields = ["journal", "callnumber", "abstract", "keywords"]
+    for field in unsupported_fields:
+        csl.pop(field, None)
+
 
     return csl
 
