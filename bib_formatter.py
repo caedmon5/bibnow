@@ -166,7 +166,7 @@ def render_bibliography(csl, style_name=None):
             tree.write(tmp.name, encoding="unicode")
             patched_style_path = tmp.name
 
-    style = CitationStylesStyle(patched_style_path, validate=False
+    style = CitationStylesStyle(patched_style_path, validate=False)
     source = CiteProcJSON([csl])
     bibliography = CitationStylesBibliography(style, source)
     citation = Citation([CitationItem(csl["id"])])
