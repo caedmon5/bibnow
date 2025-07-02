@@ -47,6 +47,62 @@ def bib_to_csl(entry, citekey=None):
         elif field == "container-title" and "journal" in entry:
             csl["container-title"] = entry["journal"]
 
+    # === Additional CSL field mappings ===
+
+    if "pages" in entry:
+        csl["page"] = entry["pages"]
+
+    if "editor" in entry:
+        from author_utils import parse_responsible_parties
+        csl["editor"] = parse_responsible_parties({"editor": entry["editor"]})
+
+    if "series" in entry:
+        csl["collection-title"] = entry["series"]
+
+    if "collection" in entry and "collection-title" not in csl:
+        csl["collection-title"] = entry["collection"]
+
+    if "number" in entry:
+        csl["number"] = entry["number"]
+
+    if "edition" in entry:
+        csl["edition"] = entry["edition"]
+
+    if "language" in entry:
+        csl["language"] = entry["language"]
+
+    if "callnumber" in entry:
+        csl["callnumber"] = entry["callnumber"]
+
+    if "abstract" in entry:
+        csl["abstract"] = entry["abstract"]
+
+    if "keywords" in entry:
+        csl["keyword"] = entry["keywords"]
+
+    if "booktitle" in entry:
+        csl["event"] = entry["booktitle"]
+
+    if "event" in entry and "event" not in csl:
+        csl["event"] = entry["event"]
+
+    if "address" in entry:
+        csl["event-place"] = entry["address"]
+
+    if "location" in entry and "event-place" not in csl:
+        csl["event-place"] = entry["location"]
+
+    if "urldate" in entry:
+        csl["accessed"] = {"raw": entry["urldate"]}
+
+    if "access-date" in entry and "accessed" not in csl:
+        csl["accessed"] = {"raw": entry["access-date"]}
+
+    # Fallback for issued if date is available
+    if "issued" not in csl and "date" in entry:
+        csl["issued"] = {"raw": entry["date"]}
+
+
     return csl
 
 # === FUNCTION: Render bibliography from CSL JSON using a CSL file ===
