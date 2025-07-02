@@ -11,7 +11,7 @@ def render_bibliography(csl, style_name=None):
     bibliography = CitationStylesBibliography(style, bib_source, formatter=formatter.plain)
     citation = Citation([CitationItem(csl["id"])])
     bibliography.register(citation)
-    return [str(entry) for entry in bibliography.bibliography()]
+    return [str(entry) for entry in bibliography.bibliography()][0]
 
 def bib_to_csl(entry, citekey=None):
     """
