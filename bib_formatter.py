@@ -4,6 +4,8 @@ import os
 import json
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem, formatter
 from citeproc.source.json import CiteProcJSON
+import inflect
+p = inflect.engine()
 
 # === CONFIG ===
 CSL_DIR = os.path.join(os.path.dirname(__file__), "csl")
@@ -45,6 +47,14 @@ def bib_to_csl(entry, citekey=None):
         "title": entry.get("title", ""),
     }
 
+    if entry["ENTRYTYPE"] in ["phdthesis", "mastersthesis", "thesis"]:
+        csl["genre"] = "PhD thesis" if "phd" in entry["ENTRYTYPE"] else "Master's thesis"
+        if "publisher" not in csl:
+            csl["publisher"] = entry.get("school", entry.get("institution", ""))
+
+    if "booktitle" in entry:
+        csl["container-title"] = entry["booktitle"]
+
     if "year" in entry:
         try:
             csl["issued"] = {"date-parts": [[int(entry["year"])] ]}
@@ -82,7 +92,11 @@ def bib_to_csl(entry, citekey=None):
         csl["number"] = entry["number"]
 
     if "edition" in entry:
-        csl["edition"] = entry["edition"]
+        try:
+            edition_number = int(entry["edition"])
+            csl["edition"] = p.ordinal(edition_number)
+        except ValueError:
+            csl["edition"] = entry["edition"]
 
     if "language" in entry:
         csl["language"] = entry["language"]
