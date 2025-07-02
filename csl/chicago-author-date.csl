@@ -46,10 +46,12 @@
       <term name="translator" form="verb-short">trans.</term>
       <term name="editortranslator" form="verb">edited and translated by</term>
       <term name="translator" form="short">trans.</term>
+<!--
       <term name="open-quote" form="long">“</term>
       <term name="close-quote" form="long">”</term>
       <term name="open-inner-quote" form="long">‘</term>
       <term name="close-inner-quote" form="long">’</term>
+-->
     </terms>
   </locale>
   <locale xml:lang="pt-PT">
