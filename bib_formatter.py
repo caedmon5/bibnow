@@ -11,6 +11,22 @@ DEFAULT_STYLE = os.path.join(CSL_DIR, "chicago-author-date.csl")
 
 # === FUNCTION: Convert BibTeX-like entry to CSL JSON format ===
 def bib_to_csl(entry, citekey=None):
+    bibtex_to_csl_type = {
+        "article": "article-journal",
+        "book": "book",
+        "inbook": "chapter",
+        "incollection": "chapter",
+        "inproceedings": "paper-conference",
+        "conference": "paper-conference",
+        "thesis": "thesis",
+        "phdthesis": "thesis",
+        "mastersthesis": "thesis",
+        "report": "report",
+        "webpage": "webpage",
+        "misc": "document",
+        "manual": "book",
+    }
+
     def parse_name(name):
         if ',' in name:
             family, given = [x.strip() for x in name.split(",", 1)]
@@ -25,7 +41,7 @@ def bib_to_csl(entry, citekey=None):
 
     csl = {
         "id": citekey or entry.get("ID", "ITEM-1"),
-        "type": entry.get("ENTRYTYPE", "article"),
+        "type": bibtex_to_csl_type.get(entry.get("ENTRYTYPE", "article"), "document"),
         "title": entry.get("title", ""),
     }
 
