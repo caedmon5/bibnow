@@ -145,7 +145,8 @@ def bib_to_csl(entry, citekey=None):
 
 # === FUNCTION: Render bibliography from CSL JSON using a CSL file ===
 def render_bibliography(csl, style_name=None):
-    style_path = style_name or DEFAULT_STYLE
+    original_style_path = style_name or DEFAULT_STYLE
+    style_basename = os.path.basename(original_style_path).replace(".csl", "")
     force_us_punctuation_styles = [
         "chicago-author-date",  # add more as needed
     ]
