@@ -149,10 +149,13 @@ def render_bibliography(csl, style_name=None):
         "chicago-author-date",  # add more as needed
     ]
 
+    # Extract basename of CSL file to determine style
     style_basename = os.path.basename(style_path).replace(".csl", "")
-    if style_basename in force_us_punctuation_styles:
-        style.options["punctuation-in-quote"] = "true"
-        source = CiteProcJSON([csl])
+
+    # Force US punctuation style if applicable
+    if style_basename in ["chicago-author-date"]:
+        style._style.options["punctuation-in-quote"] = "true"
+    source = CiteProcJSON([csl])
     bibliography = CitationStylesBibliography(style, source)
     citation = Citation([CitationItem(csl["id"])])
     bibliography.register(citation)
