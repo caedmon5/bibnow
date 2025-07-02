@@ -1,9 +1,6 @@
-@article{Garcia2023AlgorithmicBiasAndJustice,
-  author    = {Garcia, Maria and Lee, Anthony},
-  title     = {Algorithmic Bias and the Pursuit of Justice in Automated Systems},
-  journal   = {Journal of Ethics and Information Technology},
-  volume    = {25},
-  number    = {3},
-  year      = {2023},
-  url       = {https://example.com/algorithmic-bias-justice}
+@article{Garcia2023AlgorithmicBiasAndThe,
+  title={Algorithmic Bias and the Limits of Fairness},
+  author={Garcia, M.},
+  journal={AI & Society},
+  year={2023}
 }

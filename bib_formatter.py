@@ -7,7 +7,7 @@ import json
 def render_bibliography(csl, style_name=None):
     from citeproc import CitationStylesBibliography, Citation, CitationItem
     from citeproc.source.json import CiteProcJSON
-
+    style = CitationStylesStyle(style_name, validate=False)
     bib_source = CiteProcJSON([csl])
     bibliography = CitationStylesBibliography(style, bib_source, formatter="text")
     citation = Citation([CitationItem(csl["id"])])
