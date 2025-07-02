@@ -145,6 +145,7 @@ def bib_to_csl(entry, citekey=None):
 def render_bibliography(csl, style_name=None):
     style_path = style_name or DEFAULT_STYLE
     style = CitationStylesStyle(style_path, validate=False)
+    style.options["punctuation-in-quote"] = "true"
     source = CiteProcJSON([csl])
     bibliography = CitationStylesBibliography(style, source)
     citation = Citation([CitationItem(csl["id"])])
