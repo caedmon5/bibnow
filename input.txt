@@ -1,39 +1,42 @@
-@article{Adams2021SoloAuthorship,
-  author = {Adams, Rachel},
-  title = {The Single Author in Modern Citation Contexts},
-  journal = {Solo Studies Quarterly},
-  year = {2021},
-  abstract = {Explores implications of single authorship for digital bibliography pipelines.},
-  keywords = {test, responsible party, one author},
-  note = {TEST ENTRY}
+@article{Smith2024Article,
+  author = {Smith, John},
+  title = {An Interesting Article},
+  journal = {Journal of Examples},
+  date = {2024}
 }
 
-@book{BrownGreen2022TwoAuthors,
-  author = {Brown, Thomas and Green, Lisa},
-  title = {Dual Authorship and Metadata Consistency},
-  publisher = {MetaPress},
-  year = {2022},
-  abstract = {Case study on handling two authors in reference management systems.},
-  keywords = {test, responsible party, two authors},
-  note = {TEST ENTRY}
+@thesis{Jones2022Thesis,
+  author = {Jones, Emily},
+  title = {Thinking Clearly},
+  university = {University of Lethbridge},
+  date = {2022}
 }
 
-@techreport{ChenEtAl2023ThreeEditors,
-  editor = {Chen, Ming and O'Shea, Grace and Patel, Raj},
-  title = {Three Editors and a BibTeX File},
-  institution = {Metadata Institute},
-  year = {2023},
-  abstract = {This report analyzes multi-editor roles in bibliographic pipelines.},
-  keywords = {test, responsible party, three editors},
-  note = {TEST ENTRY}
+@book{Taylor2021Book,
+  author = {Taylor, Alex},
+  title = {Big Ideas in Small Spaces},
+  publisher = {Small Press},
+  location = {Toronto},
+  date = {2021}
 }
 
-@inproceedings{UNESCO2024InstitutionAsAuthor,
-  institution = {UNESCO and World Bank and OECD and IMF},
-  title = {Coordinated Institutional Authorship in Global Research},
-  booktitle = {Proceedings of the Global Policy Research Summit},
-  year = {2024},
-  abstract = {This paper explores edge cases where institutional names function as compound authors.},
-  keywords = {test, responsible party, four institutions},
-  note = {TEST ENTRY}
+@misc{Doe2023BlogPost,
+  author = {Doe, Jane},
+  title = {What AI Means to Me},
+  url = {https://example.com/blog/ai},
+  date = {2023}
+}
+
+@article{O_Donnell2023Example,
+  author = {O'Donnell, Daniel Paul},
+  title = {On Underscores and Apostrophes},
+  journal = {Annals of BibTeX},
+  date = {2023}
+}
+
+@article{MalformedEntry,
+  author = {Foo, Bar},
+  title = {This Will Break
+  journal = {Broken},
+  date = {2025}
 }
