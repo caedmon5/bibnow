@@ -1,6 +1,7 @@
 # === BEGIN: bib_formatter.py ===
 
-import os
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "vendor"))
 import json
 from citeproc import CitationStylesStyle, CitationStylesBibliography, Citation, CitationItem, formatter
 from citeproc.source.json import CiteProcJSON
