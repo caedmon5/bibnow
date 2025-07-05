@@ -2,6 +2,9 @@
 
 > A lightweight pipeline for generating BibTeX, Obsidian markdown, and Zotero-compatible entries from scholarly sources — optimized for mobile and cross-platform workflows.
 
+📎 See full setup and usage guide in [INSTRUCTIONS.md](INSTRUCTIONS.md)
+
+
 ---
 
 ## ⚠️ This is a Pre-release Development Branch
