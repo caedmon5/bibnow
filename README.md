@@ -21,6 +21,9 @@ A command-line Python tool for uploading BibTeX bibliography entries to Zotero a
 
 ## 🛠 Setup
 
+📎 See full setup and usage guide in [INSTRUCTIONS.md](INSTRUCTIONS.md)
+
+
 ### 1. Install Dependencies
 
 Install with:
