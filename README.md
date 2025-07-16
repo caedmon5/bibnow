@@ -7,7 +7,16 @@
 
 ---
 
+
 ## ✅ Current Stable Release: `v0.2.0`
+=======
+## 🛠 Setup
+
+📎 See full setup and usage guide in [INSTRUCTIONS.md](INSTRUCTIONS.md)
+
+
+### 1. Install Dependencies
+
 
 This branch (`main`) reflects the **current stable version** (`v0.2.0`), which is:
 
