@@ -194,6 +194,20 @@ def parse_bibtex(bibtex):
         entry["school"] = entry.get("school", "") or entry.get("institution", "")
     return entry
 
+def fetch_formatted_citation(user_id, item_key, style="chicago-author-date"):
+    """
+    Queries Zotero API for a preformatted CSL citation string.
+    Default style is Chicago 17 Author–Year.
+    """
+    headers = {"Accept": "text/html"}
+    url = f"https://www.zotero.org/users/{user_id}/items/{item_key}?format=bib&style={style}"
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        return r.text.strip()
+    else:
+        print(f"⚠️ Could not fetch formatted citation from Zotero: {r.status_code}")
+        return None
+
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
     item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
@@ -257,7 +271,7 @@ def zotero_upload(entry):
     except requests.exceptions.JSONDecodeError:
         return r.status_code, {"error": "No JSON returned", "body": r.text}
 
-def build_markdown(entry, citekey=None, zotero_key=None):
+def build_markdown(entry, citekey=None, zotero_key=None, formatted_citation=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
     lastname_readable = f"{info['first_lastname']} et al" if info["multiple"] else info["first_lastname"]
@@ -266,10 +280,6 @@ def build_markdown(entry, citekey=None, zotero_key=None):
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     aliases = f'"{lastname_readable} {year} {slug}","{lastname_readable} {year}", "{citekey}"'
     callnumber = f"{entry.get('callnumber', '')}"
-    if entry.get("ENTRYTYPE") in ["article", "inproceedings"]:
-        biblio_line = f"{entry.get('author', '')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" *{entry.get('journal', '')}*. {entry.get('url', '')}"
-    else:
-        biblio_line = f"{entry.get('court') or entry.get('institution') or entry.get('legislativebody', 'UNKNOWN')}. {entry.get('date', '')}. \"{entry.get('title', '')}.\" {entry.get('reporter', '') or entry.get('session', '') or entry.get('billnumber', '')} {entry.get('url', '')}"
 
     md = f"""---
 citekey: "{citekey or entry.get('ID', 'UNKNOWN')}"
@@ -284,7 +294,8 @@ autoupdate: true
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
 ## Chicago Author-Year Bibliography
-{biblio_line}
+{formatted_citation or '⚠️ Citation unavailable.'}
+
 
 ## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
 {entry.get('abstract', 'None supplied')}
@@ -359,6 +370,8 @@ def main(text, commit=False):
             if status in [200, 201] and 'successful' in resp and '0' in resp['successful']:
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
+                formatted_citation = fetch_formatted_citation(ZOTERO_USER_ID, key)
+                md = build_markdown(bib, citekey=citekey, zotero_key=key, formatted_citation=formatted_citation)
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
