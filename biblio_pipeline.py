@@ -194,19 +194,30 @@ def parse_bibtex(bibtex):
         entry["school"] = entry.get("school", "") or entry.get("institution", "")
     return entry
 
-def fetch_formatted_citation(user_id, item_key, style="chicago-author-date"):
+def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
     """
-    Queries Zotero API for a preformatted CSL citation string.
-    Default style is Chicago 17 Author–Year.
+    Queries Zotero API for a preformatted CSL citation (e.g. Chicago Author–Date).
+    Includes an initial wait and retry-on-404 strategy to allow for Zotero propagation lag.
     """
+    import time
     headers = {"Accept": "text/html"}
     url = f"https://www.zotero.org/users/{user_id}/items/{item_key}?format=bib&style={style}"
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        return r.text.strip()
-    else:
-        print(f"⚠️ Could not fetch formatted citation from Zotero: {r.status_code}")
-        return None
+
+    for attempt in range(retries):
+        r = requests.get(url, headers=headers)
+        if r.status_code == 200:
+            return r.text.strip()
+        elif r.status_code == 404:
+            if attempt < retries - 1:
+                print(f"⏳ Citation not yet available (attempt {attempt + 1}), retrying in {delay}s...")
+                time.sleep(delay)
+        else:
+            print(f"⚠️ Zotero citation fetch failed with status: {r.status_code}")
+            return None
+
+    print("⚠️ Zotero citation not available after retries.")
+    return None
+
 
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
@@ -370,6 +381,7 @@ def main(text, commit=False):
             if status in [200, 201] and 'successful' in resp and '0' in resp['successful']:
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
+                time.sleep(1.5)  # Wait before first attempt (helps with API propagation)
                 formatted_citation = fetch_formatted_citation(ZOTERO_USER_ID, key)
                 md = build_markdown(bib, citekey=citekey, zotero_key=key, formatted_citation=formatted_citation)
                 print(f"✅ Zotero upload successful (Key: {key})")

@@ -1,51 +1,10 @@
-@book{wordsworth1798,
-  title        = {Lyrical Ballads, with a Few Other Poems},
-  author       = {Wordsworth, William and Coleridge, Samuel Taylor},
-  year         = {1798},
-  publisher    = {J.\ \&\ A.\ Arch},
-  address      = {London},
-  loc_callno   = {PR5869 .L9 1798},
-  url          = {https://www.gutenberg.org/ebooks/9622},
-  keywords     = {romanticism, poetry, lyrical-ballads, original-edition, William Wordsworth, Samuel Taylor Coleridge},
-  abstract     = {The 1798 edition of *Lyrical Ballads* marks the inaugural publication of the collection that launched the English Romantic movement. Co-authored by William Wordsworth and Samuel Taylor Coleridge, the volume includes foundational poems such as Coleridge's "The Rime of the Ancyent Marinere" and Wordsworth's "Lines written a few miles above Tintern Abbey." Published anonymously, this edition was experimental in its emphasis on everyday language and rural life.},
-  note         = {Generated abstract | Keywords supplemented by AI}
-}
-
-@book{wordsworth1800,
-  title        = {Lyrical Ballads, with Other Poems},
-  author       = {Wordsworth, William and Coleridge, Samuel Taylor},
-  year         = {1800},
-  publisher    = {T.\ N.\ Longman and O.\ Rees},
-  address      = {London},
-  loc_callno   = {PR5869 .L9 1800},
-  url          = {https://www.gutenberg.org/ebooks/8905},
-  keywords     = {romanticism, poetry, lyrical-ballads, preface, second-edition, William Wordsworth, Samuel Taylor Coleridge},
-  abstract     = {The 1800 edition of *Lyrical Ballads* expanded the original 1798 volume and included a second volume of poems by Wordsworth alone. It introduced the famous "Preface," where Wordsworth articulates his poetic theory: a focus on common subjects, ordinary language, and the role of imagination. This edition solidified the philosophical foundation of Romantic poetry and marked a significant editorial and authorial shift, with Wordsworth now named as the author.},
-  note         = {Generated abstract | Keywords supplemented by AI}
-}
-
-@book{wordsworth1802,
-  title        = {Lyrical Ballads, with Pastoral and Other Poems},
-  author       = {Wordsworth, William and Coleridge, Samuel Taylor},
-  year         = {1802},
-  publisher    = {T.\ N.\ Longman and O.\ Rees},
-  address      = {London},
-  loc_callno   = {PR5869 .L9 1802},
-  url          = {https://archive.org/details/lyricalballads00longgoog},
-  keywords     = {romanticism, poetry, lyrical-ballads, pastoral, revised-edition, William Wordsworth, Samuel Taylor Coleridge},
-  abstract     = {The 1802 edition of *Lyrical Ballads* retained the contents of the 1800 edition and featured revisions to the Preface, elaborating on themes such as poetic diction, metre, and the role of the poet. It represents Wordsworth’s ongoing effort to position his poetics within a broader philosophical and aesthetic framework. While the textual changes are modest, the Preface significantly extends his earlier theoretical argument.},
-  note         = {Generated abstract | Keywords supplemented by AI}
-}
-
-@book{wordsworth1805,
-  title        = {Lyrical Ballads, with Pastoral and Other Poems},
-  author       = {Wordsworth, William and Coleridge, Samuel Taylor},
-  year         = {1805},
-  publisher    = {J.\ \&\ A.\ Arch},
-  address      = {London},
-  loc_callno   = {PR5869 .L9 1805},
-  url          = {https://standardebooks.org/ebooks/william-wordsworth_samuel-taylor-coleridge/lyrical-ballads},
-  keywords     = {romanticism, poetry, lyrical-ballads, expanded-preface, William Wordsworth, Samuel Taylor Coleridge},
-  abstract     = {This 1805 edition of *Lyrical Ballads* contains further revisions to both content and poetic philosophy. It maintains the two-volume format, refines the Preface once again, and includes additional poems. Though less frequently cited than the 1800 edition, it is critical to tracing Wordsworth’s maturing poetic identity and editorial control over the collection.},
-  note         = {Generated abstract | Keywords supplemented by AI}
+@book{foucault1977discipline,
+  title = {Discipline and Punish: The Birth of the Prison},
+  author = {Foucault, Michel},
+  year = {1977},
+  publisher = {Pantheon Books},
+  address = {New York},
+  abstract = {Michel Foucault traces the history of penal systems and the rise of the modern prison as a disciplinary institution.},
+  keywords = {discipline, punishment, prisons, surveillance, philosophy, Michel Foucault},
+  callnumber = {HV8666.F6813 1977}
 }
