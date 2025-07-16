@@ -1,24 +1,15 @@
-# 📚 biblio_pipeline_v1
+# 📚 `biblio_mobile_pipeline_v1`
 
-A command-line Python tool for uploading BibTeX bibliography entries to Zotero and generating Obsidian-compatible Markdown notes. Designed for cross-platform scholarly workflows, with full clipboard integration for both Android (Termux) and Linux.
+> A lightweight pipeline for generating BibTeX, Obsidian markdown, and Zotero-compatible entries from scholarly sources — optimized for mobile and cross-platform workflows.
 
----
+📎 See full setup and usage guide in [INSTRUCTIONS.md](INSTRUCTIONS.md)
 
-## ✨ Features
-
-- ✅ Converts BibTeX entries to Zotero-compatible JSON
-- 📋 Automatically captures input from clipboard (Termux/Linux) or falls back to `input.txt`
-- 🧠 Generates Obsidian-compatible Markdown notes with:
-  - YAML frontmatter
-  - Chicago-style citation block
-  - Abstract, keywords, notes, and URLs
-- 🪪 Automatic citekey and filename generation: `LastNameYYYYFirstSecondThirdWord`
-- 🧱 Platform-aware setup: auto-detects Android (Termux) vs. Linux
-- 📦 Outputs both `.bib` and `.md` files
-- 🔐 Uploads entries directly to your Zotero library
 
 ---
 
+
+## ✅ Current Stable Release: `v0.2.0`
+=======
 ## 🛠 Setup
 
 📎 See full setup and usage guide in [INSTRUCTIONS.md](INSTRUCTIONS.md)
@@ -26,128 +17,77 @@ A command-line Python tool for uploading BibTeX bibliography entries to Zotero a
 
 ### 1. Install Dependencies
 
-Install with:
 
+This branch (`main`) reflects the **current stable version** (`v0.2.0`), which is:
+
+- ✅ Fully working on **Linux**
+- ✅ Fully working on **Android (Termux / Python 3.12)**
+
+> This version does **not** include formatted citation blocks or `citeproc`-based output.
+
+---
+
+## 🚧 Want Better Citations? Try `v0.3.0-rc1` (Linux Only)
+
+A **release candidate for `v0.3.0`** is available on the [`dev`](https://github.com/caedmon5/biblio_mobile_pipeline_v1/tree/dev) branch and tagged as [`v0.3.0-rc1`](https://github.com/caedmon5/biblio_mobile_pipeline_v1/releases/tag/v0.3.0-rc1).
+
+It adds:
+
+- 🧠 **Formatted citation blocks** using CSL (Chicago Author–Date)
+- ✍️ Smart quotation fallback
+- 📄 Fully compatible output with this version (`v0.2.0`)
+
+> ⚠️ `v0.3.0-rc1` does **not** work on Android due to missing `lxml` support in Python 3.12 (ARM64).
+
+---
+
+## 📦 Requirements
+
+- Python 3.11+ (v0.2.0 works on 3.12; v0.3.0 requires `lxml` which is not yet packaged for Android)
+- Linux, Termux (Android), macOS (untested but likely compatible)
+
+Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
-Dependencies include:
-
-- `requests`
-- `bibtexparser`
-- `pyperclip` (Linux only)
-- `termux-clipboard-get` (Android only)
-
 ---
 
-### 2. Configure `config.py`
-
-Set your Zotero credentials and Obsidian vault path:
-
-```python
-ZOTERO_API_KEY = "your-zotero-api-key"
-ZOTERO_USER_ID = "your-user-id"
-ZOTERO_USERNAME = "your-zotero-username"
-
-OBSIDIAN_VAULT_PATH = "/absolute/path/to/your/LN Literature Notes"
-```
-
-📌 You **do not** need to specify a platform — the script auto-detects whether you're on Android (Termux) or Linux and adapts accordingly.
-
----
-
-## ▶ Usage
-
-### Dry Run (no upload, prints preview)
+## 🚀 Usage
 
 ```bash
-python3 biblio_pipeline.py
-```
-
-- Reads from clipboard (`termux-clipboard-get` or `pyperclip`)
-- Falls back to `input.txt` if clipboard fails
-- Outputs a preview of the generated citekey, Markdown, and file name
-
----
-
-### Commit Mode (upload to Zotero, save files)
-
-```bash
-python3 biblio_pipeline.py --commit
-```
-
-- Uploads to Zotero using your credentials
-- Generates `.bib` and `.md` files in the appropriate location
-- Logs the output in `output/biblio-log/`
-
----
-
-## 📄 Filename and Citekey Format
-
-- **Citekey**: `LastNameYYYYFirstSecondThirdWord`
-- **Markdown filename**: `LN LastName YYYY First Second Third.md`
-  - If multiple authors/editors: `LastName et al`
-
-Example:
-```text
-Citekey: Smith2025OnTheNature
-Filename: LN Smith 2025 On The Nature.md
+bibnow --dryrun     # Preview formatted output
+bibnow --commit     # Save to Zotero + Obsidian vault
 ```
 
 ---
 
-## 🧪 Input Handling
+## 📂 File Structure
 
-Input must be valid BibTeX — either:
-- Entire raw BibTeX
-- Or a block wrapped in `@bibtex` ... `@end`
-
-Example input:
-```
-@bibtex
-@article{Smith2025OnTheNature,
-  author = {Smith, John},
-  title = {On the Nature of BibTeX},
-  journal = {Journal of Citation},
-  date = {2025}
-}
-@end
-```
+- `input.txt`: BibTeX input (clipboard or file)
+- `bib_formatter.py`: output generator for BibTeX + YAML + Markdown
+- `biblio_pipeline.py`: main CLI entrypoint
+- `vendor/citeproc/`: included only in v0.3.x+
 
 ---
 
-## 📁 Output Structure
+## 🗂️ Versioning Strategy
 
-- `.md` Markdown file: saved to the Obsidian vault path
-- `.bib` BibTeX and `.json` log: saved in `output/`
-- Files include:
-  - Abstract, keywords, extra notes
-  - Links back to the Zotero item
-  - Warning headers indicating synced content
+| Version     | Linux | Android (Py 3.12) |
+|-------------|--------|------------------|
+| v0.2.0      | ✅     | ✅               |
+| v0.3.0-rc1  | ✅     | ❌ (no `lxml`)    |
 
 ---
 
-## 🚧 Known Issues (v0.2.0)
+## 🧭 Quick Links
 
-- `input.txt` must be manually cleared between runs if clipboard not used
-- YAML escape handling is basic — certain complex abstracts or titles may require adjustment
-- Markdown structure assumes specific Obsidian usage
-
----
-
-## 🗂 Version Summary
-
-| Version | Description                                |
-|---------|--------------------------------------------|
-| v0.1.0  | First shared version (pre-config.py)       |
-| v0.1.1  | Android base (`android-base`)              |
-| v0.1.2  | Layout fix (tested after 4c3465a)          |
-| v0.2.0  | Config.py and platform detection (this)    |
-| v0.3.0  | Citeproc integration (in development)      |
+- [Latest stable release (`v0.2.0`)](https://github.com/caedmon5/biblio_mobile_pipeline_v1/releases/tag/v0.2.0)
+- [Development branch (`v0.3.0-rc1`)](https://github.com/caedmon5/biblio_mobile_pipeline_v1/releases/tag/v0.3.0-rc1)
+- [Dev source code](https://github.com/caedmon5/biblio_mobile_pipeline_v1/tree/dev)
 
 ---
 
-## 🤝 Contributions
+## 📌 License
 
-Contributions, patches, and suggestions are welcome. Please open an issue or submit a PR.
+MIT
