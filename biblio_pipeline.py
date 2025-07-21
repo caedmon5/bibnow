@@ -490,7 +490,7 @@ def main(text, commit=False, citation_mode="minimal"):
                 md = build_markdown(
                     bib,
                     citekey=citekey,
-                    zotero_key=key,
+                    zotero_key=zotero_key,
                     citation_mode=citation_mode
                 )
             print(md)
