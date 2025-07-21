@@ -225,9 +225,12 @@ def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", ret
     print("⚠️ Zotero citation not available after retries.")
     return None
 
-def generate_citation(entry, mode="minimal", zotero_key=None):
-    if mode == "zotero" and zotero_key:
-        citation = fetch_formatted_citation(ZOTERO_USER_ID, zotero_key)
+def generate_citation(entry, mode="minimal", zotero_key=None, zotero_group_key=None):
+    if mode == "zotero":
+        if zotero_group_key:
+            return fetch_formatted_citation_from_group(ZOTERO_GROUP_ID, zotero_group_key)
+        elif zotero_key:
+            return fetch_formatted_citation(ZOTERO_USER_ID, zotero_key)
         if citation:
             return citation
     if mode == "citeproc":
@@ -376,7 +379,7 @@ def zotero_delete_group_item(group_id, item_key, version=None):
     else:
         print(f"⚠️ Failed to delete group item {item_key}: {r.status_code}")
 
-def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal"):
+def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal", zotero_group_key=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
     lastname_readable = f"{info['first_lastname']} et al" if info["multiple"] else info["first_lastname"]
@@ -402,7 +405,7 @@ autoupdate: true
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
 ## Chicago Author-Year Bibliography
-{generate_citation(entry, citation_mode, zotero_key)}
+{generate_citation(entry, citation_mode, zotero_key, zotero_group_key)}
 
 
 ## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
@@ -471,7 +474,21 @@ def main(text, commit=False, citation_mode="minimal"):
             filename = generate_filename(bib)
             print(f"\n📄 Would write file: {filename}")
             print("📦 Markdown preview:\n")
-            md = build_markdown(bib, citekey=citekey, citation_mode=citation_mode)
+            if citation_mode == "zotero":
+                md = build_markdown(
+                    bib,
+                    citekey=citekey,
+                    zotero_key=key,
+                    citation_mode=citation_mode,
+                    zotero_group_key=group_key
+                )
+            else:
+                md = build_markdown(
+                    bib,
+                    citekey=citekey,
+                    zotero_key=key,
+                    citation_mode=citation_mode
+                )
             print(md)
 
         else:

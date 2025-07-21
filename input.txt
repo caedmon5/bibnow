@@ -1,15 +1,16 @@
 @bibtex
-@article{nguyen2023language,
-  title        = {Language and Power in the Digital Age},
-  author       = {Nguyen, Thao and García, Juan},
-  journal      = {Journal of Computational Sociolinguistics},
-  year         = {2023},
-  volume       = {17},
-  number       = {2},
-  pages        = {145--163},
-  url          = {https://example.org/nguyen2023language},
-  abstract     = {This article explores how social media platforms influence linguistic behaviour and identity formation, particularly among multilingual users. Using discourse analysis and machine learning techniques, the authors demonstrate new power asymmetries in digital communication.},
-  keywords     = {Digital Discourse, Linguistic Identity, Social Media, Multilingualism},
-  note         = {Generated abstract | Keywords supplemented by AI | Reason for interest: digital power asymmetries}
+@article{bell2022acousticstyle,
+  title        = {Acoustic Style and Identity in Digital Communication},
+  author       = {Bell, Adam and Okoye, Chinyere and Wong, David},
+  journal      = {New Media and Society},
+  year         = {2022},
+  volume       = {24},
+  number       = {7},
+  pages        = {1402--1420},
+  url          = {https://journals.sagepub.com/doi/full/10.1177/14614448211034567},
+  doi          = {10.1177/14614448211034567},
+  abstract     = {This study examines the use of acoustic features in voice messaging apps to construct identity and style among young multilingual adults. It draws on discourse analysis and speech signal processing to identify affective and group-aligned variation.},
+  keywords     = {Digital Sociolinguistics, Voice Messaging, Identity Construction, Acoustic Variation},
+  note         = {Generated abstract | Keywords supplemented by AI | Reason for interest: acoustic and discourse analysis of multilingual identity}
 }
 @end
