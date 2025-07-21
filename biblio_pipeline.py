@@ -292,6 +292,63 @@ def zotero_upload(entry):
     except requests.exceptions.JSONDecodeError:
         return r.status_code, {"error": "No JSON returned", "body": r.text}
 
+def zotero_upload_to_group(entry):
+    headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
+    item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
+    creators = [{"creatorType": "author", "name": entry.get("author", "")}]
+
+    metadata = [{
+        "itemType": item_type,
+        "title": entry.get("title", ""),
+        "creators": creators,
+        "date": entry.get("date", entry.get("year", "")),
+        "url": entry.get("url", ""),
+        "abstractNote": entry.get("abstract", ""),
+        "extra": entry.get("note", ""),
+        "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
+    }]
+
+    r = requests.post(
+        f"https://api.zotero.org/groups/{ZOTERO_GROUP_ID}/items",
+        headers=headers,
+        data=json.dumps(metadata)
+    )
+
+    try:
+        return r.status_code, r.json()
+    except requests.exceptions.JSONDecodeError:
+        return r.status_code, {"error": "No JSON returned", "body": r.text}
+
+
+def fetch_formatted_citation_from_group(group_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
+    import time
+    headers = {"Accept": "text/html"}
+    url = f"https://www.zotero.org/groups/{group_id}/items/{item_key}?format=bib&style={style}"
+
+    for attempt in range(retries):
+        r = requests.get(url, headers=headers)
+        if r.status_code == 200:
+            return r.text.strip()
+        elif r.status_code == 404:
+            if attempt < retries - 1:
+                print(f"⏳ Citation not yet available from group (attempt {attempt + 1}), retrying in {delay}s...")
+                time.sleep(delay)
+        else:
+            print(f"⚠️ Group citation fetch failed with status: {r.status_code}")
+            return None
+    print("⚠️ Group citation not available after retries.")
+    return None
+
+
+def zotero_delete_group_item(group_id, item_key):
+    headers = {'Zotero-API-Key': ZOTERO_API_KEY}
+    url = f"https://api.zotero.org/groups/{group_id}/items/{item_key}"
+    r = requests.delete(url, headers=headers)
+    if r.status_code == 204:
+        print(f"🗑️ Deleted group item: {item_key}")
+    else:
+        print(f"⚠️ Failed to delete group item {item_key}: {r.status_code}")
+
 def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal"):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
@@ -356,6 +413,7 @@ def log_run(data, citekey):
     save_file(json.dumps(data, indent=2), log_filename, LOG_PATH)
 
 def main(text, commit=False, citation_mode="minimal"):
+    group_items_to_delete = []
     if "@bibtex" in text and "@end" in text:
         bibtex_raw = extract_blocks(text, "@bibtex", "@end")
     else:
@@ -395,7 +453,21 @@ def main(text, commit=False, citation_mode="minimal"):
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
                 time.sleep(1.5)  # Wait before first attempt (helps with API propagation)
-                formatted_citation = fetch_formatted_citation(ZOTERO_USER_ID, key)
+
+                # Upload to public group for citation
+                group_status, group_resp = zotero_upload_to_group(bib)
+                if group_status in [200, 201] and 'successful' in group_resp and '0' in group_resp['successful']:
+                    group_item = group_resp['successful']['0']
+                    group_key = group_item['key']
+                    group_items_to_delete.append(group_key)
+                    print(f"🌐 Group upload successful (Key: {group_key})")
+
+                    time.sleep(1.5)
+                    formatted_citation = fetch_formatted_citation_from_group(ZOTERO_GROUP_ID, group_key)
+                else:
+                    print(f"⚠️ Group upload failed — using fallback citation.")
+                    formatted_citation = generate_citation(bib, mode="minimal")
+
                 md = build_markdown(bib, citekey=citekey, zotero_key=key, citation_mode=citation_mode)
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, citekey=citekey, zotero_key=key)
@@ -411,6 +483,11 @@ def main(text, commit=False, citation_mode="minimal"):
                 print(f"❌ Zotero upload failed: {status}")
                 print(json.dumps(resp, indent=2))
 
+    if commit and group_items_to_delete:
+        print(f"🧹 Cleaning up {len(group_items_to_delete)} group item(s)...")
+        for gkey in group_items_to_delete:
+            zotero_delete_group_item(ZOTERO_GROUP_ID, gkey)
+
 
 if __name__ == "__main__":
     import argparse
@@ -421,15 +498,15 @@ if __name__ == "__main__":
     parser.add_argument("--minimal", action="store_true", help="Use minimal fallback citation formatting")
     args = parser.parse_args()
 
-if args.zotero:
-    citation_mode = "zotero"
-elif args.citeproc:
-    citation_mode = "citeproc"
-elif args.minimal:
-    citation_mode = "minimal"
-else:
-    citation_mode = "minimal"
-print(f"🧾 Citation mode set to: {citation_mode}")
+    if args.zotero:
+        citation_mode = "zotero"
+    elif args.citeproc:
+        citation_mode = "citeproc"
+    elif args.minimal:
+        citation_mode = "minimal"
+    else:
+        citation_mode = "minimal"
+    print(f"🧾 Citation mode set to: {citation_mode}")
 
 
     import platform

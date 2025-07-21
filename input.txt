@@ -1,10 +1,15 @@
-@book{foucault1977discipline,
-  title = {Discipline and Punish: The Birth of the Prison},
-  author = {Foucault, Michel},
-  year = {1977},
-  publisher = {Pantheon Books},
-  address = {New York},
-  abstract = {Michel Foucault traces the history of penal systems and the rise of the modern prison as a disciplinary institution.},
-  keywords = {discipline, punishment, prisons, surveillance, philosophy, Michel Foucault},
-  callnumber = {HV8666.F6813 1977}
+@bibtex
+@article{nguyen2023language,
+  title        = {Language and Power in the Digital Age},
+  author       = {Nguyen, Thao and García, Juan},
+  journal      = {Journal of Computational Sociolinguistics},
+  year         = {2023},
+  volume       = {17},
+  number       = {2},
+  pages        = {145--163},
+  url          = {https://example.org/nguyen2023language},
+  abstract     = {This article explores how social media platforms influence linguistic behaviour and identity formation, particularly among multilingual users. Using discourse analysis and machine learning techniques, the authors demonstrate new power asymmetries in digital communication.},
+  keywords     = {Digital Discourse, Linguistic Identity, Social Media, Multilingualism},
+  note         = {Generated abstract | Keywords supplemented by AI | Reason for interest: digital power asymmetries}
 }
+@end
