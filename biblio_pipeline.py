@@ -313,6 +313,24 @@ def zotero_upload_to_group(entry):
         "abstractNote": entry.get("abstract", ""),
         "extra": entry.get("note", ""),
         "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
+        "publicationTitle": entry.get("journal", ""),
+        "volume": entry.get("volume", ""),
+        "issue": entry.get("number", entry.get("issue", "")),
+        "pages": entry.get("pages", ""),
+        "publisher": entry.get("publisher", ""),
+        "DOI": entry.get("doi", entry.get("DOI", "")),
+        "reportType": entry.get("type", "") if item_type == "report" else "",
+        "thesisType": "PhD Thesis" if entry.get("ENTRYTYPE") == "phdthesis" else (
+            "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
+        ),
+        "institution": entry.get("institution", "") if item_type == "report" else "",
+        "university": entry.get("school", "") if item_type == "thesis" else "",
+        "court": entry.get("court", "") if item_type == "case" else "",
+        "reporter": entry.get("reporter", "") if item_type == "case" else "",
+        "committee": entry.get("committee", "") if item_type == "hearing" else "",
+        "billNumber": entry.get("billnumber", "") if item_type == "bill" else "",
+        "session": entry.get("session", "") if item_type == "bill" else "",
+        "legislativeBody": entry.get("legislativebody", "") if item_type == "bill" else ""
     }]
 
     r = requests.post(
