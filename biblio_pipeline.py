@@ -218,6 +218,16 @@ def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", ret
     print("⚠️ Zotero citation not available after retries.")
     return None
 
+def generate_citation(entry, mode="minimal", zotero_key=None):
+    if mode == "zotero" and zotero_key:
+        citation = fetch_formatted_citation(ZOTERO_USER_ID, zotero_key)
+        if citation:
+            return citation
+    if mode == "citeproc":
+        return f"{get_responsible_party(entry)} ({extract_year(entry)}). *{entry.get('title', '')}*"
+    return f"{get_responsible_party(entry)} ({extract_year(entry)}). {entry.get('title', '')}"
+
+
 
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
@@ -282,7 +292,7 @@ def zotero_upload(entry):
     except requests.exceptions.JSONDecodeError:
         return r.status_code, {"error": "No JSON returned", "body": r.text}
 
-def build_markdown(entry, citekey=None, zotero_key=None, formatted_citation=None):
+def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal"):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
     lastname_readable = f"{info['first_lastname']} et al" if info["multiple"] else info["first_lastname"]
@@ -299,13 +309,16 @@ type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
+responsible: "{get_responsible_party(entry)}"
+title: "{entry.get('title', '')}"
+year: "{extract_year(entry)}"
 callnumber: "{callnumber}"
 autoupdate: true
 ---
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
 ## Chicago Author-Year Bibliography
-{formatted_citation or '⚠️ Citation unavailable.'}
+{generate_citation(entry, citation_mode, zotero_key)}
 
 
 ## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
@@ -342,7 +355,7 @@ def log_run(data, citekey):
     log_filename = f"biblio_log_{citekey}_{ts}.json"
     save_file(json.dumps(data, indent=2), log_filename, LOG_PATH)
 
-def main(text, commit=False):
+def main(text, commit=False, citation_mode="minimal"):
     if "@bibtex" in text and "@end" in text:
         bibtex_raw = extract_blocks(text, "@bibtex", "@end")
     else:
@@ -373,7 +386,7 @@ def main(text, commit=False):
             filename = generate_filename(bib)
             print(f"\n📄 Would write file: {filename}")
             print("📦 Markdown preview:\n")
-            md = build_markdown(bib, citekey=citekey)
+            md = build_markdown(bib, citekey=citekey, citation_mode=citation_mode)
             print(md)
 
         else:
@@ -383,7 +396,7 @@ def main(text, commit=False):
                 key = zotero_item['key']
                 time.sleep(1.5)  # Wait before first attempt (helps with API propagation)
                 formatted_citation = fetch_formatted_citation(ZOTERO_USER_ID, key)
-                md = build_markdown(bib, citekey=citekey, zotero_key=key, formatted_citation=formatted_citation)
+                md = build_markdown(bib, citekey=citekey, zotero_key=key, citation_mode=citation_mode)
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
@@ -403,7 +416,21 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--commit", action="store_true", help="Actually upload to Zotero and write files")
+    parser.add_argument("--zotero", action="store_true", help="Use Zotero CSL citation formatting")
+    parser.add_argument("--citeproc", action="store_true", help="Use local citeproc-py formatting (WIP)")
+    parser.add_argument("--minimal", action="store_true", help="Use minimal fallback citation formatting")
     args = parser.parse_args()
+
+if args.zotero:
+    citation_mode = "zotero"
+elif args.citeproc:
+    citation_mode = "citeproc"
+elif args.minimal:
+    citation_mode = "minimal"
+else:
+    citation_mode = "minimal"
+print(f"🧾 Citation mode set to: {citation_mode}")
+
 
     import platform
 
