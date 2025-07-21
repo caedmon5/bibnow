@@ -240,12 +240,16 @@ def fetch_formatted_citation_from_group(group_id, item_key, style="chicago-autho
 
 def generate_citation(entry, mode="minimal", zotero_key=None, zotero_group_key=None):
     if mode == "zotero":
+        citation = None
         if zotero_group_key:
-            return fetch_formatted_citation_from_group(ZOTERO_GROUP_ID, zotero_group_key)
+            citation = fetch_formatted_citation_from_group(ZOTERO_GROUP_ID, zotero_group_key)
         elif zotero_key:
-            return fetch_formatted_citation(ZOTERO_USER_ID, zotero_key)
+            citation = fetch_formatted_citation(ZOTERO_USER_ID, zotero_key)
         if citation:
             return citation
+        else:
+            print("⚠️ No formatted citation returned — falling back to minimal style.")
+
     if mode == "citeproc":
         return f"{get_responsible_party(entry)} ({extract_year(entry)}). *{entry.get('title', '')}*"
     return f"{get_responsible_party(entry)} ({extract_year(entry)}). {entry.get('title', '')}"
