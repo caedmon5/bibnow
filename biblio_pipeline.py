@@ -467,7 +467,10 @@ def main(text, commit=False, citation_mode="minimal"):
     for bib in entries:
         citekey = generate_citekey(bib)
         print(f"\n✅ Parsed citekey: {citekey}")
+## Dry-run block
         if not commit:
+            zotero_key = None
+            formatted_citation = None
             print("🟡 Dry-run mode. No Zotero upload or file write.")
             print(json.dumps(bib, indent=2))
             filename = generate_filename(bib)
@@ -477,9 +480,10 @@ def main(text, commit=False, citation_mode="minimal"):
                 md = build_markdown(
                     bib,
                     citekey=citekey,
-                    zotero_key=key,
+                    zotero_key=zotero_key,
                     citation_mode=citation_mode,
-                    zotero_group_key=group_key
+                    zotero_group_key=group_key,
+                    formatted_citation=formatted_citation
                 )
             else:
                 md = build_markdown(
