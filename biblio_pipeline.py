@@ -347,8 +347,10 @@ def fetch_formatted_citation_from_group(group_id, item_key, style="chicago-autho
     return None
 
 
-def zotero_delete_group_item(group_id, item_key):
+def zotero_delete_group_item(group_id, item_key, version=None):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY}
+    if version:
+            headers['If-Unmodified-Since-Version'] = str(version)
     url = f"https://api.zotero.org/groups/{group_id}/items/{item_key}"
     r = requests.delete(url, headers=headers)
     if r.status_code == 204:
@@ -466,7 +468,8 @@ def main(text, commit=False, citation_mode="minimal"):
                 if group_status in [200, 201] and 'successful' in group_resp and '0' in group_resp['successful']:
                     group_item = group_resp['successful']['0']
                     group_key = group_item['key']
-                    group_items_to_delete.append(group_key)
+                    group_version = group_item['version']
+                    group_items_to_delete.append((group_key, group_version))
                     print(f"🌐 Group upload successful (Key: {group_key})")
 
                     time.sleep(1.5)
@@ -492,8 +495,8 @@ def main(text, commit=False, citation_mode="minimal"):
 
     if commit and group_items_to_delete:
         print(f"🧹 Cleaning up {len(group_items_to_delete)} group item(s)...")
-        for gkey in group_items_to_delete:
-            zotero_delete_group_item(ZOTERO_GROUP_ID, gkey)
+        for gkey, version in group_items_to_delete:
+            zotero_delete_group_item(ZOTERO_GROUP_ID, gkey, version)
 
 
 if __name__ == "__main__":
