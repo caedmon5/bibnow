@@ -201,48 +201,42 @@ def parse_bibtex(bibtex):
         entry["school"] = entry.get("school", "") or entry.get("institution", "")
     return entry
 
-def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
-    """
-    Queries Zotero API for a preformatted CSL citation (e.g. Chicago Author–Date).
-    Includes an initial wait and retry-on-404 strategy to allow for Zotero propagation lag.
-    """
+def fetch_formatted_citation_from_group(group_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
     import time
+    from html import unescape
+    import re
+
     headers = {"Accept": "text/html"}
-    url = f"https://www.zotero.org/users/{user_id}/items/{item_key}?format=bib&style={style}"
+    url = f"https://api.zotero.org/groups/{group_id}/items/{item_key}?format=bib&style={style}"
 
     for attempt in range(retries):
         r = requests.get(url, headers=headers)
         body = r.text.strip()
 
-        # 1. Detect fallback HTML
+        # Step 1: detect fallback HTML
         if "<html" in body.lower():
             print(f"⏳ CSL citation not ready (attempt {attempt + 1}), retrying in {delay}s...")
             time.sleep(delay)
             continue
 
-## 2. Valid 200 -- try to extract and decode
+        # Step 2: try to extract formatted citation
         if r.status_code == 200:
-            from html import unescape
-            import re
-
-            # Extract inner content
             match = re.search(r'<div class="csl-entry">(.*?)</div>', body, re.DOTALL)
             if match:
-                raw_citation = match.group(1)
-                return unescape(raw_citation.strip())
+                return unescape(match.group(1).strip())
             return unescape(body)
 
-## step 3. handle 404 retry
         elif r.status_code == 404:
             if attempt < retries - 1:
-                print(f"⏳ Citation not yet available (attempt {attempt + 1}), retrying in {delay}s...")
+                print(f"⏳ Citation not yet available from group (attempt {attempt + 1}), retrying in {delay}s...")
                 time.sleep(delay)
         else:
-            print(f"⚠️ Zotero citation fetch failed with status: {r.status_code}")
+            print(f"⚠️ Group citation fetch failed with status: {r.status_code}")
             return None
 
-    print("⚠️ Zotero citation not available after retries.")
+    print("⚠️ Group citation not available after retries.")
     return None
+
 
 def generate_citation(entry, mode="minimal", zotero_key=None, zotero_group_key=None):
     if mode == "zotero":
