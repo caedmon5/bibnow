@@ -212,8 +212,17 @@ def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", ret
 
     for attempt in range(retries):
         r = requests.get(url, headers=headers)
+        body = r.text.strip()
+
+        # Detect fallback HTML
+        if "<html" in body.lower():
+            print(f"⏳ CSL citation not ready (attempt {attempt + 1}), retrying in {delay}s...")
+            time.sleep(delay)
+            continue
+
+
         if r.status_code == 200:
-            return r.text.strip()
+            return body
         elif r.status_code == 404:
             if attempt < retries - 1:
                 print(f"⏳ Citation not yet available (attempt {attempt + 1}), retrying in {delay}s...")
