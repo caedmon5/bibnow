@@ -525,7 +525,6 @@ def main(text, commit=False, citation_mode="minimal"):
                     formatted_citation=formatted_citation
                 )
                 print(f"✅ Zotero upload successful (Key: {key})")
-                md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
 
                 citekey = generate_citekey(bib)
