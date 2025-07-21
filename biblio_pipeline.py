@@ -207,7 +207,7 @@ def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", ret
     Includes an initial wait and retry-on-404 strategy to allow for Zotero propagation lag.
     """
     import time
-    headers = {"Accept": "application/x-bibtex"}
+    headers = {"Accept": "text/html"}
     url = f"https://www.zotero.org/users/{user_id}/items/{item_key}?format=bib&style={style}"
 
     for attempt in range(retries):
@@ -351,7 +351,7 @@ def zotero_upload_to_group(entry):
 def fetch_formatted_citation_from_group(group_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
     import time
     headers = {"Accept": "text/html"}
-    url = f"https://www.zotero.org/groups/{group_id}/items/{item_key}?format=bib&style={style}"
+    url = f"https://api.zotero.org/groups/{group_id}/items/{item_key}?format=bib&style={style}"
 
     for attempt in range(retries):
         r = requests.get(url, headers=headers)
