@@ -470,6 +470,7 @@ def main(text, commit=False, citation_mode="minimal"):
 ## Dry-run block
         if not commit:
             zotero_key = None
+            group_key = None
             formatted_citation = None
             print("🟡 Dry-run mode. No Zotero upload or file write.")
             print(json.dumps(bib, indent=2))
