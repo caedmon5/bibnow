@@ -1,16 +1,16 @@
 @bibtex
-@article{bell2022acousticstyle,
-  title        = {Acoustic Style and Identity in Digital Communication},
-  author       = {Bell, Adam and Okoye, Chinyere and Wong, David},
-  journal      = {New Media and Society},
-  year         = {2022},
-  volume       = {24},
-  number       = {7},
-  pages        = {1402--1420},
-  url          = {https://journals.sagepub.com/doi/full/10.1177/14614448211034567},
-  doi          = {10.1177/14614448211034567},
-  abstract     = {This study examines the use of acoustic features in voice messaging apps to construct identity and style among young multilingual adults. It draws on discourse analysis and speech signal processing to identify affective and group-aligned variation.},
-  keywords     = {Digital Sociolinguistics, Voice Messaging, Identity Construction, Acoustic Variation},
-  note         = {Generated abstract | Keywords supplemented by AI | Reason for interest: acoustic and discourse analysis of multilingual identity}
+@article{miller2020soundstyle,
+  title        = {Sound Style and Self: Phonetic Variation in Online Audio Diaries},
+  author       = {Miller, Rebecca and Al-Khatib, Zain},
+  journal      = {Journal of Linguistic Anthropology},
+  year         = {2020},
+  volume       = {30},
+  number       = {1},
+  pages        = {58--75},
+  url          = {https://anthrosource.onlinelibrary.wiley.com/doi/10.1111/jola.12250},
+  doi          = {10.1111/jola.12250},
+  abstract     = {This article investigates how speakers use phonetic variation to perform identity in asynchronous voice-recorded diaries. The authors find that users stylise pitch, vowel backing, and temporal modulation as forms of personal and social alignment.},
+  keywords     = {Sociophonetics, Voice Diaries, Identity, Temporal Modulation},
+  note         = {Generated abstract | Keywords supplemented by AI | Reason for interest: longitudinal self-presentation in digital voice media}
 }
 @end

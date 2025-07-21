@@ -379,7 +379,7 @@ def zotero_delete_group_item(group_id, item_key, version=None):
     else:
         print(f"⚠️ Failed to delete group item {item_key}: {r.status_code}")
 
-def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal", zotero_group_key=None):
+def build_markdown(entry, citekey=None, zotero_key=None, citation_mode="minimal", zotero_group_key=None, formatted_citation=None):
     zotero_url = f"https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
     info = parse_responsible_party(entry)
     lastname_readable = f"{info['first_lastname']} et al" if info["multiple"] else info["first_lastname"]
@@ -405,8 +405,7 @@ autoupdate: true
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
 ## Chicago Author-Year Bibliography
-{generate_citation(entry, citation_mode, zotero_key, zotero_group_key)}
-
+{formatted_citation or generate_citation(entry, citation_mode, zotero_key, zotero_group_key)}
 
 ## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
 {entry.get('abstract', 'None supplied')}
@@ -490,7 +489,7 @@ def main(text, commit=False, citation_mode="minimal"):
                     citation_mode=citation_mode
                 )
             print(md)
-
+## the commit block
         else:
             status, resp = zotero_upload(bib)
             if status in [200, 201] and 'successful' in resp and '0' in resp['successful']:
@@ -513,7 +512,14 @@ def main(text, commit=False, citation_mode="minimal"):
                     print(f"⚠️ Group upload failed — using fallback citation.")
                     formatted_citation = generate_citation(bib, mode="minimal")
 
-                md = build_markdown(bib, citekey=citekey, zotero_key=key, citation_mode=citation_mode)
+                md = build_markdown(
+                    bib,
+                    citekey=citekey,
+                    zotero_key=key,
+                    citation_mode=citation_mode,
+                    zotero_group_key=group_key,
+                    formatted_citation=formatted_citation
+                )
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
