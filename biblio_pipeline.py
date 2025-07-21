@@ -214,15 +214,25 @@ def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", ret
         r = requests.get(url, headers=headers)
         body = r.text.strip()
 
-        # Detect fallback HTML
+        # 1. Detect fallback HTML
         if "<html" in body.lower():
             print(f"⏳ CSL citation not ready (attempt {attempt + 1}), retrying in {delay}s...")
             time.sleep(delay)
             continue
 
-
+## 2. Valid 200 -- try to extract and decode
         if r.status_code == 200:
-            return body
+            from html import unescape
+            import re
+
+            # Extract inner content
+            match = re.search(r'<div class="csl-entry">(.*?)</div>', body, re.DOTALL)
+            if match:
+                raw_citation = match.group(1)
+                return unescape(raw_citation.strip())
+            return unescape(body)
+
+## step 3. handle 404 retry
         elif r.status_code == 404:
             if attempt < retries - 1:
                 print(f"⏳ Citation not yet available (attempt {attempt + 1}), retrying in {delay}s...")
