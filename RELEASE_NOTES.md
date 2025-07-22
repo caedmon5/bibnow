@@ -1,40 +1,27 @@
-# 📦 Release Notes – Version 1.1.0
+# 📦 Release Notes – Version 0.2.1
 
 ## 🚀 New Features
 
-- 🎭 **Expanded Zotero Type Mapping**
-  - Added support for BibTeX types: `@film`, `@hearing`, `@case`, `@poster`, `@presentation`, `@blog`
-  - Improved fallback metadata (e.g., use `court`, `institution`, `director` when `author` is absent)
+- 🧾 **Baseline Citation Support**
+  - Adds a new fallback citation line to markdown output: `Responsible Party. Year. Title.`
+  - Works even when CSL output is not available
+- 📄 **YAML Metadata Enhancements**
+  - New YAML fields:
+    - `responsible_party`
+    - `record_title`
+    - `record_year`
 
-- 🧠 **Smarter Citekey and Filename Generation**
-  - Citekeys follow `LastnameYYYYFirstSecondThird`
-  - Markdown filenames follow `LN Lastname et al YYYY Title.md`
+## 🛠 Improvements
 
-- 🪵 **Enhanced Markdown Output**
-  - Correctly formats YAML frontmatter, Chicago-style bibliography, and wikilinked keywords
-  - Gracefully fills missing values with "TBD" to prevent rendering issues
+- Markdown output is more robust
+- Lays groundwork for future field sanitisation (e.g. skipping invalid BibTeX fields)
 
-## 🛠 Fixes and Improvements
+## 🔧 Internals
 
-- 🛠 **Zotero Upload**
-  - Removed deprecated `year` field (was causing `Invalid property 'year'` errors)
-  - All dates now sent via `date` field only
-
-- 🧱 **Parser Robustness**
-  - More reliable BibTeX parsing from full or block-captured clipboard input
-  - Multi-author detection now reliably triggers `et al` in filenames
-
-- 📄 **Markdown Output**
-  - Fixed broken or unaligned abstract/keyword sections in YAML or Markdown
-  - Introduced fallback handling for citation logic when bibliographic fields are sparse
-
-## ❗ Known Issues
-
-- 🎬 Some exotic BibTeX types like `@manual`, `@software` not yet supported
-- 🧑‍⚖️ `@case` and `@hearing` entries may require title-casing or manual verification
-- 🖋 Output bibliography entries still assume English Chicago-style formatting
+- Supports clean DRY-RUN previews
+- Compatible with all v0.2.0-format notes and filenames
 
 ---
 
-Released: 2025-06-22  
+Released: 2025-07-22
 Maintainer: Daniel Paul O'Donnell
