@@ -290,6 +290,10 @@ def build_markdown(entry, citekey=None, zotero_key=None, formatted_citation=None
     title_words = re.findall(r'\b\w+\b', entry.get("title", ""))
     slug = " ".join(re.sub(r"[^\w\s]", "", word).capitalize() for word in title_words[:4])
     aliases = f'"{lastname_readable} {year} {slug}","{lastname_readable} {year}", "{citekey}"'
+    # Extract additional metadata
+    responsible_party = get_responsible_party(entry)
+    record_title = entry.get("title", "Untitled")
+    record_year = extract_year(entry)
     callnumber = f"{entry.get('callnumber', '')}"
 
     md = f"""---
@@ -299,13 +303,16 @@ type: "{entry.get('ENTRYTYPE', 'article')}"
 zotero_key: "{zotero_key or ''}"
 zotero_url: "{zotero_url}"
 zotero_library_id: {ZOTERO_USER_ID}
+responsible_party: "{responsible_party}"
+record_title: "{record_title}"
+record_year: "{record_year}"
 callnumber: "{callnumber}"
 autoupdate: true
 ---
 # Supplied Content <span title="This section is supplied by Zotero and should not be edited here. It contains bibliographic information about the item and should be edited, if necessary, in Zotero as edits made here are not synced back to Zotero and will be overwritten durimg updates.">ⓘ</span>
 
-## Chicago Author-Year Bibliography
-{formatted_citation or '⚠️ Citation unavailable.'}
+## Baseline Citation
+{responsible_party}. {record_year}. {record_title}.
 
 
 ## Abstract <span title="This field stores a supplied abstract and should not be edited here. User-supplied notes and summaries should go in a separate section below the edit line.">ⓘ</span>
