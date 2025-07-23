@@ -194,31 +194,6 @@ def parse_bibtex(bibtex):
         entry["school"] = entry.get("school", "") or entry.get("institution", "")
     return entry
 
-def fetch_formatted_citation(user_id, item_key, style="chicago-author-date", retries=3, delay=1.5):
-    """
-    Queries Zotero API for a preformatted CSL citation (e.g. Chicago Author–Date).
-    Includes an initial wait and retry-on-404 strategy to allow for Zotero propagation lag.
-    """
-    import time
-    headers = {"Accept": "text/html"}
-    url = f"https://www.zotero.org/users/{user_id}/items/{item_key}?format=bib&style={style}"
-
-    for attempt in range(retries):
-        r = requests.get(url, headers=headers)
-        if r.status_code == 200:
-            return r.text.strip()
-        elif r.status_code == 404:
-            if attempt < retries - 1:
-                print(f"⏳ Citation not yet available (attempt {attempt + 1}), retrying in {delay}s...")
-                time.sleep(delay)
-        else:
-            print(f"⚠️ Zotero citation fetch failed with status: {r.status_code}")
-            return None
-
-    print("⚠️ Zotero citation not available after retries.")
-    return None
-
-
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
     item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
