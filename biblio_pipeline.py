@@ -388,9 +388,7 @@ def main(text, commit=False):
             if status in [200, 201] and 'successful' in resp and '0' in resp['successful']:
                 zotero_item = resp['successful']['0']
                 key = zotero_item['key']
-                time.sleep(1.5)  # Wait before first attempt (helps with API propagation)
-                formatted_citation = fetch_formatted_citation(ZOTERO_USER_ID, key)
-                md = build_markdown(bib, citekey=citekey, zotero_key=key, formatted_citation=formatted_citation)
+                md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 print(f"✅ Zotero upload successful (Key: {key})")
                 md = build_markdown(bib, citekey=citekey, zotero_key=key)
                 year = extract_year(bib)
