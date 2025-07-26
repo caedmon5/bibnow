@@ -25,19 +25,16 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
         if field in allowed_fields:
             sanitized[field] = value
         elif field in CANONICAL_EXTRA_FIELDS:
-            extra_lines.append(f"{field}: {value}")
-        else:
-            extra_lines.append(f"{field}: {value}")
+            extra_fields[field] = value
+        elif field not in ("ENTRYTYPE", "ID"):
+            extra_fields[field] = value
             if verbose:
                 print(f"[ZoteroSanitize] Moved field '{field}' to extra.")
 
     if "extra" in entry and entry["extra"]:
-        extra_lines.insert(0, entry["extra"])  # Preserve original extra
+        extra_fields["note"] = entry["extra"]
 
-    if extra_lines:
-        sanitized["extra"] = "\n".join(extra_lines)
-
-    return sanitized
+    return sanitized, extra_fields
 
 def detect_platform():
     """
