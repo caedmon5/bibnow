@@ -236,52 +236,30 @@ def zotero_upload(entry):
     item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
     creators = [{"creatorType": "author", "name": entry.get("author", "")}]
 
-    metadata = [{
+    # --- [START METADATA CONSTRUCTION] ---
+    clean_entry, extra_fields = sanitize_entry_for_zotero(entry)
+    
+    metadata = {
         "itemType": item_type,
-        "title": entry.get("title", ""),
-        "creators": creators,
-        "date": entry.get("date", entry.get("year", "")),
-        # "year": extract_year(entry),
-        "url": entry.get("url", ""),
-        "abstractNote": entry.get("abstract", ""),
-        "extra": entry.get("note", ""),
-        "tags": [{"tag": k.strip()} for k in entry.get("keywords", "").split(",") if k.strip()],
-        "publicationTitle": entry.get("journal", ""),
-        "volume": entry.get("volume", ""),
-        "issue": entry.get("number", entry.get("issue", "")),
-        "pages": entry.get("pages", ""),
-        "publisher": entry.get("publisher", ""),
-        "DOI": entry.get("doi", entry.get("DOI", "")),
-        "reportType": entry.get("type", "") if item_type == "report" else "",
-        "thesisType": "PhD Thesis" if entry.get("ENTRYTYPE") == "phdthesis" else (
-            "Master's Thesis" if entry.get("ENTRYTYPE") == "mastersthesis" else ""
-        ),
-        "institution": entry.get("institution", "") if item_type == "report" else "",
-        "university": entry.get("school", "") if item_type == "thesis" else "",
-        "court": entry.get("court", "") if item_type == "case" else "",
-        "reporter": entry.get("reporter", "") if item_type == "case" else "",
-        "committee": entry.get("committee", "") if item_type == "hearing" else "",
-        "billNumber": entry.get("billnumber", "") if item_type == "bill" else "",
-        "session": entry.get("session", "") if item_type == "bill" else "",
-        "legislativeBody": entry.get("legislativebody", "") if item_type == "bill" else ""
-}]
+        "creators": [{"creatorType": "author", "name": clean_entry.get("author", "")}]
+    }
 
-    # Additional fields for custom types
-    item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
-    metadata[0]["itemType"] = item_type
-
-    if item_type == "case":
-        metadata[0]["reporter"] = entry.get("reporter", "")
-        metadata[0]["court"] = entry.get("court", "")
-    elif item_type == "hearing":
-        metadata[0]["institution"] = entry.get("institution", "")
-        metadata[0]["committee"] = entry.get("committee", "")
-    elif item_type == "bill":
-        metadata[0]["billNumber"] = entry.get("billnumber", "")
-        metadata[0]["session"] = entry.get("session", "")
-        metadata[0]["legislativeBody"] = entry.get("legislativebody", "")
-
-
+    # Only include allowed fields (excluding creators, handled above)
+    for field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
+        if field in clean_entry and field not in ("itemType", "creators"):
+            metadata[field] = clean_entry[field]
+    
+    # Add extra field, if there are moved entries
+    if extra_fields:
+        extra_lines = [f"{key}: {value}" for key, value in extra_fields.items()]
+        metadata["extra"] = "\n".join(extra_lines)
+    elif "note" in entry:
+        metadata["extra"] = entry["note"]
+    
+    # Wrap in list for Zotero upload format
+    metadata = [metadata]
+    # --- [END METADATA CONSTRUCTION] ---
+    
 
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
