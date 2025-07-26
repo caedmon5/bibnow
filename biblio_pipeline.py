@@ -11,6 +11,41 @@ CANONICAL_EXTRA_FIELDS = {
     "Editorial Director", "Illustrator"
 }
 
+BIBTEX_TO_ZOTERO_FIELD = {
+    "title": "title",
+    "booktitle": "publicationTitle",
+    "journal": "publicationTitle",
+    "year": "date",
+    "month": "date",
+    "day": "date",
+    "doi": "DOI",
+    "url": "url",
+    "volume": "volume",
+    "number": "issue",
+    "pages": "pages",
+    "publisher": "publisher",
+    "institution": "institution",
+    "school": "university",
+    "edition": "edition",
+    "series": "series",
+    "type": "type",
+    "note": "extra",
+    "abstract": "abstractNote",
+    "address": "place"
+    # 'author' and 'editor' intentionally omitted
+}
+
+def normalize_bibtex_fields(entry):
+    normalized = {}
+    for key, value in entry.items():
+        if key in ("author", "editor"):  # leave for creator logic
+            normalized[key] = value
+        else:
+            norm_key = BIBTEX_TO_ZOTERO_FIELD.get(key, key)
+            normalized[norm_key] = value
+    return normalized
+
+
 
 def sanitize_entry_for_zotero(entry, item_type, verbose=False):
     """
@@ -234,7 +269,8 @@ def zotero_upload(entry):
     creators = [{"creatorType": "author", "name": entry.get("author", "")}]
 
     # --- [START METADATA CONSTRUCTION] ---
-    clean_entry, extra_fields = sanitize_entry_for_zotero(entry, item_type)
+    normalized_entry = normalize_bibtex_fields(entry)
+    clean_entry, extra_fields = sanitize_entry_for_zotero(normalized_entry, item_type)
     
     metadata = {
         "itemType": item_type,
