@@ -1,6 +1,8 @@
 import requests, json, os, re, time, bibtexparser
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAULT_PATH
 from bibtexparser.bparser import BibTexParser
+from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
+
 
 def detect_platform():
     """
