@@ -19,7 +19,7 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
     """
     allowed_fields = ZOTERO_ALLOWED_FIELDS.get(item_type, [])
     sanitized = {}
-    extra_fields = []
+    extra_fields = {}
 
     for field, value in entry.items():
         if field in allowed_fields:
