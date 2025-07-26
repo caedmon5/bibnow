@@ -3,6 +3,41 @@ from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_USERNAME, OBSIDIAN_VAU
 from bibtexparser.bparser import BibTexParser
 from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
 
+CANONICAL_EXTRA_FIELDS = {
+    "DOI", "PMID", "PMCID", "Status", "Submitted Date", "Reviewed Title",
+    "Chapter Number", "Archive Place", "Event Date", "Event Place",
+    "Original Date", "Original Title", "Original Publisher",
+    "Original Publisher Place", "Original Author", "Director",
+    "Editorial Director", "Illustrator"
+}
+
+
+def sanitize_entry_for_zotero(entry, item_type, verbose=False):
+    """
+    Filters a Zotero entry to only include valid fields for the given item_type.
+    Invalid fields are moved to the `extra` field, using canonical Zotero labels if possible.
+    """
+    allowed_fields = ZOTERO_ALLOWED_FIELDS.get(item_type, [])
+    sanitized = {}
+    extra_lines = []
+
+    for field, value in entry.items():
+        if field in allowed_fields:
+            sanitized[field] = value
+        elif field in CANONICAL_EXTRA_FIELDS:
+            extra_lines.append(f"{field}: {value}")
+        else:
+            extra_lines.append(f"{field}: {value}")
+            if verbose:
+                print(f"[ZoteroSanitize] Moved field '{field}' to extra.")
+
+    if "extra" in entry and entry["extra"]:
+        extra_lines.insert(0, entry["extra"])  # Preserve original extra
+
+    if extra_lines:
+        sanitized["extra"] = "\n".join(extra_lines)
+
+    return sanitized
 
 def detect_platform():
     """
