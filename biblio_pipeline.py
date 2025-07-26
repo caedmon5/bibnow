@@ -237,7 +237,7 @@ def zotero_upload(entry):
     creators = [{"creatorType": "author", "name": entry.get("author", "")}]
 
     # --- [START METADATA CONSTRUCTION] ---
-    clean_entry, extra_fields = sanitize_entry_for_zotero(entry)
+    clean_entry, extra_fields = sanitize_entry_for_zotero(entry, item_type)
     
     metadata = {
         "itemType": item_type,
