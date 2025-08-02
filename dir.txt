@@ -1,7 +1,316 @@
-README.MD
-config.py
-dir.txt
-input.txt
-legacy_bibtex
-requirements.txt
-vendor
+.:
+total 27
+-rw-rw----. 1 u0_a269 media_rw  521 Aug  2 16:52 README.md
+-rw-rw----. 1 u0_a269 media_rw  271 Jul  4 08:47 config.py
+-rw-rw----. 1 u0_a269 media_rw    0 Aug  2 16:54 dir.txt
+-rw-rw----. 1 u0_a269 media_rw 1008 Aug  1 20:04 input.txt
+drwxrws---. 4 u0_a269 media_rw 3452 Aug  2 16:43 legacy_bibtex
+-rw-rw----. 1 u0_a269 media_rw  142 Jul  6 15:04 requirements.txt
+drwxrws---. 2 u0_a269 media_rw 3452 Aug  2 16:48 v2
+drwxrws---. 3 u0_a269 media_rw 3452 Jul  4 10:38 vendor
+
+./legacy_bibtex:
+total 63
+-rw-rw----. 1 u0_a269 media_rw 11367 Jul 24 17:58 INSTRUCTIONS.MD
+-rw-rw----. 1 u0_a269 media_rw   678 Jul 22 07:43 RELEASE_NOTES.md
+drwxrws---. 2 u0_a269 media_rw  3452 Aug  2 16:43 __pycache__
+-rw-rw----. 1 u0_a269 media_rw 16383 Jul 24 17:58 biblio_pipeline.py
+drwxrws---. 3 u0_a269 media_rw  3452 Aug  2 16:43 output
+-rw-rw----. 1 u0_a269 media_rw  7706 Jul 22 07:43 output.html
+-rw-rw----. 1 u0_a269 media_rw  4706 Jun 21 21:35 output.txt
+-rw-rw----. 1 u0_a269 media_rw   624 Jul 22 07:43 test_zotero_citation_fetch.py
+-rw-rw----. 1 u0_a269 media_rw  1751 Jun 19 06:48 viking_sample.txt
+
+./legacy_bibtex/__pycache__:
+total 32
+-rw-rw----. 1 u0_a269 media_rw  7087 Jul  4 08:47 bib_formatter.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw 13149 Jun 21 08:53 biblio_pipeline.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw   469 Jun 19 07:42 config.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw   290 Jun 19 07:07 config.cpython-313.pyc
+
+./legacy_bibtex/output:
+total 44
+drwxrws---. 2 u0_a269 media_rw 57344 Aug  1 20:04 biblio-log
+
+./legacy_bibtex/output/biblio-log:
+total 1236
+-rw-rw----. 1 u0_a269 media_rw 2466 Jul 11 09:13 biblio_log_Abid2021PersistentAntiMuslimBias_20250711-091356.json
+-rw-rw----. 1 u0_a269 media_rw 2740 Jul  7 06:59 biblio_log_Affairs2023OchaOccupiedPalestinianTerritory_20250707-065903.json
+-rw-rw----. 1 u0_a269 media_rw 4420 Jul 13 14:43 biblio_log_Ahmad2020TheLeadingCausesOf_20250713-144350.json
+-rw-rw----. 1 u0_a269 media_rw 4197 Jul 10 21:02 biblio_log_Ahrens2022HowToTakeSmart_20250710-210252.json
+-rw-rw----. 1 u0_a269 media_rw 5278 Aug  1 09:47 biblio_log_Andersen2025EveryScientificEmpireComes_20250801-094709.json
+-rw-rw----. 1 u0_a269 media_rw 2087 Jul 17 00:48 biblio_log_Anderson2004TheSpectreOfComparisons_20250717-074813.json
+-rw-rw----. 1 u0_a269 media_rw 3384 Jun 21 11:13 biblio_log_Andy2017TheTooPerfect_20250621-111326.json
+-rw-rw----. 1 u0_a269 media_rw 3411 Jun 21 11:57 biblio_log_Andy2017TheTooPerfect_20250621-115706.json
+-rw-rw----. 1 u0_a269 media_rw 3384 Jun 21 10:37 biblio_log_AndyXXXXTheTooPerfect_20250621-103749.json
+-rw-rw----. 1 u0_a269 media_rw 2695 Jul 24 18:39 biblio_log_Anonymous1966PopcornFriendOrFoe_20250724-183903.json
+-rw-rw----. 1 u0_a269 media_rw 2926 Aug  1 07:58 biblio_log_Arnason2005AxialCivilizationsAndWorld_20250801-075845.json
+-rw-rw----. 1 u0_a269 media_rw 3904 Jul 17 06:26 biblio_log_Audin2025CybermeneuticsAnthologyTool_20250717-132658.json
+-rw-rw----. 1 u0_a269 media_rw 5654 Jun 24 08:00 biblio_log_Barrett2025JusticeDeptLeader_20250624-080042.json
+-rw-rw----. 1 u0_a269 media_rw 4141 Jul 17 06:18 biblio_log_Bauchu2025GeoDatabasesOnPaper_20250717-131857.json
+-rw-rw----. 1 u0_a269 media_rw 3629 Jul 31 07:56 biblio_log_Baude2017TheJudgmentPower_20250731-075647.json
+-rw-rw----. 1 u0_a269 media_rw 3659 Jul  6 15:52 biblio_log_Beam2025SheWantedToSave_20250706-175233.json
+-rw-rw----. 1 u0_a269 media_rw 2813 Aug  1 07:58 biblio_log_Bellah2011ReligionInHumanEvolution_20250801-075844.json
+-rw-rw----. 1 u0_a269 media_rw 3184 Jul 22 10:29 biblio_log_Berardinetti2025BeyondTheClassroomMuseum_20250722-102927.json
+-rw-rw----. 1 u0_a269 media_rw 3199 Jul 22 10:43 biblio_log_Berardinetti2025BeyondTheClassroomMuseum_20250722-104348.json
+-rw-rw----. 1 u0_a269 media_rw 2019 Jul 17 00:48 biblio_log_Birmingham2003AConciseHistoryOf_20250717-074812.json
+-rw-rw----. 1 u0_a269 media_rw 4477 Jun 25 07:57 biblio_log_Boffey2025KillingMachinesHow_20250625-075707.json
+-rw-rw----. 1 u0_a269 media_rw 4924 Jul 20 03:14 biblio_log_Bradsher2020ASoaringMonumentTo_20250720-101456.json
+-rw-rw----. 1 u0_a269 media_rw 3985 Jun 23 23:05 biblio_log_Brooks2024HowToBe_20250623-230509.json
+-rw-rw----. 1 u0_a269 media_rw 4979 Jul 18 00:48 biblio_log_Brooks2025TrumpIsWinningThe_20250718-074834.json
+-rw-rw----. 1 u0_a269 media_rw 2764 Jul  7 06:59 biblio_log_Btselem2024StatisticsOnCasualtiesIn_20250707-065902.json
+-rw-rw----. 1 u0_a269 media_rw 3126 Jul 31 09:46 biblio_log_Buckingham2007BeyondTechnologyChildrenS_20250731-094618.json
+-rw-rw----. 1 u0_a269 media_rw 4574 Jul 24 08:00 biblio_log_Casello2025AnHonestLookAt_20250724-080051.json
+-rw-rw----. 1 u0_a269 media_rw 4647 Jul 24 08:08 biblio_log_Casello2025AnHonestLookAt_20250724-080834.json
+-rw-rw----. 1 u0_a269 media_rw 4332 Jul 20 01:41 biblio_log_Castle2025A900YearOld_20250720-084102.json
+-rw-rw----. 1 u0_a269 media_rw 2471 Jul  8 17:40 biblio_log_Chasan2024ManDiesAfterCrawling_20250708-174046.json
+-rw-rw----. 1 u0_a269 media_rw 3681 Jul 10 17:43 biblio_log_Chayka2025AIIsHomogenizing_20250710-174352.json
+-rw-rw----. 1 u0_a269 media_rw 4797 Jul 24 17:56 biblio_log_Chelsea2025MeetTheGlitteringMitford_20250724-175650.json
+-rw-rw----. 1 u0_a269 media_rw 2404 Jul 24 18:39 biblio_log_Cinemas1968InternalMemoOnConcessions_20250724-183903.json
+-rw-rw----. 1 u0_a269 media_rw 5405 Jul 25 08:01 biblio_log_Closson2025DidColumbiaSDeal_20250725-080145.json
+-rw-rw----. 1 u0_a269 media_rw 3265 Jul  6 15:05 biblio_log_Colin2025ThatDroppedCallWith_20250706-170505.json
+-rw-rw----. 1 u0_a269 media_rw 2676 Jul  7 06:59 biblio_log_Contributors2023CasualtiesOfTheIsraeli_20250707-065905.json
+-rw-rw----. 1 u0_a269 media_rw 2316 Jul 30 12:18 biblio_log_Contributors2024GradingInEducation_20250730-121858.json
+-rw-rw----. 1 u0_a269 media_rw 2558 Jul  7 06:59 biblio_log_Contributors2024IsraeliInvasionOfThe_20250707-065904.json
+-rw-rw----. 1 u0_a269 media_rw 1804 Aug  1 07:58 biblio_log_Contributors2025AxialAgeWikipediaThe_20250801-075846.json
+-rw-rw----. 1 u0_a269 media_rw 3210 Jul 12 08:41 biblio_log_Contributors2025DuvergerSLawWikipedia_20250712-084128.json
+-rw-rw----. 1 u0_a269 media_rw 1819 Aug  1 07:58 biblio_log_Contributors2025KarlJaspersWikipediaThe_20250801-075846.json
+-rw-rw----. 1 u0_a269 media_rw 1836 Aug  1 07:58 biblio_log_Contributors2025RobertNBellahWikipedia_20250801-075847.json
+-rw-rw----. 1 u0_a269 media_rw 2422 Jul  8 17:40 biblio_log_Couto2024PersonDiesAfterFalling_20250708-174045.json
+-rw-rw----. 1 u0_a269 media_rw 3259 Jul 17 02:43 biblio_log_Deilen2023EmergingFieldsInEasy_20250717-094346.json
+-rw-rw----. 1 u0_a269 media_rw 3537 Jul 17 02:43 biblio_log_Deilen2023UsingChatgptAsA_20250717-094348.json
+-rw-rw----. 1 u0_a269 media_rw 3248 Jul 28 08:39 biblio_log_Dey2025Over80OfCompanies_20250728-083947.json
+-rw-rw----. 1 u0_a269 media_rw 2060 Jul 17 00:48 biblio_log_Disney2009AHistoryOfPortugal_20250717-074816.json
+-rw-rw----. 1 u0_a269 media_rw 2768 Jul  4 07:06 biblio_log_Doe2021SocialMediaAnd_20250704-090612.json
+-rw-rw----. 1 u0_a269 media_rw 4526 Jul 23 07:45 biblio_log_Dunfield2025WhyWomenSReluctance_20250723-074502.json
+-rw-rw----. 1 u0_a269 media_rw 2975 Jul 30 12:18 biblio_log_Durm1993AnAIsNot_20250730-121855.json
+-rw-rw----. 1 u0_a269 media_rw 3110 Jul 12 08:41 biblio_log_Duverger1951LesPartisPolitiques_20250712-084128.json
+-rw-rw----. 1 u0_a269 media_rw 3097 Jul 12 08:41 biblio_log_Duverger1954PoliticalPartiesTheirOrganization_20250712-084129.json
+-rw-rw----. 1 u0_a269 media_rw 2662 Jul 30 12:18 biblio_log_Editors2024TheOriginOfGrades_20250730-121858.json
+-rw-rw----. 1 u0_a269 media_rw 4510 Jun 19 21:21 biblio_log_Edwards2025TiktokSSephora_20250619-212154.json
+-rw-rw----. 1 u0_a269 media_rw 4765 Jun 19 21:50 biblio_log_Edwards2025TiktokSSephora_20250619-215017.json
+-rw-rw----. 1 u0_a269 media_rw 2875 Aug  1 07:58 biblio_log_Eisenstadt1986TheOriginsAndDiversity_20250801-075844.json
+-rw-rw----. 1 u0_a269 media_rw 5652 Jun 23 07:47 biblio_log_Fausset2025AWhiteNationalist_20250623-074702.json
+-rw-rw----. 1 u0_a269 media_rw 3656 Jul  1 19:11 biblio_log_Flattery2023NothingSpecial_20250701-211119.json
+-rw-rw----. 1 u0_a269 media_rw 4406 Jul 10 21:02 biblio_log_Forte2022MastersOfCreativeNote_20250710-210217.json
+-rw-rw----. 1 u0_a269 media_rw 3039 Jul 22 10:29 biblio_log_Fox2025ModellingBookAuctionsCatalogues_20250722-102958.json
+-rw-rw----. 1 u0_a269 media_rw 3054 Jul 22 10:48 biblio_log_Fox2025ModellingBookAuctionsCatalogues_20250722-104825.json
+-rw-rw----. 1 u0_a269 media_rw 7109 Jun 26 06:47 biblio_log_Friesen2025AuthorWinsDefamation_20250626-064722.json
+-rw-rw----. 1 u0_a269 media_rw 5473 Jun 30 09:40 biblio_log_Friesen2025OutgoingUOf_20250630-114059.json
+-rw-rw----. 1 u0_a269 media_rw 4373 Aug  1 08:07 biblio_log_Frum2025TrumpSTariffDisaster_20250801-080702.json
+-rw-rw----. 1 u0_a269 media_rw 2034 Jul 17 00:48 biblio_log_Gallagher1983PortugalATwentiethCentury_20250717-074810.json
+-rw-rw----. 1 u0_a269 media_rw 3511 Jun 21 11:57 biblio_log_Ganson1957TheDaiVernon_20250621-115706.json
+-rw-rw----. 1 u0_a269 media_rw 3756 Aug  1 20:04 biblio_log_Ganz2009WhyDavidSometimesWins_20250801-200449.json
+-rw-rw----. 1 u0_a269 media_rw 5542 Jul 22 07:58 biblio_log_Garnett2025TheTroubleWithWanting_20250722-075848.json
+-rw-rw----. 1 u0_a269 media_rw 2880 Jun 27 19:47 biblio_log_Gavrilets2008DynamicsOfAlliance_20250627-194713.json
+-rw-rw----. 1 u0_a269 media_rw 3924 Jun 29 19:57 biblio_log_Gilliver2016TheMakingOf_20250629-215709.json
+-rw-rw----. 1 u0_a269 media_rw 4647 Jun 27 07:38 biblio_log_Globe2025HowToWin_20250627-073822.json
+-rw-rw----. 1 u0_a269 media_rw 3804 Jul 31 07:56 biblio_log_Goldsmith2018TheDepartmentalistPresident_20250731-075645.json
+-rw-rw----. 1 u0_a269 media_rw 4558 Jun 25 07:49 biblio_log_Goodley2025SecondStudyFinds_20250625-074923.json
+-rw-rw----. 1 u0_a269 media_rw 4061 Jun 21 08:29 biblio_log_Gopnik2025MasteringItThe_20250621-082956.json
+-rw-rw----. 1 u0_a269 media_rw 4061 Jun 21 10:37 biblio_log_Gopnik2025MasteringItThe_20250621-103748.json
+-rw-rw----. 1 u0_a269 media_rw 4061 Jun 21 11:13 biblio_log_Gopnik2025MasteringItThe_20250621-111324.json
+-rw-rw----. 1 u0_a269 media_rw 4089 Jun 21 11:57 biblio_log_Gopnik2025MasteringItThe_20250621-115705.json
+-rw-rw----. 1 u0_a269 media_rw 3382 Jul 10 08:07 biblio_log_Gosalvez blanco2025TheTalentedMsHighsmith_20250710-080702.json
+-rw-rw----. 1 u0_a269 media_rw 3222 Jul 10 08:07 biblio_log_Gosalvez blanco2025YouAreLivingWith_20250710-080702.json
+-rw-rw----. 1 u0_a269 media_rw 4637 Jul 22 17:02 biblio_log_Graham2025WhyWonTThe_20250722-170259.json
+-rw-rw----. 1 u0_a269 media_rw 4981 Jul 24 11:07 biblio_log_Grose2025TheBoyCrisisIs_20250724-110740.json
+-rw-rw----. 1 u0_a269 media_rw 2484 Jul  8 17:40 biblio_log_Gross2025ManDiesAtMilan_20250708-174044.json
+-rw-rw----. 1 u0_a269 media_rw 4055 Jun 27 07:20 biblio_log_Hameroff2014ConsciousnessMicrotubulesAnd_20250627-072024.json
+-rw-rw----. 1 u0_a269 media_rw 3364 Jul 17 02:43 biblio_log_Hansenschirra2020EasyLanguagePlusBalancing_20250717-094346.json
+-rw-rw----. 1 u0_a269 media_rw 2733 Jul 24 18:39 biblio_log_Harper1994PicturingThePastThe_20250724-183904.json
+-rw-rw----. 1 u0_a269 media_rw 3231 Jul  6 15:05 biblio_log_Herd2018AdministrativeBurdenPolicymakingBy_20250706-170507.json
+-rw-rw----. 1 u0_a269 media_rw 2703 Jul 11 09:13 biblio_log_Hickey2023AuditingElonMuskS_20250711-091355.json
+-rw-rw----. 1 u0_a269 media_rw 3414 Jul  4 09:25 biblio_log_History2018WorkingClassHistory_20250704-112558.json
+-rw-rw----. 1 u0_a269 media_rw 3374 Jul 22 10:29 biblio_log_History2025SmallGrantsBigOpportunities_20250722-102902.json
+-rw-rw----. 1 u0_a269 media_rw 3389 Jul 22 10:43 biblio_log_History2025SmallGrantsBigOpportunities_20250722-104323.json
+-rw-rw----. 1 u0_a269 media_rw 2661 Jun 27 19:17 biblio_log_Hrdy2025IWantedTo_20250627-191750.json
+-rw-rw----. 1 u0_a269 media_rw 4641 Jul 10 17:43 biblio_log_Hsu2025WhatHappensAfterA_20250710-174351.json
+-rw-rw----. 1 u0_a269 media_rw 3454 Jul 31 09:46 biblio_log_Hull2005LocatingTheSemioticPower_20250731-094615.json
+-rw-rw----. 1 u0_a269 media_rw 2597 Aug  1 07:58 biblio_log_Jaspers1953TheOriginAndGoal_20250801-075843.json
+-rw-rw----. 1 u0_a269 media_rw 3138 Jul 31 09:46 biblio_log_Jenkins2006ConvergenceCultureWhereOld_20250731-094617.json
+-rw-rw----. 1 u0_a269 media_rw 3118 Jun 21 22:14 biblio_log_Johnsson1971TheTooPerfect_20250621-221425.json
+-rw-rw----. 1 u0_a269 media_rw 3150 Jun 21 22:18 biblio_log_Johnsson1971TheTooPerfect_20250621-221829.json
+-rw-rw----. 1 u0_a269 media_rw 3150 Jun 21 22:22 biblio_log_Johnsson1971TheTooPerfect_20250621-222220.json
+-rw-rw----. 1 u0_a269 media_rw 2606 Jul  4 07:06 biblio_log_Jones2018ReimaginingResponsibilityA_20250704-090614.json
+-rw-rw----. 1 u0_a269 media_rw 3330 Jun 21 22:14 biblio_log_Jones2021PractisingImperfectionThe_20250621-221427.json
+-rw-rw----. 1 u0_a269 media_rw 3362 Jun 21 22:18 biblio_log_Jones2021PractisingImperfectionThe_20250621-221830.json
+-rw-rw----. 1 u0_a269 media_rw 3362 Jun 21 22:22 biblio_log_Jones2021PractisingImperfectionThe_20250621-222222.json
+-rw-rw----. 1 u0_a269 media_rw 5652 Jun 27 07:58 biblio_log_Keller2025IsTrumpS_20250627-075803.json
+-rw-rw----. 1 u0_a269 media_rw 3235 Jul 28 08:39 biblio_log_Khan2025ACommentOnThe_20250728-083944.json
+-rw-rw----. 1 u0_a269 media_rw 3850 Jun 19 21:48 biblio_log_Klein2025SarahMcbrideIs_20250619-214841.json
+-rw-rw----. 1 u0_a269 media_rw 3168 Jul 22 10:29 biblio_log_Klinger2025CollectingAndPreparingMetadata_20250722-102952.json
+-rw-rw----. 1 u0_a269 media_rw 3183 Jul 22 10:48 biblio_log_Klinger2025CollectingAndPreparingMetadata_20250722-104819.json
+-rw-rw----. 1 u0_a269 media_rw 3152 Jul 31 09:46 biblio_log_Kohn1999TheSchoolsOurChildren_20250731-094619.json
+-rw-rw----. 1 u0_a269 media_rw 2752 Jun 27 19:17 biblio_log_Konner2019ABoldNew_20250627-191750.json
+-rw-rw----. 1 u0_a269 media_rw 3121 Jun 27 19:58 biblio_log_Kramer2022FemaleCooperationEvolutionary_20250627-195812.json
+-rw-rw----. 1 u0_a269 media_rw 2982 Jul 31 09:46 biblio_log_Kress2003LiteracyInTheNew_20250731-094617.json
+-rw-rw----. 1 u0_a269 media_rw 3272 Jul  7 16:17 biblio_log_Kurokawa1970CapsuleInstallationOsakaExpo_20250707-161740.json
+-rw-rw----. 1 u0_a269 media_rw 3499 Jul  7 16:17 biblio_log_Kurokawa1970TheCapsuleDeclaration_20250707-161739.json
+-rw-rw----. 1 u0_a269 media_rw 3688 Jul 17 02:43 biblio_log_Leskela2023EasyAndPlainLanguages_20250717-094345.json
+-rw-rw----. 1 u0_a269 media_rw 4879 Jun 23 13:27 biblio_log_León cabrera2025ABetterWay_20250623-132723.json
+-rw-rw----. 1 u0_a269 media_rw 5047 Jul  6 16:47 biblio_log_Loffhagen2025TheRadical1960sSchools_20250706-184752.json
+-rw-rw----. 1 u0_a269 media_rw 3209 Jul 17 02:43 biblio_log_Madina2023EasyToReadIn_20250717-094347.json
+-rw-rw----. 1 u0_a269 media_rw 4942 Jul 28 22:18 biblio_log_Marchese2025RobertReichThinksThe_20250728-221817.json
+-rw-rw----. 1 u0_a269 media_rw 3157 Jul 22 10:29 biblio_log_Marques2025LearningToEncodeManuscripts_20250722-102939.json
+-rw-rw----. 1 u0_a269 media_rw 3172 Jul 22 10:48 biblio_log_Marques2025LearningToEncodeManuscripts_20250722-104807.json
+-rw-rw----. 1 u0_a269 media_rw 4547 Jul 22 17:11 biblio_log_Marris2025AiSlopMightFinally_20250722-171129.json
+-rw-rw----. 1 u0_a269 media_rw 4637 Jun 27 08:05 biblio_log_Martin2025CarneySInner_20250627-080558.json
+-rw-rw----. 1 u0_a269 media_rw 3476 Jun 30 15:47 biblio_log_Matthews1999TheMakingOf_20250630-174729.json
+-rw-rw----. 1 u0_a269 media_rw 2795 Jun 29 20:33 biblio_log_Matthews2010ChaucerSAmerican_20250629-223335.json
+-rw-rw----. 1 u0_a269 media_rw 4390 Jun 19 21:42 biblio_log_McBride2025SarahMcbrideIs_20250619-214224.json
+-rw-rw----. 1 u0_a269 media_rw 3797 Jul 28 22:09 biblio_log_Mcalevey2016NoShortcutsOrganizingFor_20250728-220901.json
+-rw-rw----. 1 u0_a269 media_rw 2483 Jul 11 09:13 biblio_log_Mcguffie2020TheRadicalizationRisksOf_20250711-091355.json
+-rw-rw----. 1 u0_a269 media_rw 2061 Jul 28 08:17 biblio_log_Mckinsey2025AiInTheWorkplace_20250728-081756.json
+-rw-rw----. 1 u0_a269 media_rw 3404 Jul 28 08:32 biblio_log_Mckinsey2025AiInTheWorkplace_20250728-083208.json
+-rw-rw----. 1 u0_a269 media_rw 2896 Jul 28 08:39 biblio_log_Mckinsey2025AiInTheWorkplace_20250728-083946.json
+-rw-rw----. 1 u0_a269 media_rw 4743 Jul 30 08:08 biblio_log_Mcwhorter2025DoTheseJeansMake_20250730-080832.json
+-rw-rw----. 1 u0_a269 media_rw 3013 Jul 24 18:39 biblio_log_Mellor1998CulturalHistoryOfPopcorn_20250724-183905.json
+-rw-rw----. 1 u0_a269 media_rw 5268 Jul 24 08:00 biblio_log_Naidu2025ColumbiaSAdministratorsAre_20250724-080045.json
+-rw-rw----. 1 u0_a269 media_rw 5335 Jul 24 08:08 biblio_log_Naidu2025ColumbiaSAdministratorsAre_20250724-080827.json
+-rw-rw----. 1 u0_a269 media_rw 3433 Jun 23 22:11 biblio_log_Nasa1982Spinoff1982_20250623-221152.json
+-rw-rw----. 1 u0_a269 media_rw 3544 Jun 21 11:13 biblio_log_Nelson2009ASlightOf_20250621-111327.json
+-rw-rw----. 1 u0_a269 media_rw 3572 Jun 21 11:57 biblio_log_Nelson2009ASlightOf_20250621-115707.json
+-rw-rw----. 1 u0_a269 media_rw 3544 Jun 21 10:37 biblio_log_NelsonXXXXASlightOf_20250621-103750.json
+-rw-rw----. 1 u0_a269 media_rw 1998 Jul 17 00:48 biblio_log_Newitt2009PortugalInEuropeanAnd_20250717-074814.json
+-rw-rw----. 1 u0_a269 media_rw 3221 Jul 22 10:29 biblio_log_Nguyen2025ThePoisonedWellTracing_20250722-102921.json
+-rw-rw----. 1 u0_a269 media_rw 3236 Jul 22 10:43 biblio_log_Nguyen2025ThePoisonedWellTracing_20250722-104342.json
+-rw-rw----. 1 u0_a269 media_rw 2938 Jul 19 01:23 biblio_log_Oecd2025OecdEconomicSurveysCanada_20250719-082309.json
+-rw-rw----. 1 u0_a269 media_rw 3605 Jul 10 08:10 biblio_log_Opinko2025Over3MillionAwarded_20250710-081049.json
+-rw-rw----. 1 u0_a269 media_rw 3163 Jul 28 08:39 biblio_log_Opus2025TheIllusionOfThe_20250728-083943.json
+-rw-rw----. 1 u0_a269 media_rw 5051 Jul 25 07:56 biblio_log_Otterman2025ColumbiaWalkedATightrope_20250725-075656.json
+-rw-rw----. 1 u0_a269 media_rw 3566 Jun 30 15:48 biblio_log_Palmer1965TheRiseOf_20250630-174833.json
+-rw-rw----. 1 u0_a269 media_rw 3844 Jul  2 19:24 biblio_log_Palmer2015NederlandsNaarPerfectie_20250702-212447.json
+-rw-rw----. 1 u0_a269 media_rw 2477 Jul 24 18:39 biblio_log_Pathé1955AmericanSnacksInBritish_20250724-183902.json
+-rw-rw----. 1 u0_a269 media_rw 2746 Jun 29 20:33 biblio_log_Phillips2009TextsWithTrowsers_20250629-223334.json
+-rw-rw----. 1 u0_a269 media_rw 3122 Jul 19 01:23 biblio_log_Piketty2014CapitalInTheTwenty_20250719-082308.json
+-rw-rw----. 1 u0_a269 media_rw 5436 Jul 20 02:54 biblio_log_Poniewozik2025HowTvTrainedUs_20250720-095420.json
+-rw-rw----. 1 u0_a269 media_rw 4041 Jul 19 00:49 biblio_log_Press2025TeenDiesAfterBeing_20250719-074937.json
+-rw-rw----. 1 u0_a269 media_rw 4735 Jul 19 23:20 biblio_log_Project2016AmericansWillAlwaysDo_20250720-062034.json
+-rw-rw----. 1 u0_a269 media_rw 2838 Jun 26 07:32 biblio_log_Reinhart2010GrowthInA_20250626-073201.json
+-rw-rw----. 1 u0_a269 media_rw 4844 Jul 29 07:37 biblio_log_Richman2025TrumpIsDiscoveringThe_20250729-073731.json
+-rw-rw----. 1 u0_a269 media_rw 3597 Jul  1 19:11 biblio_log_Rosenkrantz1968Talk_20250701-211120.json
+-rw-rw----. 1 u0_a269 media_rw 5050 Jul 27 08:27 biblio_log_Rosenwald2025JamesLeprinoWillyWonka_20250727-082756.json
+-rw-rw----. 1 u0_a269 media_rw 4934 Jul  8 20:18 biblio_log_Rothman2025WhatSHappeningTo_20250708-201832.json
+-rw-rw----. 1 u0_a269 media_rw 3874 Jul 10 17:43 biblio_log_Rothman2025WhatSHappeningTo_20250710-174351.json
+-rw-rw----. 1 u0_a269 media_rw 3982 Jun 30 16:07 biblio_log_Russell2018WomenAndDictionary_20250630-180704.json
+-rw-rw----. 1 u0_a269 media_rw 4842 Jul 26 10:30 biblio_log_Ryback2025WhatHappenedWhenHitler_20250726-103034.json
+-rw-rw----. 1 u0_a269 media_rw 2696 Jul 28 08:27 biblio_log_Ryseff2024TheRootCausesOf_20250728-082713.json
+-rw-rw----. 1 u0_a269 media_rw 3823 Jul 28 08:32 biblio_log_Ryseff2024TheRootCausesOf_20250728-083207.json
+-rw-rw----. 1 u0_a269 media_rw 3539 Jul 28 08:39 biblio_log_Ryseff2024TheRootCausesOf_20250728-083945.json
+-rw-rw----. 1 u0_a269 media_rw 3123 Jul  1 20:31 biblio_log_Salinger1964FrannyAndZooey_20250701-223128.json
+-rw-rw----. 1 u0_a269 media_rw 4250 Jun 27 07:20 biblio_log_Sattin2021TheoreticalModelsOf_20250627-072024.json
+-rw-rw----. 1 u0_a269 media_rw 2989 Jul 30 12:18 biblio_log_Schinske2014TeachingMoreByGrading_20250730-121856.json
+-rw-rw----. 1 u0_a269 media_rw 3280 Jul 19 01:23 biblio_log_Schirle2008TheRelationshipBetweenLabour_20250719-082310.json
+-rw-rw----. 1 u0_a269 media_rw 3265 Jul 31 09:46 biblio_log_Selfe2009TheMovementOfAir_20250731-094616.json
+-rw-rw----. 1 u0_a269 media_rw 3942 Jul 14 13:07 biblio_log_Selznick2007TheInventionOfHugo_20250714-150706.json
+-rw-rw----. 1 u0_a269 media_rw 3220 Jul  1 20:13 biblio_log_Seneca2015OnTheShortness_20250701-221346.json
+-rw-rw----. 1 u0_a269 media_rw 3056 Jul  1 20:12 biblio_log_Seneca2021Dialogues_20250701-221240.json
+-rw-rw----. 1 u0_a269 media_rw 3222 Jul  1 20:10 biblio_log_SenecaXXXXDeOtio_20250701-221055.json
+-rw-rw----. 1 u0_a269 media_rw 3094 Jul  6 15:06 biblio_log_Services1944SimpleSabotageFieldManual_20250706-170639.json
+-rw-rw----. 1 u0_a269 media_rw 4613 Jun 23 23:05 biblio_log_Sharif2021HavingTooLittle_20250623-230508.json
+-rw-rw----. 1 u0_a269 media_rw 3207 Jul 31 09:46 biblio_log_Shipka2011TowardACompositionMade_20250731-094615.json
+-rw-rw----. 1 u0_a269 media_rw 2914 Jul 28 07:51 biblio_log_Shojaee2025TheIllusionOfThinking_20250728-075102.json
+-rw-rw----. 1 u0_a269 media_rw 2914 Jul 28 08:17 biblio_log_Shojaee2025TheIllusionOfThinking_20250728-081755.json
+-rw-rw----. 1 u0_a269 media_rw 4236 Jul 28 08:32 biblio_log_Shojaee2025TheIllusionOfThinking_20250728-083206.json
+-rw-rw----. 1 u0_a269 media_rw 3620 Jul 28 08:39 biblio_log_Shojaee2025TheIllusionOfThinking_20250728-083942.json
+-rw-rw----. 1 u0_a269 media_rw 3670 Jun 29 19:52 biblio_log_Singleton2001TheEarlyEnglish_20250629-215213.json
+-rw-rw----. 1 u0_a269 media_rw 3849 Jun 29 18:30 biblio_log_Singleton2005TheEarlyEnglish_20250629-203012.json
+-rw-rw----. 1 u0_a269 media_rw 3849 Jun 29 18:31 biblio_log_Singleton2005TheEarlyEnglish_20250629-203155.json
+-rw-rw----. 1 u0_a269 media_rw 3849 Jun 29 18:32 biblio_log_Singleton2005TheEarlyEnglish_20250629-203248.json
+-rw-rw----. 1 u0_a269 media_rw 3849 Jun 29 19:52 biblio_log_Singleton2005TheEarlyEnglish_20250629-215214.json
+-rw-rw----. 1 u0_a269 media_rw 4243 Jul 28 07:52 biblio_log_Sivarajan2025ABillionDollarBet_20250728-075208.json
+-rw-rw----. 1 u0_a269 media_rw 4329 Jul 28 08:32 biblio_log_Sivarajan2025ABillionDollarBet_20250728-083208.json
+-rw-rw----. 1 u0_a269 media_rw 3481 Jul 28 08:39 biblio_log_Sivarajan2025ABillionDollarBet_20250728-083944.json
+-rw-rw----. 1 u0_a269 media_rw 3002 Jul 30 12:18 biblio_log_Smallwood2001GradingOnTheCurve_20250730-121855.json
+-rw-rw----. 1 u0_a269 media_rw 3351 Jun 21 22:14 biblio_log_Smith2018BeyondBeliefThe_20250621-221426.json
+-rw-rw----. 1 u0_a269 media_rw 3383 Jun 21 22:18 biblio_log_Smith2018BeyondBeliefThe_20250621-221829.json
+-rw-rw----. 1 u0_a269 media_rw 3383 Jun 21 22:22 biblio_log_Smith2018BeyondBeliefThe_20250621-222221.json
+-rw-rw----. 1 u0_a269 media_rw 2747 Jul  4 07:06 biblio_log_Smith2020MarketsAndMerchants_20250704-090613.json
+-rw-rw----. 1 u0_a269 media_rw 3394 Jun 21 11:13 biblio_log_Smith2020TheSocialEpistemology_20250621-111326.json
+-rw-rw----. 1 u0_a269 media_rw 3422 Jun 21 11:57 biblio_log_Smith2020TheSocialEpistemology_20250621-115707.json
+-rw-rw----. 1 u0_a269 media_rw 3024 Jun 27 19:47 biblio_log_Smith2022FemaleCooperationEvolutionary_20250627-194732.json
+-rw-rw----. 1 u0_a269 media_rw 3394 Jun 21 10:37 biblio_log_SmithXXXXTheSocialEpistemology_20250621-103749.json
+-rw-rw----. 1 u0_a269 media_rw 3050 Jun 29 20:33 biblio_log_Spencer2014FJFurnivall_20250629-223335.json
+-rw-rw----. 1 u0_a269 media_rw 2896 Jun 29 20:33 biblio_log_Spencer2015FJFurnivall_20250629-223336.json
+-rw-rw----. 1 u0_a269 media_rw 3323 Jul 17 03:29 biblio_log_Standardization2023PlainLanguagePart1_20250717-102919.json
+-rw-rw----. 1 u0_a269 media_rw 3379 Jul 14 13:07 biblio_log_Stephenson1999Cryptonomicon_20250714-150707.json
+-rw-rw----. 1 u0_a269 media_rw 3037 Jul 30 12:18 biblio_log_Stiles1901TheLiteraryDiaryOf_20250730-121857.json
+-rw-rw----. 1 u0_a269 media_rw 4966 Jun 26 07:55 biblio_log_Subramaniam2025DhlReachesTentative_20250626-075516.json
+-rw-rw----. 1 u0_a269 media_rw 5229 Jun 27 06:37 biblio_log_Sullivan2025HowTheGay_20250627-063711.json
+-rw-rw----. 1 u0_a269 media_rw 3131 Jul  6 15:05 biblio_log_Sunstein2021SludgeWhatStopsUs_20250706-170505.json
+-rw-rw----. 1 u0_a269 media_rw 4613 Aug  1 08:07 biblio_log_Swanson2025HarmOrHelpWhy_20250801-080701.json
+-rw-rw----. 1 u0_a269 media_rw 3645 Jun 21 22:14 biblio_log_Tanaka2022FromSleightTo_20250621-221427.json
+-rw-rw----. 1 u0_a269 media_rw 3677 Jun 21 22:18 biblio_log_Tanaka2022FromSleightTo_20250621-221831.json
+-rw-rw----. 1 u0_a269 media_rw 3677 Jun 21 22:22 biblio_log_Tanaka2022FromSleightTo_20250621-222222.json
+-rw-rw----. 1 u0_a269 media_rw 3111 Jul 22 10:29 biblio_log_Team2025DigitalByzantineStudiesHow_20250722-102945.json
+-rw-rw----. 1 u0_a269 media_rw 3126 Jul 22 10:48 biblio_log_Team2025DigitalByzantineStudiesHow_20250722-104813.json
+-rw-rw----. 1 u0_a269 media_rw 3200 Jul  6 15:05 biblio_log_Tenumah2021WaitingForServiceAn_20250706-170506.json
+-rw-rw----. 1 u0_a269 media_rw 3159 Jul  6 15:05 biblio_log_Thaler2021NudgeImprovingDecisionsAbout_20250706-170506.json
+-rw-rw----. 1 u0_a269 media_rw 2457 Jul 11 09:13 biblio_log_Tufekci2025MuskSChatbotStarted_20250711-091354.json
+-rw-rw----. 1 u0_a269 media_rw 5241 Jul 12 09:09 biblio_log_Urback2025DanielleSmithIsnT_20250712-090903.json
+-rw-rw----. 1 u0_a269 media_rw 5245 Jul 12 09:54 biblio_log_Varcoe2025VarcoeAnAiAcademy_20250712-095413.json
+-rw-rw----. 1 u0_a269 media_rw 3670 Jul 31 07:56 biblio_log_Vermeule2020BeyondOriginalism_20250731-075646.json
+-rw-rw----. 1 u0_a269 media_rw 5322 Jul 31 07:55 biblio_log_Vermeule2025SomeoneIsDefyingThe_20250731-075515.json
+-rw-rw----. 1 u0_a269 media_rw 3486 Jun 21 11:13 biblio_log_Vernon1957TheDaiVernon_20250621-111325.json
+-rw-rw----. 1 u0_a269 media_rw 3486 Jun 21 10:37 biblio_log_VernonXXXXTheDaiVernon_20250621-103748.json
+-rw-rw----. 1 u0_a269 media_rw 4753 Jun 27 07:20 biblio_log_Verny2025CanScienceSolve_20250627-072023.json
+-rw-rw----. 1 u0_a269 media_rw 2815 Jul 10 08:07 biblio_log_Vitija2022LovingHighsmith_20250710-080703.json
+-rw-rw----. 1 u0_a269 media_rw 3572 Jul 22 10:29 biblio_log_Volodin2025SiberianaСибиpианаHowTo_20250722-102915.json
+-rw-rw----. 1 u0_a269 media_rw 3587 Jul 22 10:43 biblio_log_Volodin2025SiberianaСибиpианаHowTo_20250722-104336.json
+-rw-rw----. 1 u0_a269 media_rw 4255 Jul 27 07:39 biblio_log_Voltaire1759CandideOuLOptimisme_20250727-073957.json
+-rw-rw----. 1 u0_a269 media_rw 4054 Jul 26 22:13 biblio_log_Voltaire1993CandideADualLanguage_20250726-221346.json
+-rw-rw----. 1 u0_a269 media_rw 5093 Jul  7 16:17 biblio_log_Wainwright2025AsThrillingAsDriving_20250707-161739.json
+-rw-rw----. 1 u0_a269 media_rw 5263 Jun 22 08:36 biblio_log_Walker2025YouDonT_20250622-083605.json
+-rw-rw----. 1 u0_a269 media_rw 5311 Jun 22 10:06 biblio_log_Walker2025YouDonT_20250622-100607.json
+-rw-rw----. 1 u0_a269 media_rw 3444 Jul 22 10:29 biblio_log_Walter2025PrototypingARagSystem_20250722-102933.json
+-rw-rw----. 1 u0_a269 media_rw 3459 Jul 22 10:48 biblio_log_Walter2025PrototypingARagSystem_20250722-104801.json
+-rw-rw----. 1 u0_a269 media_rw 5018 Jul 20 03:17 biblio_log_Wang2025TearItDownThey_20250720-101722.json
+-rw-rw----. 1 u0_a269 media_rw 3622 Jul  1 19:16 biblio_log_Warhol1968AANovel_20250701-211636.json
+-rw-rw----. 1 u0_a269 media_rw 3651 Jul  1 19:16 biblio_log_Warhol1989TheAndyWarhol_20250701-211637.json
+-rw-rw----. 1 u0_a269 media_rw 3187 Jul 31 09:46 biblio_log_Warner2018WhyTheyCanT_20250731-094619.json
+-rw-rw----. 1 u0_a269 media_rw 4585 Jul 22 16:51 biblio_log_Warzel2025TheDesperationOfDonald_20250722-165117.json
+-rw-rw----. 1 u0_a269 media_rw 4505 Jul 22 16:53 biblio_log_Warzel2025TheDesperationOfDonald_20250722-165326.json
+-rw-rw----. 1 u0_a269 media_rw 2614 Jul  7 06:59 biblio_log_Watch2023GazaReportsOfViolations_20250707-065903.json
+-rw-rw----. 1 u0_a269 media_rw 3354 Jul 22 10:29 biblio_log_Wilson2025DigitalCamerariusTracingThe_20250722-102909.json
+-rw-rw----. 1 u0_a269 media_rw 3369 Jul 22 10:43 biblio_log_Wilson2025DigitalCamerariusTracingThe_20250722-104330.json
+-rw-rw----. 1 u0_a269 media_rw 2713 Jun 27 19:32 biblio_log_Wrangham2019TheGoodnessParadox_20250627-193223.json
+-rw-rw----. 1 u0_a269 media_rw 4923 Jul 12 09:11 biblio_log_Yakabuski2025OutWithTuAnd_20250712-091142.json
+-rw-rw----. 1 u0_a269 media_rw 4835 Jul 25 08:08 biblio_log_Yang2025TheConservativeCrusadeThat_20250725-080808.json
+-rw-rw----. 1 u0_a269 media_rw 3983 Jul 19 01:23 biblio_log_Yin2025WorkAmericanHoursEarn_20250719-082307.json
+
+./v2:
+total 0
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 __init__.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 input_handler.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 obsidian_writer.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 pipeline.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 utils.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 zotero_query.py
+-rw-rw----. 1 u0_a269 media_rw 0 Aug  2 16:48 zotero_writer.py
+
+./vendor:
+total 4
+drwxrws---. 4 u0_a269 media_rw 3452 Jul  6 15:04 citeproc
+
+./vendor/citeproc:
+total 7
+drwxrws---. 2 u0_a269 media_rw 3452 Jul  4 10:39 __pycache__
+drwxrws---. 3 u0_a269 media_rw 3452 Jul  6 15:04 formatter
+
+./vendor/citeproc/__pycache__:
+total 16
+-rw-rw----. 1 u0_a269 media_rw 2532 Jul  4 10:39 __init__.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw 7415 Jul  4 10:39 frontend.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw 1266 Jul  4 10:39 types.cpython-312.pyc
+
+./vendor/citeproc/formatter:
+total 4
+drwxrws---. 2 u0_a269 media_rw 3452 Jul  4 10:39 __pycache__
+
+./vendor/citeproc/formatter/__pycache__:
+total 16
+-rw-rw----. 1 u0_a269 media_rw  259 Jul  4 10:39 __init__.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw 2980 Jul  4 10:39 html.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw  455 Jul  4 10:39 plain.cpython-312.pyc
+-rw-rw----. 1 u0_a269 media_rw 2226 Jul  4 10:39 rst.cpython-312.pyc
