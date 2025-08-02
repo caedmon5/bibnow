@@ -65,7 +65,7 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
             "ENTRYTYPE", "ID", "author", "editor",
             "title", "year", "date", "month", "day",
             "billnumber", "session", "legislativebody",
-            "court", "reporter"
+            "court", "reporter", "institution", "authority"
         ):
             extra_fields[field] = value
             if verbose:
@@ -314,6 +314,10 @@ def zotero_upload(entry):
         "itemType": item_type,
     }
 
+    if item_type == "case" and "title" in entry:
+        entry["caseName"] = entry.pop("title")
+
+
     creators = parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
     if not creators:
         fallback = (
@@ -330,6 +334,11 @@ def zotero_upload(entry):
     for field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
         if field in clean_entry and field not in ("itemType", "creators"):
             metadata[field] = clean_entry[field]
+            # Ensure fallback responsible-party fields are kept if valid
+    for rp_field in ("authority", "court", "institution", "legislativebody"):
+        if rp_field in entry and rp_field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
+            metadata[rp_field] = entry[rp_field]
+
     if item_type == "case":
         if "court" in entry:
             metadata["court"] = entry["court"]
@@ -356,11 +365,6 @@ def zotero_upload(entry):
     metadata = [metadata]
     # --- [END METADATA CONSTRUCTION] ---
     
-    if item_type == "case":
-        if "title" in entry:
-            metadata[0]["caseName"] = entry["title"]
-            metadata[0].pop("title", None)
-
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
         headers=headers,
