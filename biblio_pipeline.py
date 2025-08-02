@@ -324,7 +324,7 @@ def zotero_upload(entry):
         )
         creators = [{"creatorType": "author", "literal": fallback}]
     metadata["creators"] = creators
-    }
+
 
     # Only include allowed fields (excluding creators, handled above)
     for field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
@@ -358,8 +358,8 @@ def zotero_upload(entry):
     
     if item_type == "case":
         if "title" in entry:
-            metadata["caseName"] = entry["title"]
-            metadata.pop("title", None)
+            metadata[0]["caseName"] = entry["title"]
+            metadata[0].pop("title", None)
 
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
