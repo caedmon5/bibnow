@@ -61,7 +61,7 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
             sanitized[field] = value
         elif field in CANONICAL_EXTRA_FIELDS:
             extra_fields[field] = value
-        elif field not in ("ENTRYTYPE", "ID"):
+        elif field not in ("ENTRYTYPE", "ID", "author", "editor"):
             extra_fields[field] = value
             if verbose:
                 print(f"[ZoteroSanitize] Moved field '{field}' to extra.")
