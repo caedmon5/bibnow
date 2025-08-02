@@ -1,0 +1,7 @@
+README.MD
+config.py
+dir.txt
+input.txt
+legacy_bibtex
+requirements.txt
+vendor
