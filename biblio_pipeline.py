@@ -313,6 +313,14 @@ def zotero_upload(entry):
     metadata = {
         "itemType": item_type,
         "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
+        if not creators:
+    fallback = (
+        entry.get("court")
+        or entry.get("legislativebody")
+        or entry.get("institution")
+        or "Unknown"
+    )
+    creators = [{"creatorType": "author", "literal": fallback}]
     }
 
     # Only include allowed fields (excluding creators, handled above)
@@ -345,6 +353,10 @@ def zotero_upload(entry):
     metadata = [metadata]
     # --- [END METADATA CONSTRUCTION] ---
     
+    if item_type == "case":
+        if "title" in entry:
+            metadata["caseName"] = entry["title"]
+            metadata.pop("title", None)
 
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
