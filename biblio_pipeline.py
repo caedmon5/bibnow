@@ -312,15 +312,18 @@ def zotero_upload(entry):
 
     metadata = {
         "itemType": item_type,
-        "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
-        if not creators:
-    fallback = (
-        entry.get("court")
-        or entry.get("legislativebody")
-        or entry.get("institution")
-        or "Unknown"
-    )
-    creators = [{"creatorType": "author", "literal": fallback}]
+    }
+
+    "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
+    if not creators:
+        fallback = (
+            entry.get("court")
+            or entry.get("legislativebody")
+            or entry.get("institution")
+            or "Unknown"
+        )
+        creators = [{"creatorType": "author", "literal": fallback}]
+    metadata["creators"] = creators
     }
 
     # Only include allowed fields (excluding creators, handled above)
