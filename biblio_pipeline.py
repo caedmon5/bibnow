@@ -24,7 +24,7 @@ BIBTEX_TO_ZOTERO_FIELD = {
     "number": "issue",
     "pages": "pages",
     "publisher": "publisher",
-    "institution": "institution",
+    "institution": "university",
     "school": "university",
     "edition": "edition",
     "series": "series",
@@ -308,22 +308,23 @@ def zotero_upload(entry):
 
     # --- [START METADATA CONSTRUCTION] ---
     normalized_entry = normalize_bibtex_fields(entry)
+ # Ensure Zotero 'case' items use 'caseName' instead of 'title'
+    if item_type == "case" and "title" in normalized_entry:
+        normalized_entry["caseName"] = normalized_entry.pop("title")
     clean_entry, extra_fields = sanitize_entry_for_zotero(normalized_entry, item_type)
 
     metadata = {
         "itemType": item_type,
     }
 
-    if item_type == "case" and "title" in entry:
-        entry["caseName"] = entry.pop("title")
-
-
     creators = parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
     if not creators:
         fallback = (
-            entry.get("court")
+            entry.get("authority")
+            or entry.get("court")
             or entry.get("legislativebody")
             or entry.get("institution")
+            or entry.get("organization")
             or "Unknown"
         )
         creators = [{"creatorType": "author", "literal": fallback}]
