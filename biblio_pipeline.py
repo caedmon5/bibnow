@@ -323,7 +323,7 @@ def zotero_upload(entry):
         if "court" in entry:
             metadata["authority"] = entry["court"]
         if "reporter" in entry:
-            metadata["container-title"] = entry["reporter"]
+            metadata["reporter"] = entry["reporter"]
 
     elif item_type == "bill":
         if "billnumber" in entry:
@@ -331,7 +331,7 @@ def zotero_upload(entry):
         if "legislativebody" in entry:
             metadata["authority"] = entry["legislativebody"]
         if "session" in entry:
-            metadata["chapter-number"] = entry["session"]
+            metadata["chapterNumber"] = entry["session"]
 
     
     # Add extra field, if there are moved entries
