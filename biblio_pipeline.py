@@ -314,7 +314,7 @@ def zotero_upload(entry):
         "itemType": item_type,
     }
 
-    "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
+    creators = parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
     if not creators:
         fallback = (
             entry.get("court")
