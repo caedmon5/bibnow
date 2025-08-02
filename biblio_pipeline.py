@@ -177,6 +177,30 @@ def parse_responsible_party(entry):
     }
 
 
+def parse_creators(raw, creator_type):
+    """
+    Parses a raw BibTeX creator string into Zotero's structured firstName/lastName format.
+    Handles "Smith, John and Jane Doe" formats.
+    """
+    creators = []
+    for person in raw.split(" and "):
+        person = person.strip()
+        if not person:
+            continue
+        if "," in person:
+            last, first = [s.strip() for s in person.split(",", 1)]
+        else:
+            parts = person.split()
+            first = " ".join(parts[:-1])
+            last = parts[-1]
+        creators.append({
+            "creatorType": creator_type,
+            "firstName": first,
+            "lastName": last
+        })
+    return creators
+
+
 def generate_citekey(entry):
     info = parse_responsible_party(entry)
     lastname = info["first_lastname"]
@@ -266,15 +290,18 @@ def parse_bibtex(bibtex):
 def zotero_upload(entry):
     headers = {'Zotero-API-Key': ZOTERO_API_KEY, 'Content-Type': 'application/json'}
     item_type = BIBTEX_TO_ZOTERO_TYPE.get(entry.get("ENTRYTYPE", "misc"), "document")
-    creators = [{"creatorType": "author", "name": entry.get("author", "")}]
+
+    # Extract raw before sanitisation
+    raw_authors = entry.get("author", "")
+    raw_editors = entry.get("editor", "")
 
     # --- [START METADATA CONSTRUCTION] ---
     normalized_entry = normalize_bibtex_fields(entry)
     clean_entry, extra_fields = sanitize_entry_for_zotero(normalized_entry, item_type)
-    
+
     metadata = {
         "itemType": item_type,
-        "creators": [{"creatorType": "author", "name": clean_entry.get("author", "")}]
+        "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
     }
 
     # Only include allowed fields (excluding creators, handled above)
