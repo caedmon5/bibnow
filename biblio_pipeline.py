@@ -31,7 +31,8 @@ BIBTEX_TO_ZOTERO_FIELD = {
     "type": "type",
     "note": "extra",
     "abstract": "abstractNote",
-    "address": "place"
+    "address": "place",
+    "billnumber": "number"
     # 'author' and 'editor' intentionally omitted
 }
 
@@ -65,7 +66,8 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
             "ENTRYTYPE", "ID", "author", "editor",
             "title", "year", "date", "month", "day",
             "billnumber", "session", "legislativebody",
-            "court", "reporter", "institution", "authority"
+            "court", "reporter", "institution", "authority",
+            "chapter-number"
         ):
             extra_fields[field] = value
             if verbose:
@@ -295,7 +297,9 @@ def parse_bibtex(bibtex):
             entry["ID"] = entry_type_match.group(2) if entry_type_match else "unknown"
 # Normalize institution to school for Zotero compatibility
     if entry["ENTRYTYPE"] in ["phdthesis", "mastersthesis"]:
-        entry["school"] = entry.get("school", "") or entry.get("institution", "")
+        if "school" not in entry and "institution" in entry:
+            entry["school"] = entry["institution"]
+
     return entry
 
 def zotero_upload(entry):
@@ -337,14 +341,14 @@ def zotero_upload(entry):
             metadata[field] = clean_entry[field]
             # Ensure fallback responsible-party fields are kept if valid
     for rp_field in ("authority", "court", "institution", "legislativebody"):
-        if rp_field in entry and rp_field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
-            metadata[rp_field] = entry[rp_field]
+        if rp_field in clean_entry and rp_field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
+            metadata[rp_field] = clean_entry[rp_field]
 
     if item_type == "case":
-        if "court" in entry:
-            metadata["court"] = entry["court"]
-        if "reporter" in entry:
-            metadata["reporter"] = entry["reporter"]
+        if "court" in clean_entry:
+            metadata["court"] = clean_entry["court"]
+        if "reporter" in clean_entry:
+            metadata["reporter"] = clean_entry["reporter"]
 
     elif item_type == "bill":
         if "billnumber" in entry:
