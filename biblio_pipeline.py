@@ -24,14 +24,15 @@ BIBTEX_TO_ZOTERO_FIELD = {
     "number": "issue",
     "pages": "pages",
     "publisher": "publisher",
-    "institution": "institution",
+    "institution": "university",
     "school": "university",
     "edition": "edition",
     "series": "series",
     "type": "type",
     "note": "extra",
     "abstract": "abstractNote",
-    "address": "place"
+    "address": "place",
+    "billnumber": "number"
     # 'author' and 'editor' intentionally omitted
 }
 
@@ -65,7 +66,8 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
             "ENTRYTYPE", "ID", "author", "editor",
             "title", "year", "date", "month", "day",
             "billnumber", "session", "legislativebody",
-            "court", "reporter"
+            "court", "reporter", "institution", "authority",
+            "chapter-number"
         ):
             extra_fields[field] = value
             if verbose:
@@ -295,7 +297,9 @@ def parse_bibtex(bibtex):
             entry["ID"] = entry_type_match.group(2) if entry_type_match else "unknown"
 # Normalize institution to school for Zotero compatibility
     if entry["ENTRYTYPE"] in ["phdthesis", "mastersthesis"]:
-        entry["school"] = entry.get("school", "") or entry.get("institution", "")
+        if "school" not in entry and "institution" in entry:
+            entry["school"] = entry["institution"]
+
     return entry
 
 def zotero_upload(entry):
@@ -308,30 +312,51 @@ def zotero_upload(entry):
 
     # --- [START METADATA CONSTRUCTION] ---
     normalized_entry = normalize_bibtex_fields(entry)
+ # Ensure Zotero 'case' items use 'caseName' instead of 'title'
+    if item_type == "case" and "title" in normalized_entry:
+        normalized_entry["caseName"] = normalized_entry.pop("title")
     clean_entry, extra_fields = sanitize_entry_for_zotero(normalized_entry, item_type)
 
     metadata = {
         "itemType": item_type,
-        "creators": parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
     }
+
+    creators = parse_creators(raw_authors, "author") + parse_creators(raw_editors, "editor")
+    if not creators:
+        fallback = (
+            entry.get("authority")
+            or entry.get("court")
+            or entry.get("legislativebody")
+            or entry.get("institution")
+            or entry.get("organization")
+            or "Unknown"
+        )
+        creators = [{"creatorType": "author", "literal": fallback}]
+    metadata["creators"] = creators
+
 
     # Only include allowed fields (excluding creators, handled above)
     for field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
         if field in clean_entry and field not in ("itemType", "creators"):
             metadata[field] = clean_entry[field]
+            # Ensure fallback responsible-party fields are kept if valid
+    for rp_field in ("authority", "court", "institution", "legislativebody"):
+        if rp_field in clean_entry and rp_field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
+            metadata[rp_field] = clean_entry[rp_field]
+
     if item_type == "case":
-        if "court" in entry:
-            metadata["authority"] = entry["court"]
-        if "reporter" in entry:
-            metadata["container-title"] = entry["reporter"]
+        if "court" in clean_entry:
+            metadata["court"] = clean_entry["court"]
+        if "reporter" in clean_entry:
+            metadata["reporter"] = clean_entry["reporter"]
 
     elif item_type == "bill":
         if "billnumber" in entry:
-            metadata["number"] = entry["billnumber"]
+            metadata["billNumber"] = entry["billnumber"]
         if "legislativebody" in entry:
-            metadata["authority"] = entry["legislativebody"]
+            metadata["legislativeBody"] = entry["legislativebody"]
         if "session" in entry:
-            metadata["chapter-number"] = entry["session"]
+            metadata["session"] = entry["session"]
 
     
     # Add extra field, if there are moved entries
@@ -345,7 +370,6 @@ def zotero_upload(entry):
     metadata = [metadata]
     # --- [END METADATA CONSTRUCTION] ---
     
-
     r = requests.post(
         f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items",
         headers=headers,
