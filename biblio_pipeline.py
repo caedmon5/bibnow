@@ -61,7 +61,12 @@ def sanitize_entry_for_zotero(entry, item_type, verbose=False):
             sanitized[field] = value
         elif field in CANONICAL_EXTRA_FIELDS:
             extra_fields[field] = value
-        elif field not in ("ENTRYTYPE", "ID", "author", "editor"):
+        elif field not in (
+            "ENTRYTYPE", "ID", "author", "editor",
+            "title", "year", "date", "month", "day",
+            "billnumber", "session", "legislativebody",
+            "court", "reporter"
+        ):
             extra_fields[field] = value
             if verbose:
                 print(f"[ZoteroSanitize] Moved field '{field}' to extra.")
@@ -187,6 +192,12 @@ def parse_creators(raw, creator_type):
         person = person.strip()
         if not person:
             continue
+        if person.startswith("{") and person.endswith("}"):
+            creators.append({
+                "creatorType": creator_type,
+                "literal": person.strip("{}")
+            })
+            continue
         if "," in person:
             last, first = [s.strip() for s in person.split(",", 1)]
         else:
@@ -308,6 +319,20 @@ def zotero_upload(entry):
     for field in ZOTERO_ALLOWED_FIELDS.get(item_type, []):
         if field in clean_entry and field not in ("itemType", "creators"):
             metadata[field] = clean_entry[field]
+    if item_type == "case":
+        if "court" in entry:
+            metadata["authority"] = entry["court"]
+        if "reporter" in entry:
+            metadata["container-title"] = entry["reporter"]
+
+    elif item_type == "bill":
+        if "billnumber" in entry:
+            metadata["number"] = entry["billnumber"]
+        if "legislativebody" in entry:
+            metadata["authority"] = entry["legislativebody"]
+        if "session" in entry:
+            metadata["chapter-number"] = entry["session"]
+
     
     # Add extra field, if there are moved entries
     if extra_fields:
