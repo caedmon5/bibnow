@@ -14,11 +14,11 @@ from csl_mapper import csl_to_zotero
 with open("test_csl_input.json", "r", encoding="utf-8") as f:
     csl_item = json.load(f)
 
-# Load CSL-JSON test data from file
+# Convert to Zotero-compatible JSON
 zotero_item = csl_to_zotero(csl_item)
 
 # Attempt Zotero upload
-status_code, response = send_to_zotero(csl_item)
+status_code, response = send_to_zotero(zotero_item)
 
 # Print raw result
 print(f"\nStatus Code: {status_code}")
