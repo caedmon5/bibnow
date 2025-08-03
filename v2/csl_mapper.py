@@ -101,13 +101,29 @@ def csl_to_zotero(csl_item):
         "creators": map_creators(csl_item)
     }
 
+    # Map container-title to appropriate Zotero field by type
+    container_map = {
+        "journalArticle": "publicationTitle",
+        "magazineArticle": "publicationTitle",
+        "newspaperArticle": "publicationTitle",
+        "bookSection": "bookTitle",
+        "conferencePaper": "proceedingsTitle",
+        "dictionaryEntry": "dictionaryTitle",
+        "encyclopediaArticle": "encyclopediaTitle"
+    }
+
+    if "container-title" in csl_item:
+        mapped_field = container_map.get(item_type)
+        if mapped_field:
+            zotero_item[mapped_field] = csl_item["container-title"]
+
+
     # Optionally map commonly used Zotero-compatible fields
     common_field_map = {
         "abstract": "abstractNote",
         "URL": "url",
         "DOI": "DOI",
         "publisher": "publisher",
-        "container-title": "publicationTitle",
         "volume": "volume",
         "issue": "issue",
         "page": "pages"
