@@ -7,8 +7,8 @@ Requires: test_csl_input.json, config.py, zotero_writer.py
 
 import json
 from zotero_writer import send_to_zotero, validate_zotero_response
-
 from csl_mapper import csl_to_zotero
+from config import ZOTERO_USERNAME
 
 # Load CSL-JSON test data from file
 with open("test_csl_input.json", "r", encoding="utf-8") as f:
@@ -30,4 +30,4 @@ print(f"\nSuccess? {success}")
 print(f"Message: {message}")
 print(f"Zotero Key: {zotero_key}")
 if zotero_key:
-    print(f"Zotero URL: https://www.zotero.org/users/{ZOTERO_USER_ID}/items/{zotero_key}")
+    print(f"Zotero URL: https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}")
