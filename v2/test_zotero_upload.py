@@ -33,7 +33,7 @@ print(f"\nSuccess? {bool(success) and not failed}")
 if success and not failed:
     print("Message: Upload successful")
     print(f"Zotero Key: {zotero_key}")
-    print(f"Zotero URL: https://www.zotero.org/users/{ZOTERO_USER_ID}/items/{zotero_key}")
+    print(f"Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{zotero_key}")
 elif failed:
     failure = list(failed.values())[0]
     print("Message: Upload failed")
