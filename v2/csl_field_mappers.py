@@ -77,7 +77,18 @@ def map_case_fields(csl, zotero, item_type):
     """Maps fields for legal cases."""
     if item_type != "case":
         return
-    zotero["caseName"] = csl.get("title", "")
+
+    if "title" in csl_item:
+            zotero_item["caseName"] = csl_item["title"]
+            # Important: remove 'title' if it was auto-mapped
+            if "title" in zotero_item:
+                del zotero_item["title"]
+
+    # Optionally map other legal-specific fields if needed
+    if "URL" in csl_item:
+        zotero_item["url"] = csl_item["URL"]
+    if "page" in csl_item:
+        zotero_item["pages"] = csl_item["page"]
     if "authority" in csl:
         zotero["court"] = csl["authority"]
     if "issued" in csl:

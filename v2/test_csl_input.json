@@ -1,10 +1,12 @@
 {
-  "type": "thesis",
-  "title": "Imperial Knowledge Systems",
+  "type": "legal_case",
+  "title": "Empire v. Citizen",
   "author": [
-    { "family": "Lin", "given": "Alex" }
+    { "family": "Cheng", "given": "Mei" }
   ],
-  "issued": { "date-parts": [[2022]] },
-  "publisher": "MIT",
-  "URL": "https://example.org/thesis"
+  "issued": { "date-parts": [[1999]] },
+  "container-title": "International Legal Review",
+  "page": "112-120",
+  "URL": "https://example.org/case"
 }
+
