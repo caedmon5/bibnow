@@ -13,17 +13,44 @@ See: zotero_writer.py for the upload logic
 import json
 from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
 
-# Minimal type mapping — expand as needed
+# Complete mapping
 CSL_TO_ZOTERO_TYPE = {
-    "book": "book",
+    "article": "journalArticle",
     "article-journal": "journalArticle",
-    "paper-conference": "conferencePaper",
+    "article-magazine": "magazineArticle",
+    "article-newspaper": "newspaperArticle",
+    "bill": "bill",
+    "book": "book",
+    "broadcast": "tvBroadcast",
     "chapter": "bookSection",
-    "webpage": "webpage",
-    "thesis": "thesis",
+    "classic": "book",  # fallback
+    "dataset": "dataset",
+    "entry": "encyclopediaArticle",  # ambiguous: could also be dictionary
+    "entry-dictionary": "dictionaryEntry",
+    "entry-encyclopedia": "encyclopediaArticle",
+    "figure": "artwork",
+    "graphic": "artwork",
+    "interview": "interview",
+    "legal_case": "case",
+    "legislation": "statute",
     "manuscript": "manuscript",
-    "presentation": "presentation",
-    "report": "report"
+    "map": "map",
+    "motion_picture": "film",
+    "musical_score": "audioRecording",  # no perfect match; could be document too
+    "pamphlet": "book",  # fallback
+    "paper-conference": "conferencePaper",
+    "patent": "patent",
+    "personal_communication": "email",
+    "post": "forumPost",
+    "post-weblog": "blogPost",
+    "report": "report",
+    "review": "journalArticle",
+    "review-book": "journalArticle",
+    "song": "audioRecording",
+    "speech": "presentation",
+    "thesis": "thesis",
+    "treaty": "document",  # fallback
+    "webpage": "webpage"
 }
 
 def map_creators(csl_item):
