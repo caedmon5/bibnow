@@ -90,4 +90,7 @@ def csl_to_zotero(csl_item):
         if zotero_field in allowed_fields and csl_field in csl_item:
             zotero_item[zotero_field] = csl_item[csl_field]
 
+# debug
+    print("[DEBUG] Zotero item before upload:\n", json.dumps(zotero_item, indent=2))
+
     return zotero_item
