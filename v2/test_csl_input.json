@@ -1,0 +1,31 @@
+{
+  "type": "article-journal",
+  "title": "Revisiting Scientific Empires: Intellectual Power and Decline",
+  "author": [
+    {
+      "family": "Andersen",
+      "given": "Casper"
+    },
+    {
+      "family": "Nguyen",
+      "given": "Lan"
+    }
+  ],
+  "issued": {
+    "date-parts": [
+      [
+        2025,
+        8,
+        1
+      ]
+    ]
+  },
+  "container-title": "Journal of Historical Epistemology",
+  "volume": "19",
+  "issue": "2",
+  "page": "145-162",
+  "DOI": "10.1234/jhe.v19i2.5678",
+  "URL": "https://doi.org/10.1234/jhe.v19i2.5678",
+  "abstract": "This article explores the cyclical nature of scientific flourishing and decline...",
+  "note": "Generated abstract | Keywords supplemented by AI | Reason for interest: comparison of historical and modern 'scientific empires'."
+}
