@@ -10,7 +10,7 @@ Assumes:
 
 See: zotero_writer.py for the upload logic
 """
-
+import json
 from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
 
 # Minimal type mapping — expand as needed
