@@ -172,8 +172,6 @@ def csl_to_zotero(csl_item):
     map_tags(csl_item, zotero_item, item_type)
     map_extra_fields(csl_item, zotero_item, item_type)
 
-    from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
-
     clean_unexpected_fields(zotero_item)
 
  
