@@ -1,12 +1,10 @@
 {
-  "type": "chapter",
-  "title": "Ruling by Building",
+  "type": "thesis",
+  "title": "Imperial Knowledge Systems",
   "author": [
-    { "family": "Khan", "given": "Omar" }
+    { "family": "Lin", "given": "Alex" }
   ],
-  "issued": { "date-parts": [[2015]] },
-  "container-title": "Architecture and Power",
-  "publisher": "Heritage Books",
-  "page": "22–45",
-  "URL": "https://example.org/chapter"
+  "issued": { "date-parts": [[2022]] },
+  "publisher": "MIT",
+  "URL": "https://example.org/thesis"
 }

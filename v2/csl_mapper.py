@@ -117,13 +117,22 @@ def csl_to_zotero(csl_item):
         if mapped_field:
             zotero_item[mapped_field] = csl_item["container-title"]
 
+# Publisher maps to 'university' for theses, 'institution' for reports, else 'publisher'
+
+    if "publisher" in csl_item:
+        if item_type == "thesis":
+            zotero_item["university"] = csl_item["publisher"]
+        elif item_type == "report":
+                zotero_item["institution"] = csl_item["publisher"]
+        else:
+            zotero_item["publisher"] = csl_item["publisher"]
+
 
     # Optionally map commonly used Zotero-compatible fields
     common_field_map = {
         "abstract": "abstractNote",
         "URL": "url",
         "DOI": "DOI",
-        "publisher": "publisher",
         "volume": "volume",
         "issue": "issue",
         "page": "pages"
