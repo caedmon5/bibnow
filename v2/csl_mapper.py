@@ -12,6 +12,31 @@ See: zotero_writer.py for the upload logic
 """
 import json
 from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
+from csl_field_mappers import (
+    map_container_title,
+    map_publisher_field,
+    map_genre,
+    map_event,
+    map_title_short,
+    map_note,
+    map_issued_date,
+    map_case_fields,
+    map_bill_fields,
+    map_statute_fields,
+    map_hearing_fields,
+    map_presentation_fields,
+    map_interview_fields,
+    map_audio_fields,
+    map_video_fields,
+    map_doi,
+    map_url,
+    map_pages,
+    map_language,
+    map_abstract,
+    map_access_date,
+    map_tags,
+    map_extra_fields
+)
 
 # Complete mapping
 CSL_TO_ZOTERO_TYPE = {
@@ -101,46 +126,32 @@ def csl_to_zotero(csl_item):
         "creators": map_creators(csl_item)
     }
 
-    # Map container-title to appropriate Zotero field by type
-    container_map = {
-        "journalArticle": "publicationTitle",
-        "magazineArticle": "publicationTitle",
-        "newspaperArticle": "publicationTitle",
-        "bookSection": "bookTitle",
-        "conferencePaper": "proceedingsTitle",
-        "dictionaryEntry": "dictionaryTitle",
-        "encyclopediaArticle": "encyclopediaTitle"
-    }
+    map_container_title(csl_item, zotero_item, item_type)
+    map_publisher_field(csl_item, zotero_item, item_type)
+    map_genre(csl_item, zotero_item, item_type)
+    map_event(csl_item, zotero_item, item_type)
+    map_title_short(csl_item, zotero_item, item_type)
+    map_note(csl_item, zotero_item, item_type)
+    map_issued_date(csl_item, zotero_item, item_type)
+    
+    map_case_fields(csl_item, zotero_item, item_type)
+    map_bill_fields(csl_item, zotero_item, item_type)
+    map_statute_fields(csl_item, zotero_item, item_type)
+    map_hearing_fields(csl_item, zotero_item, item_type)
+    map_presentation_fields(csl_item, zotero_item, item_type)
+    map_interview_fields(csl_item, zotero_item, item_type)
+    map_audio_fields(csl_item, zotero_item, item_type)
+    map_video_fields(csl_item, zotero_item, item_type)
 
-    if "container-title" in csl_item:
-        mapped_field = container_map.get(item_type)
-        if mapped_field:
-            zotero_item[mapped_field] = csl_item["container-title"]
+    map_doi(csl_item, zotero_item, item_type)
+    map_url(csl_item, zotero_item, item_type)
+    map_pages(csl_item, zotero_item, item_type)
+    map_language(csl_item, zotero_item, item_type)
+    map_abstract(csl_item, zotero_item, item_type)
+    map_access_date(csl_item, zotero_item, item_type)
+    map_tags(csl_item, zotero_item, item_type)
+    map_extra_fields(csl_item, zotero_item, item_type)
 
-# Publisher maps to 'university' for theses, 'institution' for reports, else 'publisher'
-
-    if "publisher" in csl_item:
-        if item_type == "thesis":
-            zotero_item["university"] = csl_item["publisher"]
-        elif item_type == "report":
-                zotero_item["institution"] = csl_item["publisher"]
-        else:
-            zotero_item["publisher"] = csl_item["publisher"]
-
-
-    # Optionally map commonly used Zotero-compatible fields
-    common_field_map = {
-        "abstract": "abstractNote",
-        "URL": "url",
-        "DOI": "DOI",
-        "volume": "volume",
-        "issue": "issue",
-        "page": "pages"
-    }
-
-    for csl_field, zotero_field in common_field_map.items():
-        if zotero_field in allowed_fields and csl_field in csl_item:
-            zotero_item[zotero_field] = csl_item[csl_field]
 
 # debug
     print("[DEBUG] Zotero item before upload:\n", json.dumps(zotero_item, indent=2))
