@@ -117,6 +117,16 @@ def map_case_fields(csl_item, zotero_item, item_type):
     if "issued" in csl_item:
         zotero_item["dateDecided"] = csl_item["issued"].get("raw", "")
 
+    # Handle CSL 'page' or 'pages' → Zotero 'firstPage'
+    if "page" in csl_item or "pages" in csl_item:
+        page_val = csl_item.get("page") or csl_item.get("pages")
+        if isinstance(page_val, str):
+            # If it's a range like '112–120', extract the first page
+            zotero_item["firstPage"] = page_val.split("-")[0].strip()
+        else:
+            zotero_item["firstPage"] = str(page_val)
+
+
 def map_bill_fields(csl_item, zotero_item, item_type):
     """Maps fields for bills."""
     if item_type != "bill":
