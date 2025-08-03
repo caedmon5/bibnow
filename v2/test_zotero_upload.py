@@ -8,6 +8,9 @@ Requires: test_csl_input.json, config.py, zotero_writer.py
 import json
 from zotero_writer import send_to_zotero, validate_zotero_response
 
+from csl_mapper import csl_to_zotero
+zotero_item = csl_to_zotero(csl_input)
+status, response = send_to_zotero(zotero_item)
 
 # Load CSL-JSON test data from file
 with open("test_csl_input.json", "r", encoding="utf-8") as f:

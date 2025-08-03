@@ -14,11 +14,6 @@ import requests
 import json
 from config import ZOTERO_API_KEY, ZOTERO_USER_ID
 
-from csl_mapper import csl_to_zotero
-zotero_item = csl_to_zotero(csl_input)
-status, response = send_to_zotero(zotero_item)
-
-
 # Define base URL for Zotero item upload
 ZOTERO_BASE_URL = f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items"
 
