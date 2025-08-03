@@ -1,3 +1,4 @@
+
 # === Core conditional mappings ===
 
 def map_container_title(csl_item, zotero_item, item_type):
@@ -17,6 +18,18 @@ def map_container_title(csl_item, zotero_item, item_type):
     target = field_map.get(item_type)
     if target:
         zotero_item[target] = container
+
+def extract_year_from_issued(issued):
+    """
+    Extract a formatted string from CSL 'issued' object for Zotero's 'dateDecided'.
+    Supports year, year-month, or full date.
+    """
+    try:
+        parts = issued.get("date-parts", [])[0]
+        return "-".join(str(p) for p in parts)
+    except Exception:
+        return ""
+
 
 def map_publisher_field(csl_item, zotero_item, item_type):
     """Maps CSL 'publisher' to Zotero field (university, institution, or publisher)."""
@@ -74,9 +87,19 @@ def map_issued_date(csl_item, zotero_item, item_type):
 # === Legal/Governmental ===
 
 def map_case_fields(csl_item, zotero_item, item_type):
-    """Maps fields for legal cases."""
+    """
+    Special handling for legal cases in Zotero.
+    - 'title' becomes 'caseName'
+    - 'date' is removed (Zotero doesn't accept it)
+    - 'issued' becomes 'dateDecided'
+    """
     if item_type != "case":
-        return
+    return
+
+    # Remove unsupported Zotero field for 'case' items
+    zotero_item.pop("date", None)
+
+
 
     if "title" in csl_item:
             zotero_item["caseName"] = csl_item["title"]
