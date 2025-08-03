@@ -94,7 +94,7 @@ def map_case_fields(csl_item, zotero_item, item_type):
     - 'issued' becomes 'dateDecided'
     """
     if item_type != "case":
-    return
+        return
 
     # Remove unsupported Zotero field for 'case' items
     zotero_item.pop("date", None)
