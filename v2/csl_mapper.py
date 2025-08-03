@@ -56,7 +56,8 @@ def csl_to_zotero(csl_item):
 
     Ignores fields not in Zotero's schema for now.
     """
-    item_type = CSL_TO_ZOTERO_TYPE.get(csl_item.get("type", "document"), "document")
+    csl_type = csl_item.get("type", "").lower()
+    item_type = CSL_TO_ZOTERO_TYPE.get(csl_type, "document")
 
     # Use allowed field whitelist
     allowed_fields = ZOTERO_ALLOWED_FIELDS.get(item_type, [])
