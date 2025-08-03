@@ -33,7 +33,7 @@ def send_to_zotero(csl_item):
     }
 
     # Wrap CSL item in array — Zotero expects an array of items
-    payload = [csl_item]
+    payload = csl_item if isinstance(csl_item, list) else [csl_item]
 
     try:
         response = requests.post(ZOTERO_BASE_URL, headers=headers, json=payload)
