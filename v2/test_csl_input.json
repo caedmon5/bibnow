@@ -1,12 +1,18 @@
 {
-  "type": "legal_case",
-  "title": "Empire v. Citizen",
+  "type": "book",
+  "title": "Technologies of Empire",
   "author": [
-    { "family": "Cheng", "given": "Mei" }
+    {
+      "family": "Ramos",
+      "given": "Isabel"
+    }
   ],
-  "issued": { "date-parts": [[1999]] },
-  "container-title": "International Legal Review",
-  "page": "112-120",
-  "URL": "https://example.org/case"
+  "issued": {
+    "date-parts": [[2012]]
+  },
+  "publisher": "Colonial Studies Press",
+  "publisher-place": "Madrid",
+  "URL": "https://example.org/book-empire",
+  "page": "123–147"
 }
 

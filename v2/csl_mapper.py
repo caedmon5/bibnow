@@ -78,6 +78,26 @@ CSL_TO_ZOTERO_TYPE = {
     "webpage": "webpage"
 }
 
+def clean_unexpected_fields(zotero_item):
+    """Moves fields not allowed by Zotero to the 'extra' field."""
+    item_type = zotero_item.get("itemType")
+    allowed_fields = set(ZOTERO_ALLOWED_FIELDS.get(item_type, []))
+    extra_lines = []
+
+    for field in list(zotero_item.keys()):
+        if field not in allowed_fields and field != "itemType" and field != "creators":
+            value = zotero_item.pop(field)
+            if isinstance(value, (list, dict)):
+                value = json.dumps(value)
+            extra_lines.append(f"{field}: {value}")
+
+    if extra_lines:
+        if "extra" in zotero_item and zotero_item["extra"].strip():
+            zotero_item["extra"] += "\n" + "\n".join(extra_lines)
+        else:
+            zotero_item["extra"] = "\n".join(extra_lines)
+
+
 def map_creators(csl_item):
     """
     Convert CSL 'author' and 'editor' fields into Zotero-style 'creators' array.
@@ -154,29 +174,10 @@ def csl_to_zotero(csl_item):
 
     from zotero_allowed_fields import ZOTERO_ALLOWED_FIELDS
 
-def clean_unexpected_fields(zotero_item):
-    """Moves fields not allowed by Zotero to the 'extra' field."""
-    item_type = zotero_item.get("itemType")
-    allowed_fields = set(ZOTERO_ALLOWED_FIELDS.get(item_type, []))
-    extra_lines = []
+    clean_unexpected_fields(zotero_item)
 
-    for field in list(zotero_item.keys()):
-        if field not in allowed_fields and field != "itemType" and field != "creators":
-            value = zotero_item.pop(field)
-            if isinstance(value, (list, dict)):
-                value = json.dumps(value)
-            extra_lines.append(f"{field}: {value}")
-
-    if extra_lines:
-        if "extra" in zotero_item and zotero_item["extra"].strip():
-            zotero_item["extra"] += "\n" + "\n".join(extra_lines)
-        else:
-            zotero_item["extra"] = "\n".join(extra_lines)
-
-clean_unexpected_fields(zotero_item)
-
-
-# debug
+ 
+    # debug
     print("[DEBUG] Zotero item before upload:\n", json.dumps(zotero_item, indent=2))
 
     return zotero_item
