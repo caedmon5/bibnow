@@ -110,8 +110,6 @@ def map_case_fields(csl_item, zotero_item, item_type):
     # Optionally map other legal-specific fields if needed
     if "URL" in csl_item:
         zotero_item["url"] = csl_item["URL"]
-    if "page" in csl_item:
-        zotero_item["pages"] = csl_item["page"]
     if "authority" in csl_item:
         zotero_item["court"] = csl_item["authority"]
     if "issued" in csl_item:
