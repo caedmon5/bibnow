@@ -114,19 +114,20 @@ def map_case_fields(csl_item, zotero_item, item_type):
         zotero_item["court"] = csl_item["authority"]
     if "issued" in csl_item:
         date_parts = csl_item.get("issued", {}).get("date-parts")
-            if date_parts and isinstance(date_parts, list):
-                try:
-                    parts = date_parts[0]
-                    if len(parts) == 3:
-                        zotero_item["dateDecided"] = f"{parts[0]:04d}-{parts[1]:02d}-{parts[2]:02d}"
-                    elif len(parts) == 2:
-                        zotero_item["dateDecided"] = f"{parts[0]:04d}-{parts[1]:02d}"
-                    elif len(parts) == 1:
-                        zotero_item["dateDecided"] = f"{parts[0]:04d}"
-                except Exception:
-                    pass
-        zotero_item["dateDecided"] = csl_item["issued"].get("raw", "")
-
+        if date_parts and isinstance(date_parts, list):
+            try:
+                parts = date_parts[0]
+                if len(parts) == 3:
+                    zotero_item["dateDecided"] = f"{parts[0]:04d}-{parts[1]:02d}-{parts[2]:02d}"
+                elif len(parts) == 2:
+                    zotero_item["dateDecided"] = f"{parts[0]:04d}-{parts[1]:02d}"
+                elif len(parts) == 1:
+                    zotero_item["dateDecided"] = f"{parts[0]:04d}"
+            except Exception:
+                zotero_item["dateDecided"] = csl_item["issued"].get("raw", "")
+        else:
+            zotero_item["dateDecided"] = csl_item["issued"].get("raw", "")
+        
     # Handle CSL 'page' or 'pages' → Zotero 'firstPage'
     if "page" in csl_item or "pages" in csl_item:
         page_val = csl_item.get("page") or csl_item.get("pages")
