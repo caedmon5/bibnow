@@ -24,10 +24,20 @@ status_code, response = send_to_zotero(zotero_item)
 print(f"\nStatus Code: {status_code}")
 print("Raw Zotero Response:\n", json.dumps(response, indent=2) if isinstance(response, dict) else response)
 
-# Interpret and summarize result
-success, message, zotero_key = validate_zotero_response(status_code, response)
-print(f"\nSuccess? {success}")
-print(f"Message: {message}")
-print(f"Zotero Key: {zotero_key}")
-if zotero_key:
-    print(f"Zotero URL: https://www.zotero.org/{ZOTERO_USERNAME}/items/{zotero_key}")
+# Parse Zotero API response
+success = response.get("success", {})
+failed = response.get("failed", {})
+zotero_key = list(success.values())[0] if success else None
+
+print(f"\nSuccess? {bool(success) and not failed}")
+if success and not failed:
+    print("Message: Upload successful")
+    print(f"Zotero Key: {zotero_key}")
+    print(f"Zotero URL: https://www.zotero.org/users/{ZOTERO_USER_ID}/items/{zotero_key}")
+elif failed:
+    failure = list(failed.values())[0]
+    print("Message: Upload failed")
+    print(f"Zotero Error: {failure.get('message', 'Unknown error')}")
+else:
+    print("Message: Upload status unclear")
+
