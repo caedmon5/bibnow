@@ -186,6 +186,8 @@ def map_url(csl_item, zotero_item, item_type):
         zotero_item["url"] = csl_item["URL"]
 
 def map_pages(csl_item, zotero_item, item_type):
+    if item_type == "case":
+        return  # 'pages' is not valid for Zotero case
     if "page" in csl_item:
         zotero_item["pages"] = csl_item["page"]
 
