@@ -36,7 +36,7 @@ def send_to_zotero(csl_item):
     payload = csl_item if isinstance(csl_item, list) else [csl_item]
 
 #debug
-    print("[DEBUG] Final payload:\n", json.dumps(payload, indent=2))
+#    print("[DEBUG] Final payload:\n", json.dumps(payload, indent=2))
 
 
     try:

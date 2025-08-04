@@ -132,7 +132,7 @@ def csl_to_zotero(csl_item):
     csl_type = csl_item.get("type", "").lower()
 
     # debug
-    print(f"[DEBUG] Raw CSL type: {csl_item.get('type')} → Normalised: {csl_type}")
+    # print(f"[DEBUG] Raw CSL type: {csl_item.get('type')} → Normalised: {csl_type}")
 
     item_type = CSL_TO_ZOTERO_TYPE.get(csl_type, "document")
 
@@ -183,6 +183,6 @@ def csl_to_zotero(csl_item):
 
  
     # debug
-    print("[DEBUG] Zotero item before upload:\n", json.dumps(zotero_item, indent=2))
+    # print("[DEBUG] Zotero item before upload:\n", json.dumps(zotero_item, indent=2))
 
     return zotero_item
