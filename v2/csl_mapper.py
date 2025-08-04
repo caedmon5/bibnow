@@ -68,6 +68,7 @@ CSL_TO_ZOTERO_TYPE = {
     "personal_communication": "email",
     "post": "forumPost",
     "post-weblog": "blogPost",
+    "presentation": "presentation",
     "report": "report",
     "review": "journalArticle",
     "review-book": "journalArticle",
