@@ -19,7 +19,7 @@ import json
 from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero
-
+import sys
 
 def load_csl_items_from_input_file(filepath="input.txt"):
     with open(filepath, "r", encoding="utf-8") as f:
