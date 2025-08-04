@@ -229,7 +229,7 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
         "publisher", "page", "note", "language", "accessed", "abstract",
-        "title-short", "genre", "event", "keywords"
+        "title-short", "genre", "event", "keywords", "tags"
     }
     for k, v in csl_item.items():
         if k not in standard_keys:
