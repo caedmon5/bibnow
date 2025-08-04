@@ -172,6 +172,12 @@ def csl_to_zotero(csl_item):
     map_tags(csl_item, zotero_item, item_type)
     map_extra_fields(csl_item, zotero_item, item_type)
 
+# Patch all Zotero types to allow 'tags' globally (runtime override)
+    for fields in ZOTERO_ALLOWED_FIELDS.values():
+        if "tags" not in fields:
+            fields.append("tags")
+
+
     clean_unexpected_fields(zotero_item)
 
  
