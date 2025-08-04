@@ -19,6 +19,7 @@ import json
 from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero
+from clipboard_loader import load_clipboard_or_file
 import sys
 
 def load_csl_items_from_input_file(filepath="input.txt"):
@@ -35,7 +36,9 @@ def load_csl_items_from_input_file(filepath="input.txt"):
 
 
 if __name__ == "__main__":
-    items = load_csl_items_from_input_file("input.txt")
+    input_text = load_clipboard_or_file("input.txt")
+    data = json.loads(input_text)
+    items = [data] if isinstance(data, dict) else data
 
     for csl_item in items:
         zotero_item = csl_to_zotero(csl_item)
