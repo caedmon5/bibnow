@@ -74,7 +74,7 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
         "zotero_url": zotero_url,
         "responsible_party": responsible,
         "record_title": title,
-        "record_title_firstword": title_firstword,
+        "record_title_short": title_part,
         "record_year": year,
         "callnumber": zotero_item.get("callNumber", ""),
         "baseline_citation": f"{responsible}. {year}. {title}.",
