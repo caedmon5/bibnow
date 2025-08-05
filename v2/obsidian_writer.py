@@ -23,7 +23,7 @@ def generate_citekey(zotero_item: dict) -> str:
     year = zotero_item.get("date", "")[:4] or "XXXX"
     title = zotero_item.get("title", "")
     title_words = re.findall(r"\b\w+\b", title)
-    title_slug = ''.join(word.capitalize() for word in title_words[:4])
+    title_part = ''.join(word.capitalize() for word in title_words[:4])
 
     return f"{lastname}{year}{title_slug}"
 
