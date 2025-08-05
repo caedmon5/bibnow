@@ -20,6 +20,7 @@ from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero
 from clipboard_loader import load_clipboard_or_file
+from obsidian_writer import build_markdown_from_zotero, generate_filename, write_obsidian_note
 import sys
 
 def load_csl_items_from_input_file(filepath="input.txt"):
@@ -42,8 +43,11 @@ if __name__ == "__main__":
 
     for csl_item in items:
         zotero_item = csl_to_zotero(csl_item)
+        # Generate markdown and filename
+        citekey = "TEMPKEY"  # Replace with final logic later
+        filename = generate_filename(zotero_item)
+        markdown = build_markdown_from_zotero(zotero_item, citekey)
 
-        zotero_item = csl_to_zotero(csl_item)
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
             if 200 <= status_code < 300:
@@ -56,7 +60,11 @@ if __name__ == "__main__":
             else:
                 print(f"❌ Upload failed. Status: {status_code}")
                 print(json.dumps(response, indent=2))
+            write_obsidian_note(markdown, filename)
+            print(f"📄 Markdown written to: {filename}")
+
         else:
             print("[DRY-RUN] No upload. Final mapped Zotero item:\n")
             print(json.dumps(zotero_item, indent=2))
-
+            print(f"\n📄 Would write: {filename}")
+            print(markdown)
