@@ -20,7 +20,7 @@ from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero
 from clipboard_loader import load_clipboard_or_file
-from obsidian_writer import build_markdown_from_zotero, generate_filename, write_obsidian_note
+from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
 
 def load_csl_items_from_input_file(filepath="input.txt"):
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     for csl_item in items:
         zotero_item = csl_to_zotero(csl_item)
         # Generate markdown and filename
-        citekey = "TEMPKEY"  # Replace with final logic later
+        citekey = generate_citekey(zotero_item)
         filename = generate_filename(zotero_item)
         markdown = build_markdown_from_zotero(zotero_item, citekey)
 
