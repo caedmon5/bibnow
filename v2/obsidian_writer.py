@@ -25,7 +25,7 @@ def generate_citekey(zotero_item: dict) -> str:
     title_words = re.findall(r"\b\w+\b", title)
     title_part = ''.join(word.capitalize() for word in title_words[:4])
 
-    return f"{lastname}{year}{title_slug}"
+    return f"{lastname}{year}{title_part}"
 
 def generate_filename(zotero_item: dict) -> str:
     creators = zotero_item.get("creators", [])

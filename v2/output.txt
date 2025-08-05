@@ -1,0 +1,147 @@
+[DEBUG] Raw CSL type: article-journal → Normalised: article-journal
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "journalArticle",
+  "title": "Linguistic Landscapes in Urban Grocery Stores",
+  "date": "2023-06-01",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Lili",
+      "lastName": "Chen"
+    }
+  ],
+  "publicationTitle": "Journal of Sociolinguistics",
+  "DOI": "10.1234/jsl.2023.002",
+  "url": "https://doi.org/10.1234/jsl.2023.002",
+  "pages": "145-167",
+  "abstractNote": "This article examines multilingual signage and packaging in grocery stores to understand the linguistic hierarchies at play.",
+  "extra": "\nvolume: 27\nissue: 2\ntags: [{\"tag\": \"linguistic landscapes\"}, {\"tag\": \"multilingualism\"}, {\"tag\": \"signage\"}, {\"tag\": \"urban studies\"}]"
+}
+[DEBUG] Raw CSL type: article-journal → Normalised: article-journal
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "journalArticle",
+  "title": "Linguistic Landscapes in Urban Grocery Stores",
+  "date": "2023-06-01",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Lili",
+      "lastName": "Chen"
+    }
+  ],
+  "publicationTitle": "Journal of Sociolinguistics",
+  "DOI": "10.1234/jsl.2023.002",
+  "url": "https://doi.org/10.1234/jsl.2023.002",
+  "pages": "145-167",
+  "abstractNote": "This article examines multilingual signage and packaging in grocery stores to understand the linguistic hierarchies at play.",
+  "extra": "\nvolume: 27\nissue: 2\ntags: [{\"tag\": \"linguistic landscapes\"}, {\"tag\": \"multilingualism\"}, {\"tag\": \"signage\"}, {\"tag\": \"urban studies\"}]"
+}
+[DRY-RUN] No upload. Final mapped Zotero item:
+
+{
+  "itemType": "journalArticle",
+  "title": "Linguistic Landscapes in Urban Grocery Stores",
+  "date": "2023-06-01",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Lili",
+      "lastName": "Chen"
+    }
+  ],
+  "publicationTitle": "Journal of Sociolinguistics",
+  "DOI": "10.1234/jsl.2023.002",
+  "url": "https://doi.org/10.1234/jsl.2023.002",
+  "pages": "145-167",
+  "abstractNote": "This article examines multilingual signage and packaging in grocery stores to understand the linguistic hierarchies at play.",
+  "extra": "\nvolume: 27\nissue: 2\ntags: [{\"tag\": \"linguistic landscapes\"}, {\"tag\": \"multilingualism\"}, {\"tag\": \"signage\"}, {\"tag\": \"urban studies\"}]"
+}
+[DEBUG] Raw CSL type: presentation → Normalised: presentation
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "document",
+  "title": "AI-Assisted Indexing for Multilingual Packaging",
+  "date": "2025-07-21",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Daniel Paul",
+      "lastName": "O'Donnell"
+    }
+  ],
+  "url": "https://dh2025.pt/posters/odonnell",
+  "abstractNote": "We present a method for using LLMs to extract and normalize metadata from product packaging in low-resource languages.",
+  "extra": "tags: [{\"tag\": \"AI\"}, {\"tag\": \"packaging\"}, {\"tag\": \"linguistic data\"}, {\"tag\": \"digital humanities\"}]"
+}
+[DEBUG] Raw CSL type: presentation → Normalised: presentation
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "document",
+  "title": "AI-Assisted Indexing for Multilingual Packaging",
+  "date": "2025-07-21",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Daniel Paul",
+      "lastName": "O'Donnell"
+    }
+  ],
+  "url": "https://dh2025.pt/posters/odonnell",
+  "abstractNote": "We present a method for using LLMs to extract and normalize metadata from product packaging in low-resource languages.",
+  "extra": "tags: [{\"tag\": \"AI\"}, {\"tag\": \"packaging\"}, {\"tag\": \"linguistic data\"}, {\"tag\": \"digital humanities\"}]"
+}
+[DRY-RUN] No upload. Final mapped Zotero item:
+
+{
+  "itemType": "document",
+  "title": "AI-Assisted Indexing for Multilingual Packaging",
+  "date": "2025-07-21",
+  "creators": [
+    {
+      "creatorType": "author",
+      "firstName": "Daniel Paul",
+      "lastName": "O'Donnell"
+    }
+  ],
+  "url": "https://dh2025.pt/posters/odonnell",
+  "abstractNote": "We present a method for using LLMs to extract and normalize metadata from product packaging in low-resource languages.",
+  "extra": "tags: [{\"tag\": \"AI\"}, {\"tag\": \"packaging\"}, {\"tag\": \"linguistic data\"}, {\"tag\": \"digital humanities\"}]"
+}
+[DEBUG] Raw CSL type: legal_case → Normalised: legal_case
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "case",
+  "creators": [],
+  "caseName": "Smith v. Alberta",
+  "court": "Supreme Court of Canada",
+  "dateDecided": "2021-03-12",
+  "firstPage": "123",
+  "abstractNote": "This ruling redefined the application of the Charter in provincial data regulation cases.",
+  "extra": "\nauthority: Supreme Court of Canada\ntags: [{\"tag\": \"Charter\"}, {\"tag\": \"data law\"}, {\"tag\": \"Alberta\"}, {\"tag\": \"privacy\"}]"
+}
+[DEBUG] Raw CSL type: legal_case → Normalised: legal_case
+[DEBUG] Zotero item before upload:
+ {
+  "itemType": "case",
+  "creators": [],
+  "caseName": "Smith v. Alberta",
+  "court": "Supreme Court of Canada",
+  "dateDecided": "2021-03-12",
+  "firstPage": "123",
+  "abstractNote": "This ruling redefined the application of the Charter in provincial data regulation cases.",
+  "extra": "\nauthority: Supreme Court of Canada\ntags: [{\"tag\": \"Charter\"}, {\"tag\": \"data law\"}, {\"tag\": \"Alberta\"}, {\"tag\": \"privacy\"}]"
+}
+[DRY-RUN] No upload. Final mapped Zotero item:
+
+{
+  "itemType": "case",
+  "creators": [],
+  "caseName": "Smith v. Alberta",
+  "court": "Supreme Court of Canada",
+  "dateDecided": "2021-03-12",
+  "firstPage": "123",
+  "abstractNote": "This ruling redefined the application of the Charter in provincial data regulation cases.",
+  "extra": "\nauthority: Supreme Court of Canada\ntags: [{\"tag\": \"Charter\"}, {\"tag\": \"data law\"}, {\"tag\": \"Alberta\"}, {\"tag\": \"privacy\"}]"
+}
