@@ -55,6 +55,8 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
     )
     year = zotero_item.get("date", "")[:4] or "XXXX"
     title = zotero_item.get("title", "Untitled")
+    title_words = re.findall(r"\b\w+\b", title)
+    title_part = " ".join(word.capitalize() for word in title_words[:TITLE_WORD_LIMIT])
     extra = zotero_item.get("extra", "None supplied.")
     abstract = zotero_item.get("abstractNote", "None supplied")
     tags = zotero_item.get("tags", [])
