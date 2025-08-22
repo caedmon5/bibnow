@@ -34,7 +34,8 @@ def generate_filename(zotero_item: dict) -> str:
         first_creator = creators[0]
         lastname = first_creator.get("lastName") or first_creator.get("name", "Unknown")
     else:
-        lastname = "Unknown"
+        lastname = zotero_item.get("court", "") or zotero_item.get("authority", "") or "Unknown"
+        lastname = re.findall(r"\w+", lastname)[-1] if lastname else "Unknown"
 
     if USE_ET_AL and len(creators) > 1:
         lastname += " et al"
