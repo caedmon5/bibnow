@@ -46,13 +46,12 @@ if __name__ == "__main__":
         # Generate markdown and filename
         citekey = generate_citekey(zotero_item)
         filename = generate_filename(zotero_item)
-        markdown = build_markdown_from_zotero(zotero_item, citekey)
 
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
             if 200 <= status_code < 300:
-                key = next(iter(response.get("success", {}).values()), None)
-                if key:
+                zotero_key = next(iter(response.get("success", {}).values()), None)
+                if zotero_key:
                     print(f"✅ Upload successful. Zotero Key: {key}")
                     print(f"🔗 Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{key}")
                 else:
@@ -60,6 +59,8 @@ if __name__ == "__main__":
             else:
                 print(f"❌ Upload failed. Status: {status_code}")
                 print(json.dumps(response, indent=2))
+        markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key)
+
             write_obsidian_note(markdown, filename)
             print(f"📄 Markdown written to: {filename}")
 
