@@ -2,7 +2,7 @@ import os
 import re
 from string import Template
 
-from config import ZOTERO_USER_ID
+from config import (ZOTERO_USER_ID, ZOTERO_USERNAME)
 from obsidian_writer_config import (
     OUTPUT_DIR,
     FILENAME_PREFIX,
