@@ -27,7 +27,7 @@ def generate_citekey(zotero_item: dict) -> str:
 
 def generate_filename(zotero_item: dict) -> str:
     creators = zotero_item.get("creators", [])
-    title = zotero_item.get("title", "")
+    title = zotero_item.get("title") or zotero_item.get("caseName", "Untitled")
     date = zotero_item.get("date", "")[:4] or "XXXX"
 
     if creators:
