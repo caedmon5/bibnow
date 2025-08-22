@@ -52,8 +52,8 @@ if __name__ == "__main__":
             if 200 <= status_code < 300:
                 zotero_key = next(iter(response.get("success", {}).values()), None)
                 if zotero_key:
-                    print(f"✅ Upload successful. Zotero Key: {key}")
-                    print(f"🔗 Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{key}")
+                    print(f"✅ Upload successful. Zotero Key: {zotero_key}")
+                    print(f"🔗 Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{zotero_key}")
                 else:
                     print(f"⚠️ Upload succeeded but no key returned.\n{json.dumps(response, indent=2)}")
             else:
