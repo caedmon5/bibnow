@@ -49,12 +49,15 @@ def generate_filename(zotero_item: dict) -> str:
 def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str = None) -> str:
     # Prepare values
     creators = zotero_item.get("creators", [])
-    responsible = ", ".join(
-        f"{c.get('firstName', '')} {c.get('lastName', c.get('name', ''))}".strip()
-        for c in creators
-    )
-    year = zotero_item.get("date", "")[:4] or "XXXX"
-    title = zotero_item.get("title", "Untitled")
+    if creators:
+        responsible = ", ".join(
+            f"{c.get('firstName', '')} {c.get('lastName', c.get('name', ''))}".strip()
+            for c in creators
+        )
+    else:
+        responsible = zotero_item.get("court","") or zotero_item.get("authority","")
+    year = (zotero_item.get("date") or zotero_item.get("dateDecided") or "")[:4] or "XXXX"
+    title = zotero_item.get("title") or zotero_item.get("caseName") or "Untitled"
     title_words = re.findall(r"\b\w+\b", title)
     title_part = " ".join(word.capitalize() for word in title_words[:TITLE_WORD_LIMIT])
     extra = zotero_item.get("extra", "None supplied.")
