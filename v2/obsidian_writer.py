@@ -62,7 +62,7 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
     tags = zotero_item.get("tags", [])
     tag_list = [t.get("tag") for t in tags if t.get("tag")]
     wikilinks = ", ".join(f"[[{t}]]" for t in tag_list)
-    zotero_url = f"https://www.zotero.org/users/{ZOTERO_USER_ID}/items/{zotero_key}" if zotero_key else ""
+    zotero_url = f"https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{zotero_key}" if zotero_key else ""
 
     # Load template
     with open(TEMPLATE_PATH, encoding="utf-8") as f:
