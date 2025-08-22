@@ -59,12 +59,14 @@ if __name__ == "__main__":
             else:
                 print(f"❌ Upload failed. Status: {status_code}")
                 print(json.dumps(response, indent=2))
-        markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key)
+            # ✅ Markdown generation after upload (using zotero_key if present)
+            markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key)
 
             write_obsidian_note(markdown, filename)
             print(f"📄 Markdown written to: {filename}")
 
         else:
+            # Dry-run mode
             print("[DRY-RUN] No upload. Final mapped Zotero item:\n")
             print(json.dumps(zotero_item, indent=2))
             print(f"\n📄 Would write: {filename}")
