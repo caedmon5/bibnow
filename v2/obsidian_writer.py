@@ -14,14 +14,12 @@ from obsidian_writer_config import (
 def generate_citekey(zotero_item: dict) -> str:
     creators = zotero_item.get("creators", [])
     if creators:
-        first_creator = creators[0]
-        lastname = first_creator.get("lastName") or first_creator.get("name", "unknown")
+        last_name = creators[0].get("lastName") or creators[0].get("name", "Unknown")
     else:
-        lastname = "unknown"
-
-    lastname = re.sub(r"[^\w\s]", "", lastname).capitalize()
-    year = zotero_item.get("date", "")[:4] or "XXXX"
-    title = zotero_item.get("title", "")
+        last_name = zotero_item.get("court", "") or zotero_item.get("authority", "") or "Unknown"
+        last_name = re.findall(r"\w+", last_name)[-1] if last_name else "Unknown"
+    year = (zotero_item.get("date") or zotero_item.get("dateDecided") or "")[:4] or "XXXX"
+    title = zotero_item.get("title") or zotero_item.get("caseName") or "Untitled"
     title_words = re.findall(r"\b\w+\b", title)
     title_part = ''.join(word.capitalize() for word in title_words[:4])
 
