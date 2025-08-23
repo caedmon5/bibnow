@@ -1,5 +1,9 @@
 # config.py
 import os
+from dotenv import load_dotenv
+
+# Auto-load .env file if present in project root
+load_dotenv()
 
 ZOTERO_API_KEY    = os.getenv("ZOTERO_API_KEY")
 LIBRARY_TYPE      = os.getenv("ZOTERO_LIBRARY", "user").lower()  # "user" | "group"
