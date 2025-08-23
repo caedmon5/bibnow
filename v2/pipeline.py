@@ -38,6 +38,9 @@ def load_csl_items_from_input_file(filepath="input.txt"):
 
 if __name__ == "__main__":
     input_text = load_clipboard_or_file("input.txt")
+    t = (input_text or "").lstrip()
+    if not (t.startswith("{") or t.startswith("[")):
+        raise ValueError("Input is not JSON. v2 expects CSL JSON. If you have BibTeX, switch back to v1 or refactor the input as CSL.")
     data = json.loads(input_text)
     items = [data] if isinstance(data, dict) else data
 
@@ -50,7 +53,7 @@ if __name__ == "__main__":
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
             if 200 <= status_code < 300:
-                zotero_key = next(iter(response.get("success", {}).values()), None)
+                zotero_key = next(iter(response.get("successful", {}).values()), None)
                 if zotero_key:
                     print(f"✅ Upload successful. Zotero Key: {zotero_key}")
                     print(f"🔗 Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{zotero_key}")
