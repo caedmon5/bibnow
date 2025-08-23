@@ -23,6 +23,32 @@ from clipboard_loader import load_clipboard_or_file
 from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
 
+def _extract_first_key(response: dict):
+    """
+    Return the first successful item's key from a Zotero write response, or None.
+    Response format: {"successful": {"0": { "key": "...", ...}, ...}, ...}
+    """
+    if not isinstance(response, dict):
+        return None
+    successful = response.get("successful", {})
+    if not isinstance(successful, dict) or not successful:
+        return None
+    first = next(iter(successful.values()))
+    return first.get("key")
+
+def _extract_all_keys(response: dict):
+    """
+    Return a list of all successful item keys from a Zotero write response.
+    """
+    if not isinstance(response, dict):
+        return []
+    successful = response.get("successful", {})
+    if not isinstance(successful, dict) or not successful:
+        return []
+    return [v.get("key") for v in successful.values() if isinstance(v, dict) and v.get("key")]
+
+
+
 def load_csl_items_from_input_file(filepath="input.txt"):
     with open(filepath, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -53,7 +79,12 @@ if __name__ == "__main__":
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
             if 200 <= status_code < 300:
-                zotero_key = next(iter(response.get("successful", {}).values()), None)
+                successful = response.get("successful", {})
+                zotero_key = None
+                if successful:
+                    first_item = next(iter(successful.values()))
+                    zotero_key = first_item.get("key")
+
                 if zotero_key:
                     print(f"✅ Upload successful. Zotero Key: {zotero_key}")
                     print(f"🔗 Zotero URL: https://www.zotero.org/users/{ZOTERO_USERNAME}/items/{zotero_key}")
