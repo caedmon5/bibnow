@@ -1,0 +1,19 @@
+# Bibnow v2.0.0
+
+**Highlights**
+- CSL-JSON only ingestion (clipboard first, fallback to `v2/input.txt`)
+- Safer Zotero uploads with clear success/error and correct public links
+- Legal case mapping: `caseName`, `court`/`authority`, `dateDecided`
+- Keywords as string *or* list
+- Single-field creators (`"name"`/`"literal"`) for institutions
+- Obsidian notes from template with tidy filenames
+- Secrets via `.env` (auto-loaded), no keys in code
+- Linux + Android/Termux support
+
+**Breaking change**
+- BibTeX is no longer accepted directly in v2 (convert to CSL-JSON first).
+
+**Setup**
+- `pip install -r requirements.txt`
+- `cp .env.example .env` → fill in Zotero details + vault path
+- `python3 v2/pipeline.py --commit`
