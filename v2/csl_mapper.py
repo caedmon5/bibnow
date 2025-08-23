@@ -109,11 +109,21 @@ def map_creators(csl_item):
         if role in csl_item:
             for person in csl_item[role]:
                 if isinstance(person, dict):
-                    creators.append({
-                        "creatorType": role,
-                        "firstName": person.get("given", ""),
-                        "lastName": person.get("family", "")
-                    })
+                    # Support single-field institutional creators:
+                    # CSL often uses "literal"; some sources use "name".
+                    literal = person.get("literal") or person.get("name")
+                    if literal:
+                        creators.append({
+                            "creatorType": role,
+                            "name": literal
+                        })
+                    else:
+                        creators.append({
+                            "creatorType": role,
+                            "firstName": person.get("given", ""),
+                            "lastName": person.get("family", "")
+                        })
+
                 elif isinstance(person, str):
                     creators.append({
                         "creatorType": role,
