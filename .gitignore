@@ -1,8 +1,9 @@
 # Ignore secrets and generated content
-config.py
+config_local.py
 __pycache__/
 *.pyc
 *.log
+.env
 
 # Output files
 output/

@@ -1,8 +1,10 @@
-bibtexparser==1.4.3
-certifi==2025.6.15
-charset-normalizer==3.4.2
-idna==3.10
-pyparsing==3.2.3
-pyperclip==1.9.0
-requests==2.32.4
-urllib3==2.5.0
+# Third-party dependencies for Bibnow v2
+
+# For Zotero API calls (zotero_writer.py)
+requests>=2.31.0
+
+# For clipboard access on Linux (clipboard_loader.py)
+pyperclip>=1.9.0
+
+# Load .env files automatically instead of manual `export`
+python-dotenv>=1.0.1
