@@ -67,6 +67,7 @@ if __name__ == "__main__":
 
         else:
             # Dry-run mode
+            markdown = build_markdown_from_zotero(zotero_item, citekey)
             print("[DRY-RUN] No upload. Final mapped Zotero item:\n")
             print(json.dumps(zotero_item, indent=2))
             print(f"\n📄 Would write: {filename}")
