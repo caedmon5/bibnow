@@ -220,9 +220,14 @@ def map_access_date(csl_item, zotero_item, item_type):
             zotero_item["accessDate"] = csl_item["accessed"]["raw"]
 
 def map_tags(csl_item, zotero_item, item_type):
-    if "keywords" in csl_item:
-        tags = [t.strip() for t in csl_item["keywords"].split(",")]
-        zotero_item["tags"] = [{"tag": t} for t in tags if t]
+    kw = csl_item.get("keywords")
+    if not kw:
+        return
+    if isinstance(kw, list):
+        tags = [str(t).strip() for t in kw]
+    else:
+        tags = [t.strip() for t in str(kw).split(",")]
+    zotero_item["tags"] = [{"tag": t} for t in tags if t]
 
 def map_extra_fields(csl_item, zotero_item, item_type):
     """Catch-all for nonstandard CSL fields."""

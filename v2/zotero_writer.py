@@ -12,14 +12,20 @@ Assumptions:
 
 import requests
 import json
-from config import ZOTERO_API_KEY, ZOTERO_USER_ID
+from config import ZOTERO_API_KEY, ZOTERO_USER_ID, ZOTERO_GROUP_ID, LIBRARY_TYPE
+
+# Choose correct API base (user vs group)
+if LIBRARY_TYPE == "group":
+    API_BASE = f"https://api.zotero.org/groups/{ZOTERO_GROUP_ID}"
+else:
+    API_BASE = f"https://api.zotero.org/users/{ZOTERO_USER_ID}"
 
 # Define base URL for Zotero item upload
-ZOTERO_BASE_URL = f"https://api.zotero.org/users/{ZOTERO_USER_ID}/items"
+ZOTERO_BASE_URL = f"{API_BASE}/items"
 
 def send_to_zotero(csl_item):
     """
-    Send a CSL-JSON bibliographic item to Zotero via their API.
+    Send a zotero-mapped bibliographic item to Zotero via their API.
 
     Parameters:
         csl_item (dict): A CSL-JSON bibliographic entry.
