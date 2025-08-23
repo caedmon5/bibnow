@@ -12,3 +12,16 @@ output/
 
 input.txt
 input.txt
+# runtime & local-only
+/output/
+/__pycache__/
+/*.pyc
+/input.txt
+/output.txt
+/dir.txt
+# secrets
+.env
+config_local.py
+v2/config_local.py
+# optional: if you keep test fixtures elsewhere
+v2/input.txt
