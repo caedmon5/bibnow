@@ -99,19 +99,21 @@ def map_case_fields(csl_item, zotero_item, item_type):
     # Remove unsupported Zotero field for 'case' items
     zotero_item.pop("date", None)
 
-
-
-    if "title" in csl_item:
-            zotero_item["caseName"] = csl_item["title"]
-            # Important: remove 'title' if it was auto-mapped
-            if "title" in zotero_item:
-                del zotero_item["title"]
+    # Case name: prefer explicit CSL 'caseName', else fall back to 'title'
+    if csl_item.get("caseName"):
+        zotero_item["caseName"] = csl_item["caseName"]
+    elif csl_item.get("title"):
+        zotero_item["caseName"] = csl_item["title"]
+    # Ensure plain 'title' does not linger and get echoed into 'extra'
+    zotero_item.pop("title", None)
 
     # Optionally map other legal-specific fields if needed
     if "URL" in csl_item:
         zotero_item["url"] = csl_item["URL"]
-    if "authority" in csl_item:
-        zotero_item["court"] = csl_item["authority"]
+    # Court: prefer explicit 'court' if present, else fall back to 'authority'
+    court_val = csl_item.get("court") or csl_item.get("authority")
+    if court_val:
+        zotero_item["court"] = court_val
     if "issued" in csl_item:
         date_parts = csl_item.get("issued", {}).get("date-parts")
         if date_parts and isinstance(date_parts, list):
@@ -234,7 +236,9 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
         "publisher", "page", "note", "language", "accessed", "abstract",
-        "title-short", "genre", "event", "keywords"
+        "title-short", "genre", "event", "keywords",
+        # keep case-specific fields out of 'extra' if we mapped them
+        "caseName", "court", "authority"
     }
     for k, v in csl_item.items():
         if k not in standard_keys:
