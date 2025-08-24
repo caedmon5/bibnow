@@ -240,7 +240,7 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
         "publisher", "page", "note", "language", "accessed", "abstract",
-        "title-short", "genre", "event", "keywords", "keyword"
+        "title-short", "genre", "event", "keywords", "keyword", "id", "section", "category", "topic"
         # keep case-specific fields out of 'extra' if we mapped them
         "caseName", "court", "authority"
     }
