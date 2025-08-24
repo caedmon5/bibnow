@@ -63,7 +63,14 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
     abstract = zotero_item.get("abstractNote", "None supplied")
     tags = zotero_item.get("tags", [])
     tag_list = [t.get("tag") for t in tags if t.get("tag")]
-    wikilinks = ", ".join(f"[[{t}]]" for t in tag_list)
+
+    # --- NEW keyword renderings ---
+    keywords_plain = ", ".join(tag_list) if tag_list else ""
+    keywords_wikilinks_list = [f"[[{t}]]" for t in tag_list]
+    keywords_wikilinks_csv = ", ".join(keywords_wikilinks_list) if keywords_wikilinks_list else ""
+    keywords_yaml = "\n".join(f'- "{w}"' for w in keywords_wikilinks_list) if keywords_wikilinks_list else ""
+
+
     # Use username for user libraries (web UI), group ID for groups
     if zotero_key:
         if "ZOTERO_GROUP_ID" in globals() and ZOTERO_GROUP_ID:
@@ -90,12 +97,16 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
         "callnumber": zotero_item.get("callNumber", ""),
         "baseline_citation": f"{responsible}. {year}. {title}.",
         "abstract": abstract,
-        "keywords_display": wikilinks,
+        "keywords": keywords_plain,
+        "keywords_display": keywords_wikilinks_csv,
+        "keywords_yaml": keywords_yaml,
         "extra": extra
     })
 
 def write_obsidian_note(markdown: str, filename: str):
     path = os.path.join(OUTPUT_DIR, filename)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)  # ensure directory exists
     with open(path, "w", encoding="utf-8") as f:
         f.write(markdown)
     return path
+
