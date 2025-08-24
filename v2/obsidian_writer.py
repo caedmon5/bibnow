@@ -68,7 +68,7 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
     keywords_plain = ", ".join(tag_list) if tag_list else ""
     keywords_wikilinks_list = [f"[[{t}]]" for t in tag_list]
     keywords_wikilinks_csv = ", ".join(keywords_wikilinks_list) if keywords_wikilinks_list else ""
-    keywords_yaml = "\n".join(f'- "{w}"' for w in keywords_wikilinks_list) if keywords_wikilinks_list else ""
+    keywords_yaml = "\n".join(f'  - "{w}"' for w in keywords_wikilinks_list) if keywords_wikilinks_list else "  []"
 
 
     # Use username for user libraries (web UI), group ID for groups
