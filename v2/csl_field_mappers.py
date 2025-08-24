@@ -222,7 +222,11 @@ def map_access_date(csl_item, zotero_item, item_type):
             zotero_item["accessDate"] = csl_item["accessed"]["raw"]
 
 def map_tags(csl_item, zotero_item, item_type):
-    kw = csl_item.get("keywords")
+    """
+    Map CSL keywords to Zotero tags.
+    Accept both singular 'keyword' (array/string) and plural 'keywords'.
+    """
+    kw = csl_item.get("keyword") or csl_item.get("keywords")
     if not kw:
         return
     if isinstance(kw, list):
@@ -236,7 +240,7 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
         "publisher", "page", "note", "language", "accessed", "abstract",
-        "title-short", "genre", "event", "keywords",
+        "title-short", "genre", "event", "keywords", "keyword"
         # keep case-specific fields out of 'extra' if we mapped them
         "caseName", "court", "authority"
     }
