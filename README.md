@@ -1,4 +1,4 @@
-# Bibnow v2
+# Bibnow v2.0.1
 
 **Bibnow** is a command-line tool for adding (and linking) bibliographic entries in Zotero and Obsidian. To use it, you do the following:
 
@@ -33,6 +33,13 @@ Version 2 is a complete refactor. Most importantly for the user, it now requires
 
 - **No secrets in code.**  
   - Private settings live in `.env` (loaded automatically).
+
+## Changelog
+
+### v2.0.1 (2025-08-24)
+- Fixed CSL → Zotero keyword mapping (`keyword` vs `keywords`)
+- Prevented duplication of keywords in `extra`
+- Obsidian YAML now renders `keywords:` as wikilinked list entries (`- "[[Keyword]]"`)
 
 ---
 

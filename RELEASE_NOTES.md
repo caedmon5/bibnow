@@ -1,3 +1,10 @@
+# v2.0.1 – Keyword handling fix
+
+- Accepts CSL keyword (singular) in addition to keywords
+- Prevents keyword, id, and section from appearing in extra
+- Obsidian YAML frontmatter now outputs proper wikilinked keywords: lists
+- Fully backward-compatible bugfix (safe to upgrade from v2.0.0)
+
 # Bibnow v2.0.0
 
 **Highlights**
