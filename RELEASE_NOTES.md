@@ -1,3 +1,7 @@
+# v2.0.2 - escape double quotes in YAML
+
+- fixed problem in YAML of Obsidian when items had internal double quotes. They are escaped now throughout.
+
 # v2.0.1 – Keyword handling fix
 
 - Accepts CSL keyword (singular) in addition to keywords
