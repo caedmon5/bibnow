@@ -11,6 +11,22 @@ from obsidian_writer_config import (
     TEMPLATE_PATH
 )
 
+def yaml_escape_dq(value: str) -> str:
+    """
+    Escape a Python string for safe inclusion *inside a double-quoted YAML scalar*.
+    - Replaces literal newlines/tabs with spaces (template uses single-line fields).
+    - Escapes backslashes and double quotes.
+    - Trims leading/trailing whitespace that can trip parsers.
+    """
+    if value is None:
+        return ""
+    s = str(value)
+    s = s.replace("\r", " ").replace("\n", " ").replace("\t", " ")
+    s = s.strip()
+    s = s.replace("\\", "\\\\").replace('"', '\\"')
+    return s
+
+
 def generate_citekey(zotero_item: dict) -> str:
     creators = zotero_item.get("creators", [])
     if creators:
@@ -85,16 +101,16 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
         template = Template(f.read())
 
     return template.safe_substitute({
-        "citekey": citekey,
+        "citekey": yaml_escape_dq(citekey),
         "aliases": "",
-        "type": zotero_item.get("itemType", "document"),
-        "zotero_key": zotero_key or "",
-        "zotero_url": zotero_url,
-        "responsible_party": responsible,
-        "record_title": title,
+        "type": yaml_escape_dq(zotero_item.get("itemType", "document")),
+        "zotero_key": yaml_escape_dq(zotero_key or ""),
+        "zotero_url": yaml_escape_dq(zotero_url),
+        "responsible_party": yaml_escape_dq(responsible),
+        "record_title": yaml_escape_dq(title),
         "record_title_short": title_part,
-        "record_year": year,
-        "callnumber": zotero_item.get("callNumber", ""),
+        "record_year": yaml_escape_dq(year),
+        "callnumber": yaml_escape_dq(zotero_item.get("callNumber", "")),
         "baseline_citation": f"{responsible}. {year}. {title}.",
         "abstract": abstract,
         "keywords": keywords_plain,
