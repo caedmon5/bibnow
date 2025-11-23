@@ -18,7 +18,7 @@
 import json
 from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
-from zotero_writer import send_to_zotero
+from zotero_writer import send_to_zotero, create_fulltext_note
 from clipboard_loader import load_clipboard_or_file
 from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
@@ -71,6 +71,11 @@ if __name__ == "__main__":
     items = [data] if isinstance(data, dict) else data
 
     for csl_item in items:
+        # --- NEW: Extract user-provided full text before mapping ---
+        fulltext_user_provided = csl_item.pop("fulltext_user_provided", None)
+        # -----------------------------------------------------------
+
+
         zotero_item = csl_to_zotero(csl_item)
         # Generate markdown and filename
         citekey = generate_citekey(zotero_item)
@@ -93,6 +98,26 @@ if __name__ == "__main__":
             else:
                 print(f"❌ Upload failed. Status: {status_code}")
                 print(json.dumps(response, indent=2))
+
+
+            # --- NEW: Create Zotero child note containing full text ---
+            if zotero_key and fulltext_user_provided:
+                note_status, note_response = create_fulltext_note(
+                    parent_key=zotero_key,
+                    fulltext=fulltext_user_provided
+                )
+
+                if 200 <= note_status < 300:
+                    print("📝 Full-text note created successfully.")
+                else:
+                    print(f"⚠️ Failed to create full-text note. Status: {note_status}")
+                    try:
+                        print(json.dumps(note_response, indent=2))
+                    except Exception:
+                        print(note_response)
+            # ----------------------------------------------------------
+
+
             # ✅ Markdown generation after upload (using zotero_key if present)
             markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key)
 

@@ -58,6 +58,60 @@ def send_to_zotero(csl_item):
 
     return response.status_code, content
 
+def create_fulltext_note(parent_key, fulltext, title_prefix="Full text (user provided via bibnow)"):
+    """
+    Create a Zotero child note containing user-provided full text.
+
+    - parent_key: Zotero key of the parent bibliographic item.
+    - fulltext: plain-text content supplied by the user (UTF-8).
+    - title_prefix: optional label shown in the note title.
+
+    Zotero notes are stored as simple HTML. Here we:
+      - escape basic HTML-sensitive characters,
+      - convert newlines to <br> to preserve paragraph breaks.
+    """
+    if not parent_key or not fulltext:
+        return 0, {"error": "Missing parent_key or fulltext; note not created."}
+
+    # Basic HTML escaping and newline handling
+    def _html_escape(s: str) -> str:
+        return (
+            s.replace("&", "&amp;")
+             .replace("<", "&lt;")
+             .replace(">", "&gt;")
+        )
+
+    escaped = _html_escape(str(fulltext))
+    # Preserve line breaks
+    escaped = escaped.replace("\r\n", "\n").replace("\r", "\n")
+    note_html = "<p>" + escaped.replace("\n", "<br />\n") + "</p>"
+
+    headers = {
+        "Zotero-API-Key": ZOTERO_API_KEY,
+        "Content-Type": "application/json"
+    }
+
+    note_item = {
+        "itemType": "note",
+        "parentItem": parent_key,
+        "note": note_html
+    }
+
+    payload = [note_item]
+
+    try:
+        response = requests.post(ZOTERO_BASE_URL, headers=headers, json=payload)
+    except requests.exceptions.RequestException as e:
+        return 0, {"error": "Network or connection error while creating note", "exception": str(e)}
+
+    try:
+        content = response.json()
+    except json.JSONDecodeError:
+        content = response.text
+
+    return response.status_code, content
+
+
 
 def validate_zotero_response(status_code, response_data):
     """
