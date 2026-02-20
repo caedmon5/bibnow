@@ -30,6 +30,7 @@ from csl_field_mappers import (
     map_video_fields,
     map_doi,
     map_url,
+    map_volume_issue,
     map_pages,
     map_language,
     map_abstract,
@@ -177,6 +178,7 @@ def csl_to_zotero(csl_item):
     map_doi(csl_item, zotero_item, item_type)
     map_url(csl_item, zotero_item, item_type)
     map_pages(csl_item, zotero_item, item_type)
+    map_volume_issue(csl_item, zotero_item, item_type)
     map_language(csl_item, zotero_item, item_type)
     map_abstract(csl_item, zotero_item, item_type)
     map_access_date(csl_item, zotero_item, item_type)

@@ -67,6 +67,14 @@ def map_title_short(csl_item, zotero_item, item_type):
     if short:
         zotero_item["shortTitle"] = short
 
+def map_volume_issue(csl_item, zotero_item, item_type):
+    if "volume" in csl_item:
+        zotero_item["volume"] = str(csl_item["volume"])
+    if "issue" in csl_item:
+        zotero_item["issue"] = str(csl_item["issue"])
+    if "number" in csl_item:
+        zotero_item["issue"] = str(csl_item["number"])
+
 def map_note(csl_item, zotero_item, item_type):
     """Maps CSL 'note' to Zotero 'extra'."""
     note = csl_item.get("note")
@@ -239,8 +247,8 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     """Catch-all for nonstandard CSL fields."""
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
-        "publisher", "page", "note", "language", "accessed", "abstract",
-        "title-short", "genre", "event", "keywords", "keyword", "id", "section", "category", "topic"
+        "publisher", "page", "note", "language", "accessed", "abstract", "page", "volume",
+        "title-short", "genre", "event", "keywords", "keyword", "id", "section", "category", "topic",
         # keep case-specific fields out of 'extra' if we mapped them
         "caseName", "court", "authority"
     }
