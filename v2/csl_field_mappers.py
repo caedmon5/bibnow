@@ -13,7 +13,13 @@ def map_container_title(csl_item, zotero_item, item_type):
         "bookSection": "bookTitle",
         "conferencePaper": "proceedingsTitle",
         "dictionaryEntry": "dictionaryTitle",
-        "encyclopediaArticle": "encyclopediaTitle"
+        "encyclopediaArticle": "encyclopediaTitle",
+        "tvBroadcast": "programTitle",
+        "radioBroadcast": "programTitle",
+        "podcast": "seriesTitle",
+        "blogPost": "blogTitle",
+        "forumPost": "forumTitle",
+        "webpage": "websiteTitle"
     }
     target = field_map.get(item_type)
     if target:
@@ -32,7 +38,7 @@ def extract_year_from_issued(issued):
 
 
 def map_publisher_field(csl_item, zotero_item, item_type):
-    """Maps CSL 'publisher' to Zotero field (university, institution, or publisher)."""
+    """Maps CSL 'publisher' to Zotero field (university, institution, network, or publisher)."""
     val = csl_item.get("publisher")
     if not val:
         return
@@ -40,6 +46,14 @@ def map_publisher_field(csl_item, zotero_item, item_type):
         zotero_item["university"] = val
     elif item_type == "report":
         zotero_item["institution"] = val
+    elif item_type in ("tvBroadcast", "radioBroadcast"):
+        zotero_item["network"] = val
+    elif item_type == "film":
+        zotero_item["distributor"] = val
+    elif item_type == "computerProgram":
+        zotero_item["company"] = val
+    elif item_type == "videoRecording":
+        zotero_item["studio"] = val
     else:
         zotero_item["publisher"] = val
 
@@ -52,28 +66,38 @@ def map_genre(csl_item, zotero_item, item_type):
         zotero_item["reportType"] = genre
     elif item_type == "thesis":
         zotero_item["thesisType"] = genre
+    elif item_type == "presentation":
+        zotero_item["presentationType"] = genre
+    elif item_type == "film":
+        zotero_item["genre"] = genre
+    elif item_type == "webpage":
+        zotero_item["websiteType"] = genre
+    elif item_type == "letter":
+        zotero_item["letterType"] = genre
+    elif item_type == "manuscript":
+        zotero_item["manuscriptType"] = genre
+    elif item_type == "map":
+        zotero_item["mapType"] = genre
+    elif item_type == "forumPost":
+        zotero_item["postType"] = genre
     else:
         zotero_item["extra"] = zotero_item.get("extra", "") + f"\ngenre: {genre}"
 
 def map_event(csl_item, zotero_item, item_type):
-    """Maps CSL 'event' to Zotero 'conferenceName' (only for conferencePaper)."""
-    event = csl_item.get("event")
-    if event and item_type == "conferencePaper":
+    """Maps CSL 'event' or 'event-title' to Zotero conference/meeting field."""
+    event = csl_item.get("event") or csl_item.get("event-title")
+    if not event:
+        return
+    if item_type == "conferencePaper":
         zotero_item["conferenceName"] = event
+    elif item_type == "presentation":
+        zotero_item["meetingName"] = event
 
 def map_title_short(csl_item, zotero_item, item_type):
     """Maps CSL 'title-short' to Zotero 'shortTitle'."""
     short = csl_item.get("title-short")
     if short:
         zotero_item["shortTitle"] = short
-
-def map_volume_issue(csl_item, zotero_item, item_type):
-    if "volume" in csl_item:
-        zotero_item["volume"] = str(csl_item["volume"])
-    if "issue" in csl_item:
-        zotero_item["issue"] = str(csl_item["issue"])
-    if "number" in csl_item:
-        zotero_item["issue"] = str(csl_item["number"])
 
 def map_note(csl_item, zotero_item, item_type):
     """Maps CSL 'note' to Zotero 'extra'."""
@@ -175,28 +199,20 @@ def map_hearing_fields(csl_item, zotero_item, item_type):
 # === Media, interviews, presentations ===
 
 def map_presentation_fields(csl_item, zotero_item, item_type):
-    if item_type != "presentation":
-        return
-    if "event" in csl_item:
-        zotero_item["meetingName"] = csl_item["event"]
+    """Presentation event mapping now handled by map_event. Kept for API compat."""
+    pass
 
 def map_interview_fields(csl_item, zotero_item, item_type):
-    if item_type != "interview":
-        return
-    if "medium" in csl_item:
-        zotero_item["interviewMedium"] = csl_item["medium"]
+    """Medium mapping now handled by map_medium. Kept for API compat."""
+    pass
 
 def map_audio_fields(csl_item, zotero_item, item_type):
-    if item_type != "audioRecording":
-        return
-    if "medium" in csl_item:
-        zotero_item["audioRecordingFormat"] = csl_item["medium"]
+    """Medium mapping now handled by map_medium. Kept for API compat."""
+    pass
 
 def map_video_fields(csl_item, zotero_item, item_type):
-    if item_type != "videoRecording":
-        return
-    if "medium" in csl_item:
-        zotero_item["videoRecordingFormat"] = csl_item["medium"]
+    """Medium mapping now handled by map_medium. Kept for API compat."""
+    pass
 
 # === Common fields ===
 
@@ -228,6 +244,101 @@ def map_access_date(csl_item, zotero_item, item_type):
     if "accessed" in csl_item:
         if "raw" in csl_item["accessed"]:
             zotero_item["accessDate"] = csl_item["accessed"]["raw"]
+        elif "date-parts" in csl_item["accessed"]:
+            dp = csl_item["accessed"]["date-parts"][0]
+            zotero_item["accessDate"] = "-".join(str(d) for d in dp if d is not None)
+
+def map_volume(csl_item, zotero_item, item_type):
+    """Maps CSL 'volume' to Zotero 'volume'."""
+    val = csl_item.get("volume")
+    if val:
+        zotero_item["volume"] = str(val)
+
+def map_issue(csl_item, zotero_item, item_type):
+    """Maps CSL 'issue' to Zotero 'issue'."""
+    val = csl_item.get("issue")
+    if val:
+        zotero_item["issue"] = str(val)
+
+def map_edition(csl_item, zotero_item, item_type):
+    """Maps CSL 'edition' to Zotero 'edition'."""
+    val = csl_item.get("edition")
+    if val:
+        zotero_item["edition"] = str(val)
+
+def map_isbn(csl_item, zotero_item, item_type):
+    """Maps CSL 'ISBN' to Zotero 'ISBN'."""
+    val = csl_item.get("ISBN")
+    if val:
+        zotero_item["ISBN"] = val
+
+def map_issn(csl_item, zotero_item, item_type):
+    """Maps CSL 'ISSN' to Zotero 'ISSN'."""
+    val = csl_item.get("ISSN")
+    if val:
+        zotero_item["ISSN"] = val
+
+def map_number(csl_item, zotero_item, item_type):
+    """Maps CSL 'number' to appropriate Zotero field."""
+    val = csl_item.get("number")
+    if not val:
+        return
+    number_map = {
+        "report": "reportNumber",
+        "tvBroadcast": "episodeNumber",
+        "radioBroadcast": "episodeNumber",
+        "podcast": "episodeNumber",
+        "patent": "patentNumber",
+        "bill": "billNumber"
+    }
+    target = number_map.get(item_type)
+    if target:
+        zotero_item[target] = str(val)
+    else:
+        zotero_item["extra"] = zotero_item.get("extra", "") + f"\nnumber: {val}"
+
+def map_medium(csl_item, zotero_item, item_type):
+    """Maps CSL 'medium' to type-appropriate Zotero field."""
+    val = csl_item.get("medium")
+    if not val:
+        return
+    medium_map = {
+        "interview": "interviewMedium",
+        "audioRecording": "audioRecordingFormat",
+        "videoRecording": "videoRecordingFormat",
+        "tvBroadcast": "videoRecordingFormat",
+        "radioBroadcast": "audioRecordingFormat",
+        "artwork": "artworkMedium"
+    }
+    target = medium_map.get(item_type)
+    if target:
+        zotero_item[target] = val
+    else:
+        zotero_item["extra"] = zotero_item.get("extra", "") + f"\nmedium: {val}"
+
+def map_place(csl_item, zotero_item, item_type):
+    """Maps CSL 'event-place' or 'publisher-place' to Zotero 'place'."""
+    val = csl_item.get("event-place") or csl_item.get("publisher-place")
+    if val:
+        zotero_item["place"] = val
+
+def map_number_of_pages(csl_item, zotero_item, item_type):
+    """Maps CSL 'number-of-pages' to Zotero 'numPages'."""
+    val = csl_item.get("number-of-pages")
+    if val:
+        zotero_item["numPages"] = str(val)
+
+def map_series(csl_item, zotero_item, item_type):
+    """Maps CSL 'collection-title' / 'collection-number' to Zotero series fields."""
+    title = csl_item.get("collection-title")
+    number = csl_item.get("collection-number")
+    if title:
+        if item_type in ("book", "bookSection", "conferencePaper"):
+            zotero_item["series"] = title
+        else:
+            zotero_item["seriesTitle"] = title
+    if number:
+        zotero_item["seriesNumber"] = str(number)
 
 def map_tags(csl_item, zotero_item, item_type):
     """
@@ -247,10 +358,12 @@ def map_extra_fields(csl_item, zotero_item, item_type):
     """Catch-all for nonstandard CSL fields."""
     standard_keys = {
         "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
-        "publisher", "page", "note", "language", "accessed", "abstract", "page", "volume",
-        "title-short", "genre", "event", "keywords", "keyword", "id", "section", "category", "topic",
-        # keep case-specific fields out of 'extra' if we mapped them
-        "caseName", "court", "authority"
+        "publisher", "page", "note", "language", "accessed", "abstract",
+        "title-short", "genre", "event", "event-title", "event-place", "keywords",
+        "keyword", "id", "section", "category", "topic",
+        "caseName", "court", "authority",
+        "volume", "issue", "edition", "ISBN", "ISSN", "number", "medium",
+        "publisher-place", "number-of-pages", "collection-title", "collection-number"
     }
     for k, v in csl_item.items():
         if k not in standard_keys:

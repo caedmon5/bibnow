@@ -30,13 +30,22 @@ from csl_field_mappers import (
     map_video_fields,
     map_doi,
     map_url,
-    map_volume_issue,
     map_pages,
     map_language,
     map_abstract,
     map_access_date,
     map_tags,
-    map_extra_fields
+    map_extra_fields,
+    map_volume,
+    map_issue,
+    map_edition,
+    map_isbn,
+    map_issn,
+    map_number,
+    map_medium,
+    map_place,
+    map_number_of_pages,
+    map_series
 )
 
 # Complete mapping
@@ -178,10 +187,19 @@ def csl_to_zotero(csl_item):
     map_doi(csl_item, zotero_item, item_type)
     map_url(csl_item, zotero_item, item_type)
     map_pages(csl_item, zotero_item, item_type)
-    map_volume_issue(csl_item, zotero_item, item_type)
     map_language(csl_item, zotero_item, item_type)
     map_abstract(csl_item, zotero_item, item_type)
     map_access_date(csl_item, zotero_item, item_type)
+    map_volume(csl_item, zotero_item, item_type)
+    map_issue(csl_item, zotero_item, item_type)
+    map_edition(csl_item, zotero_item, item_type)
+    map_isbn(csl_item, zotero_item, item_type)
+    map_issn(csl_item, zotero_item, item_type)
+    map_number(csl_item, zotero_item, item_type)
+    map_medium(csl_item, zotero_item, item_type)
+    map_place(csl_item, zotero_item, item_type)
+    map_number_of_pages(csl_item, zotero_item, item_type)
+    map_series(csl_item, zotero_item, item_type)
     map_tags(csl_item, zotero_item, item_type)
     map_extra_fields(csl_item, zotero_item, item_type)
 
