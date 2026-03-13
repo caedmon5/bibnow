@@ -25,6 +25,16 @@ def map_container_title(csl_item, zotero_item, item_type):
     if target:
         zotero_item[target] = container
 
+def _format_date_parts(parts):
+    """Zero-pad a CSL date-parts list [YYYY] or [YYYY,MM] or [YYYY,MM,DD] to ISO 8601."""
+    if len(parts) == 3:
+        return f"{parts[0]:04d}-{parts[1]:02d}-{parts[2]:02d}"
+    elif len(parts) == 2:
+        return f"{parts[0]:04d}-{parts[1]:02d}"
+    elif len(parts) == 1:
+        return f"{parts[0]:04d}"
+    return ""
+
 def extract_year_from_issued(issued):
     """
     Extract a formatted string from CSL 'issued' object for Zotero's 'dateDecided'.
@@ -32,7 +42,7 @@ def extract_year_from_issued(issued):
     """
     try:
         parts = issued.get("date-parts", [])[0]
-        return "-".join(str(p) for p in parts)
+        return _format_date_parts(parts)
     except Exception:
         return ""
 
@@ -113,8 +123,8 @@ def map_issued_date(csl_item, zotero_item, item_type):
     if "raw" in issued:
         zotero_item["date"] = issued["raw"]
     elif "date-parts" in issued:
-        dp = issued["date-parts"][0]
-        zotero_item["date"] = "-".join(str(d) for d in dp if d is not None)
+        dp = [d for d in issued["date-parts"][0] if d is not None]
+        zotero_item["date"] = _format_date_parts(dp)
 
 # === Legal/Governmental ===
 
@@ -242,8 +252,14 @@ def map_abstract(csl_item, zotero_item, item_type):
 
 def map_access_date(csl_item, zotero_item, item_type):
     if "accessed" in csl_item:
-        if "raw" in csl_item["accessed"]:
-            zotero_item["accessDate"] = csl_item["accessed"]["raw"]
+        acc = csl_item["accessed"]
+        if "raw" in acc:
+            zotero_item["accessDate"] = acc["raw"]
+        elif "date-parts" in acc:
+            try:
+                zotero_item["accessDate"] = _format_date_parts(acc["date-parts"][0])
+            except (IndexError, TypeError):
+                pass
         elif "date-parts" in csl_item["accessed"]:
             dp = csl_item["accessed"]["date-parts"][0]
             zotero_item["accessDate"] = "-".join(str(d) for d in dp if d is not None)
