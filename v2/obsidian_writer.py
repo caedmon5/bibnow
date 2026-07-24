@@ -61,7 +61,7 @@ def generate_filename(zotero_item: dict) -> str:
 
     return f"{FILENAME_PREFIX}{lastname} {date} {title_part}.md"
 
-def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str = None) -> str:
+def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str = None, date_added: str = "") -> str:
     # Prepare values
     creators = zotero_item.get("creators", [])
     if creators:
@@ -106,6 +106,7 @@ def build_markdown_from_zotero(zotero_item: dict, citekey: str, zotero_key: str 
         "type": yaml_escape_dq(zotero_item.get("itemType", "document")),
         "zotero_key": yaml_escape_dq(zotero_key or ""),
         "zotero_url": yaml_escape_dq(zotero_url),
+        "date_added": yaml_escape_dq(date_added),
         "responsible_party": yaml_escape_dq(responsible),
         "record_title": yaml_escape_dq(title),
         "record_title_short": title_part,

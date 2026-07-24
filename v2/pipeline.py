@@ -18,7 +18,7 @@
 import json
 from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
-from zotero_writer import send_to_zotero, create_fulltext_note
+from zotero_writer import send_to_zotero, create_fulltext_note, fetch_item_date_added
 from clipboard_loader import load_clipboard_or_file
 from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
@@ -83,12 +83,18 @@ if __name__ == "__main__":
 
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
+            zotero_date_added = ""
             if 200 <= status_code < 300:
                 successful = response.get("successful", {})
                 zotero_key = None
                 if successful:
                     first_item = next(iter(successful.values()))
                     zotero_key = first_item.get("key")
+                    # Write responses usually carry the full item; fall back to a
+                    # read if this one didn't.
+                    zotero_date_added = first_item.get("data", {}).get("dateAdded", "")
+                    if not zotero_date_added:
+                        zotero_date_added = fetch_item_date_added(zotero_key)
 
                 if zotero_key:
                     print(f"✅ Upload successful. Zotero Key: {zotero_key}")
@@ -119,7 +125,7 @@ if __name__ == "__main__":
 
 
             # ✅ Markdown generation after upload (using zotero_key if present)
-            markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key)
+            markdown = build_markdown_from_zotero(zotero_item, citekey, zotero_key, zotero_date_added)
 
             write_obsidian_note(markdown, filename)
             print(f"📄 Markdown written to: {filename}")

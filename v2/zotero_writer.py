@@ -58,6 +58,30 @@ def send_to_zotero(csl_item):
 
     return response.status_code, content
 
+def fetch_item_date_added(item_key):
+    """
+    Fetch an item's dateAdded from Zotero.
+
+    Zotero stores dateAdded in UTC and returns it as ISO-8601 with a trailing Z
+    (e.g. "2026-07-24T20:50:00Z"). This is the only reliable record of when a
+    reference was filed: file mtimes are rewritten by Obsidian Sync, and the
+    Obsidian note is written whenever the pipeline last ran, not when the item
+    entered the library.
+
+    Returns the string, or "" if unavailable.
+    """
+    if not item_key:
+        return ""
+
+    headers = {"Zotero-API-Key": ZOTERO_API_KEY}
+    try:
+        response = requests.get(f"{ZOTERO_BASE_URL}/{item_key}", headers=headers)
+        if response.status_code != 200:
+            return ""
+        return response.json().get("data", {}).get("dateAdded", "")
+    except (requests.exceptions.RequestException, json.JSONDecodeError, AttributeError):
+        return ""
+
 def create_fulltext_note(parent_key, fulltext, title_prefix="Full text (user provided via bibnow)"):
     """
     Create a Zotero child note containing user-provided full text.
