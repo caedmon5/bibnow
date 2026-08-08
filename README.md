@@ -1,4 +1,4 @@
-# Bibnow v2.0.2
+# Bibnow v2.1.0
 
 **Bibnow** is a command-line tool for adding (and linking) bibliographic entries in Zotero and Obsidian. To use it, you do the following:
 
@@ -17,11 +17,12 @@ Version 2 is a complete refactor. Most importantly for the user, it now requires
 ## What’s new in v2 (plain English)
 
 - **Clipboard or file in — CSL-JSON only.**  
-  - If your clipboard has valid JSON, v2 uses it; otherwise it looks for `v2/input.txt`.  
+  - If your clipboard has valid JSON, v2 uses it; otherwise it looks for `input.txt` in the repository root.  
   - (BibTeX is **not** accepted in v2—convert it first or use the older path.)
 
 - **Safer Zotero uploads.**  
   - Clear success/failure, correct item key + public web link.
+  - Since v2.1.0, Bibnow checks whether the work is already in your library and skips it rather than filing a second copy.
 
 - **Better field mapping.**  
   - `keywords` as a **string** or **list**  
@@ -35,6 +36,15 @@ Version 2 is a complete refactor. Most importantly for the user, it now requires
   - Private settings live in `.env` (loaded automatically).
 
 ## Changelog
+
+### v2.1.0 (2026-08-08)
+- **Duplicate detection.** Before uploading, Bibnow checks whether the work is already in your Zotero library and skips it if so, reporting the existing item and its link. Matching is by DOI, then ISBN, then title + first-author surname + year. `--allow-duplicates` files it anyway.
+  - The check runs against a local index of your library, cached in `.zotero-index.json` and refreshed incrementally. Zotero's search endpoint does not index DOI or ISBN, so identifier matching has to happen on your machine. The first run builds the index and can take several minutes on a large library; after that it is a single request.
+  - If Zotero cannot be reached, the run warns and continues rather than stopping.
+- **Preprints** get Zotero's preprint item type. Use `"type": "preprint"` (or Crossref's `posted-content`); the server goes in `publisher` and appears as Repository, `number` becomes Archive ID, `genre` becomes Type.
+- **Full text** supplied with an entry is stored as a Zotero child note.
+- `input.txt` is now read from the repository root regardless of where you run the script from. Previously the path was relative to your working directory, so running the script from `v2/` read a different file than running it from the repository root.
+- Assorted mapping fixes: ISO 8601 date padding, field mapping for web source types, volume/issue/edition/ISBN/ISSN and other mappers, citekeys for institutional authors, and "et al" counting authors rather than all creators.
 
 ### v2.0.1 (2025-08-24)
 - Fixed CSL → Zotero keyword mapping (`keyword` vs `keywords`)
@@ -73,7 +83,7 @@ cp .env.example .env
 #   ZOTERO_GROUP_ID=6069337        # required if LIBRARY=group (numeric)
 #   OBSIDIAN_VAULT_PATH=/path/to/your/Obsidian/vault
 
-# 3) Run (clipboard JSON preferred; file fallback is v2/input.txt)
+# 3) Run (clipboard JSON preferred; file fallback is input.txt in the repo root)
 python3 v2/pipeline.py           # dry-run (prints what would happen)
 python3 v2/pipeline.py --commit  # actually create the Zotero item and write the note
 ```
@@ -100,7 +110,7 @@ cd v2 && source ../.venv/bin/activate && python3 pipeline.py --commit
 Bibnow v2 expects **CSL-JSON**. You can supply **one item** or a **list of items**.
 
 - **Clipboard method (easiest):** copy the JSON to your clipboard and run `python3 v2/pipeline.py`.  
-- **File fallback:** put the JSON in `v2/input.txt` and run the same command.
+- **File fallback:** put the JSON in `input.txt` in the repository root and run the same command. The path is resolved against the repository, not your working directory, so it does not matter where you run the script from.
 
 **Single item example:**
 
