@@ -20,6 +20,12 @@ from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero, create_fulltext_note, fetch_item_date_added
 from clipboard_loader import load_clipboard_or_file, DEFAULT_INPUT_PATH
+from zotero_query import (
+    find_existing_items,
+    describe_matches,
+    refresh_index,
+    ZoteroQueryError,
+)
 from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
 
@@ -71,6 +77,17 @@ if __name__ == "__main__":
     data = json.loads(input_text)
     items = [data] if isinstance(data, dict) else data
 
+    # Refresh the local Zotero index once, not once per entry.
+    zotero_index = None
+    if "--allow-duplicates" not in sys.argv:
+        try:
+            zotero_index = refresh_index()
+        except ZoteroQueryError as exc:
+            # Fail open, but loudly: an unreachable library must not silently
+            # turn into "no duplicates found".
+            print(f"⚠️ Could not check for duplicates — {exc}")
+            print("   Proceeding without the check.")
+
     for csl_item in items:
         # --- NEW: Extract user-provided full text before mapping ---
         fulltext_user_provided = csl_item.pop("fulltext_user_provided", None)
@@ -81,6 +98,16 @@ if __name__ == "__main__":
         # Generate markdown and filename
         citekey = generate_citekey(zotero_item)
         filename = generate_filename(zotero_item)
+
+        # --- Duplicate check: is this work already in the library? ---
+        duplicates = find_existing_items(zotero_item, zotero_index) if zotero_index else []
+
+        if duplicates:
+            print(f"[DUPLICATE] {citekey} — already in Zotero:")
+            print(describe_matches(duplicates, ZOTERO_USERNAME))
+            print("   Skipped. Re-run with --allow-duplicates to file it anyway.")
+            continue
+        # -------------------------------------------------------------
 
         if "--commit" in sys.argv:
             status_code, response = send_to_zotero(zotero_item)
