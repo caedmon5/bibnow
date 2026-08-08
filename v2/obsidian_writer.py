@@ -39,6 +39,7 @@ def generate_citekey(zotero_item: dict) -> str:
     title_words = re.findall(r"\b\w+\b", title)
     title_part = ''.join(word.capitalize() for word in title_words[:4])
 
+    last_name = re.sub(r"\W+", "", last_name)  # literal creators ("Wikipedia contributors") carry spaces
     return f"{last_name}{year}{title_part}"
 
 def generate_filename(zotero_item: dict) -> str:
@@ -53,7 +54,8 @@ def generate_filename(zotero_item: dict) -> str:
         lastname = zotero_item.get("court", "") or zotero_item.get("authority", "") or "Unknown"
         lastname = re.findall(r"\w+", lastname)[-1] if lastname else "Unknown"
 
-    if USE_ET_AL and len(creators) > 1:
+    authors = [c for c in creators if c.get("creatorType") == "author"] or creators
+    if USE_ET_AL and len(authors) > 1:
         lastname += " et al"
 
     title_words = re.findall(r"\b\w+\b", title)
