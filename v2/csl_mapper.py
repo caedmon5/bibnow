@@ -78,6 +78,12 @@ CSL_TO_ZOTERO_TYPE = {
     "personal_communication": "email",
     "post": "forumPost",
     "post-weblog": "blogPost",
+    # CSL 1.0.2 has no preprint type; "preprint" is accepted as a local
+    # extension and "posted-content" is what Crossref returns for SSRN,
+    # arXiv, bioRxiv and the like. Both route to Zotero's preprint item,
+    # whose field list is already defined in zotero_allowed_fields.
+    "preprint": "preprint",
+    "posted-content": "preprint",
     "presentation": "presentation",
     "report": "report",
     "review": "journalArticle",
@@ -115,7 +121,7 @@ def map_creators(csl_item):
     """
     creators = []
 
-    for role in ["author", "editor"]:
+    for role in ["author", "editor", "translator"]:
         if role in csl_item:
             for person in csl_item[role]:
                 if isinstance(person, dict):

@@ -3,6 +3,15 @@
 import platform
 import os
 import subprocess
+from pathlib import Path
+
+# Anchor the input file to the repo root rather than the working directory.
+# The bare relative path "input.txt" meant that running the documented
+# `python3 v2/pipeline.py` from the repo root read ./input.txt, while running
+# it from v2/ read a different file — so a stale scratch file could be
+# processed silently in place of the intended entries.
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DEFAULT_INPUT_PATH = REPO_ROOT / "input.txt"
 
 def detect_platform():
     """
@@ -34,10 +43,14 @@ def _looks_like_json(s: str) -> bool:
     s = s.strip()
     return s.startswith("{") or s.startswith("[")
 
-def load_clipboard_or_file(filepath="input.txt"):
+def load_clipboard_or_file(filepath=None):
     """
     Attempts to read JSON/BibTeX from clipboard (Linux or Termux), or falls back to input.txt.
+
+    `filepath` defaults to <repo root>/input.txt, independent of the working
+    directory. Pass an explicit path to override.
     """
+    filepath = Path(filepath) if filepath else DEFAULT_INPUT_PATH
     platform_type = detect_platform()
 
     if platform_type == "linux":
@@ -77,5 +90,5 @@ def load_clipboard_or_file(filepath="input.txt"):
 
     # Fallback to file
     with open(filepath, encoding="utf-8") as f:
-        print("📄 Loaded input from file.")
+        print(f"📄 Loaded input from file: {filepath}")
         return f.read()

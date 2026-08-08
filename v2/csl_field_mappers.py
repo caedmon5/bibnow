@@ -64,6 +64,9 @@ def map_publisher_field(csl_item, zotero_item, item_type):
         zotero_item["company"] = val
     elif item_type == "videoRecording":
         zotero_item["studio"] = val
+    elif item_type == "preprint":
+        # For a preprint the "publisher" is the server it was posted to.
+        zotero_item["repository"] = val
     else:
         zotero_item["publisher"] = val
 
@@ -78,7 +81,7 @@ def map_genre(csl_item, zotero_item, item_type):
         zotero_item["thesisType"] = genre
     elif item_type == "presentation":
         zotero_item["presentationType"] = genre
-    elif item_type == "film":
+    elif item_type in ("film", "preprint"):
         zotero_item["genre"] = genre
     elif item_type == "webpage":
         zotero_item["websiteType"] = genre
@@ -305,7 +308,9 @@ def map_number(csl_item, zotero_item, item_type):
         "radioBroadcast": "episodeNumber",
         "podcast": "episodeNumber",
         "patent": "patentNumber",
-        "bill": "billNumber"
+        "bill": "billNumber",
+        # The server's own identifier: SSRN abstract id, arXiv id, bioRxiv doi suffix.
+        "preprint": "archiveID"
     }
     target = number_map.get(item_type)
     if target:
@@ -373,7 +378,7 @@ def map_tags(csl_item, zotero_item, item_type):
 def map_extra_fields(csl_item, zotero_item, item_type):
     """Catch-all for nonstandard CSL fields."""
     standard_keys = {
-        "title", "type", "author", "editor", "issued", "DOI", "URL", "container-title",
+        "title", "type", "author", "editor", "translator", "issued", "DOI", "URL", "container-title",
         "publisher", "page", "note", "language", "accessed", "abstract",
         "title-short", "genre", "event", "event-title", "event-place", "keywords",
         "keyword", "id", "section", "category", "topic",

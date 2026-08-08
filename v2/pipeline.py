@@ -19,7 +19,7 @@ import json
 from csl_mapper import csl_to_zotero
 from config import ZOTERO_USERNAME
 from zotero_writer import send_to_zotero, create_fulltext_note, fetch_item_date_added
-from clipboard_loader import load_clipboard_or_file
+from clipboard_loader import load_clipboard_or_file, DEFAULT_INPUT_PATH
 from obsidian_writer import build_markdown_from_zotero, generate_filename, generate_citekey, write_obsidian_note
 import sys
 
@@ -49,7 +49,8 @@ def _extract_all_keys(response: dict):
 
 
 
-def load_csl_items_from_input_file(filepath="input.txt"):
+def load_csl_items_from_input_file(filepath=None):
+    filepath = filepath or DEFAULT_INPUT_PATH
     with open(filepath, "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -63,7 +64,7 @@ def load_csl_items_from_input_file(filepath="input.txt"):
 
 
 if __name__ == "__main__":
-    input_text = load_clipboard_or_file("input.txt")
+    input_text = load_clipboard_or_file()
     t = (input_text or "").lstrip()
     if not (t.startswith("{") or t.startswith("[")):
         raise ValueError("Input is not JSON. v2 expects CSL JSON. If you have BibTeX, switch back to v1 or refactor the input as CSL.")
