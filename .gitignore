@@ -26,3 +26,7 @@ v2/config_local.py
 # optional: if you keep test fixtures elsewhere
 v2/input.txt
 .zotero-index.json
+
+# secrets
+config.py
+.zotero-index*.json
